@@ -17,15 +17,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { HomepageComponent } from './components/homepage/homepage.component';
+import { ResultPageComponent } from './components/result-page/result-page.component';
 import { HeaderComponent } from './components/header/header/header.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     SearchFilterPipe,
-    HomepageComponent,
+    ResultPageComponent,
     HeaderComponent,
   ],
   imports: [
@@ -43,6 +44,7 @@ import { HeaderComponent } from './components/header/header/header.component';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

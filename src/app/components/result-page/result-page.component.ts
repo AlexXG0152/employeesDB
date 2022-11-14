@@ -4,12 +4,12 @@ import { UsersService } from 'src/app/services/users.service';
 import { Employees } from '../../interfaces/employees';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss'],
+  selector: 'app-result-page',
+  templateUrl: './result-page.component.html',
+  styleUrls: ['./result-page.component.scss'],
 })
-export class HomepageComponent implements OnInit {
-  constructor(private UserService: UsersService) {}
+export class ResultPageComponent implements OnInit {
+  constructor(private UsersService: UsersService) {}
   show: boolean = false;
   displayedColumns: string[] = [
     'firstName lastName',
@@ -31,7 +31,7 @@ export class HomepageComponent implements OnInit {
       this.usersData = [];
       this.show = false;
     } else {
-      this.UserService.getUserByName(this.searchText).subscribe(
+      this.UsersService.getUserByName(this.searchText).subscribe(
         (data: Employees) => {
           this.usersData = data;
 
