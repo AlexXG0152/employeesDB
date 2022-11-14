@@ -1,0 +1,22 @@
+table,
+thead,
+tbody,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.mat-header-cell {
+  text-transform: uppercase;
+}
