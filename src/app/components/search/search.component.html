@@ -1,0 +1,14 @@
+<div><br></div>
+<div class="example-container">
+  <div class="column left">
+    <span>Search in Employees Data Base by First Name</span>
+  </div>
+  <div class="column right">
+    <mat-form-field appearance="outline">
+      <mat-label>Search by first name</mat-label>
+      <!-- <input matInput [(ngModel)]="enteredSearchValue" (input)="onSearchTextChanged()" placeholder="Search by name" #searchInput/> -->
+      <input matInput [(ngModel)]="enteredSearchValue" placeholder="Search by first name" #searchInput />
+      <mat-icon class='search-icon' color="primary" matPrefix>search</mat-icon>
+    </mat-form-field>
+  </div>
+</div>

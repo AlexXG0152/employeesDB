@@ -1,0 +1,21 @@
+<app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+
+
+<div class="users" *ngIf="show">
+  <table mat-table [dataSource]="usersData.users" class="mat-elevation-z8" *ngIf="usersData.users">
+    <ng-container matColumnDef="firstName lastName">
+      <th mat-header-cell *matHeaderCellDef>Firstname Lastame</th>
+      <td mat-cell *matCellDef="let user">{{ user.firstName }} {{ user.lastName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="company.department">
+      <th mat-header-cell *matHeaderCellDef>Company department</th>
+      <td mat-cell *matCellDef="let user">{{ user.company.department }}</td>
+    </ng-container>
+    <ng-container matColumnDef="company.title">
+      <th mat-header-cell *matHeaderCellDef>Company title</th>
+      <td mat-cell *matCellDef="let user">{{ user.company.title} }</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
