@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchComponent } from './components/search/search.component';
+import { SearchComponent } from './core/search/search.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -17,9 +17,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { ResultPageComponent } from './components/result-page/result-page.component';
-import { HeaderComponent } from './components/header/header/header.component';
+import { ResultPageComponent } from './core/result-page/result-page.component';
+import { HeaderComponent } from './core/header/header.component';
 import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    AuthModule,
+    CoreModule,
     MatDividerModule,
     MatButtonModule,
     MatToolbarModule,
@@ -44,7 +47,6 @@ import { AuthModule } from './auth/auth.module';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
-    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
