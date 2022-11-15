@@ -6,7 +6,7 @@ import { Employees } from '../interfaces/employees';
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class DataService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<Employees[]> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime } from 'rxjs';
-import { UsersService } from 'src/app/services/users.service';
+import { DataService } from 'src/app/services/users.service';
 import { Employees } from '../../interfaces/employees';
 
 @Component({
@@ -9,7 +9,7 @@ import { Employees } from '../../interfaces/employees';
   styleUrls: ['./result-page.component.scss'],
 })
 export class ResultPageComponent implements OnInit {
-  constructor(private UsersService: UsersService) {}
+  constructor(private DataService: DataService) {}
   show: boolean = false;
   displayedColumns: string[] = [
     'firstName lastName',
@@ -31,7 +31,7 @@ export class ResultPageComponent implements OnInit {
       this.usersData = [];
       this.show = false;
     } else {
-      this.UsersService.getUserByName(this.searchText).subscribe(
+      this.DataService.getUserByName(this.searchText).subscribe(
         (data: Employees) => {
           this.usersData = data;
 

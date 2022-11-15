@@ -3,32 +3,32 @@ const ROLES = db.ROLES;
 const User = db.user;
 
 checkDuplicateUsernameOrEmail = (req, res, next) => {
-  // UserName
+  // Username
   User.findOne({
     username: req.body.username,
-  }).exec((error, user) => {
-    if (error) {
-      res.status(500).send({ message: error });
-      return;
+  }).exec((err, user) => {
+    if (err) {
+      return res.status(500).send({ message: err });
     }
 
     if (user) {
-      res.status(400).send({ message: "Failed! Username is already in use!" });
-      return;
+      return res
+        .status(400)
+        .send({ message: "Failed! Username is already in use!" });
     }
 
     // Email
     User.findOne({
       email: req.body.email,
-    }).exec((error, user) => {
-      if (error) {
-        res.status(500).send({ message: error });
-        return;
+    }).exec((err, user) => {
+      if (err) {
+        return res.status(500).send({ message: err });
       }
 
       if (user) {
-        res.status(400).send({ message: "Failed! Email is already in use!" });
-        return;
+        return res
+          .status(400)
+          .send({ message: "Failed! Email is already in use!" });
       }
 
       next();
@@ -36,7 +36,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
   });
 };
 
-checkRoleExisted = (req, res, next) => {
+checkRolesExisted = (req, res, next) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
@@ -47,6 +47,7 @@ checkRoleExisted = (req, res, next) => {
       }
     }
   }
+
   next();
 };
 

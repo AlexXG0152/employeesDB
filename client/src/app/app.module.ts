@@ -21,22 +21,22 @@ import { ResultPageComponent } from './core/result-page/result-page.component';
 import { HeaderComponent } from './core/header/header.component';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
+import { httpInterceptorProviders } from './helpers/http.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     SearchComponent,
     SearchFilterPipe,
     ResultPageComponent,
-    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    AuthModule,
     CoreModule,
     MatDividerModule,
     MatButtonModule,
@@ -47,8 +47,9 @@ import { CoreModule } from './core/core.module';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    AuthModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
   exports: [SearchFilterPipe],
 })

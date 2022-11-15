@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
-export interface IRegisterForm {
-  username: null | string;
-  email: null | string;
-  password: null | string;
-}
 
 @Component({
   selector: 'app-register',
@@ -13,29 +8,29 @@ export interface IRegisterForm {
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private AuthService: AuthService) {}
-
-  form: IRegisterForm = {
+  form: any = {
     username: null,
     email: null,
     password: null,
   };
-
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
     const { username, email, password } = this.form;
-    this.AuthService.register(username, email, password).subscribe({
-      next: (data) => {
+
+    this.authService.register(username, email, password).subscribe({
+      next: (data: any) => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
-      error: (err) => {
+      error: (err: { error: { message: string; }; }) => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       },

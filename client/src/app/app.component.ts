@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
         this.StorageService.clean();
 
         window.location.reload();
+        window.location.assign('/home')
       },
       error: err => {
         console.error(err);

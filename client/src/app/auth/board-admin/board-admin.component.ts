@@ -12,16 +12,20 @@ export class BoardAdminComponent implements OnInit {
   content?: string;
 
   ngOnInit(): void {
-    this.UserService.getAdminBoard().subscribe({
+    this.UserService.getUserBoard().subscribe({
       next: (data) => {
         this.content = data;
       },
       error: (err) => {
-        console.error(err);
         if (err.error) {
-          this.content = JSON.parse(err.error).message;
+          try {
+            const res = JSON.parse(err.error);
+            this.content = res.message;
+          } catch {
+            this.content = `Error with status: ${err.status} - ${err.statusText}`;
+          }
         } else {
-          this.content = 'Error with status: ' + err.status;
+          this.content = `Error with status: ${err.status}`;
         }
       },
     });

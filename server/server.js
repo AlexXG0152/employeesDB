@@ -1,15 +1,15 @@
+require("dotenv").config({ path: "./src/app/environments/.env" });
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const db = require("./src/app/models");
-const dbConfig = require('./src/app/config/db.config')
-const authConfig = require('./src/app/config/auth.config')
-require("dotenv").config();
 
 const app = express();
+const PORT = process.env.PORT || 8080;
 
-let corsOptions = {
-  origin: "http://localhost:8081",
+var corsOptions = {
+  origin: ["http://localhost:4200", "http://localhost:8080"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -24,13 +24,15 @@ app.use(
     name: "empl-session",
     keys: ["key1", "key2"],
     secret: process.env.COOKIE_SECRET,
-    httOnly: true,
+    httpOnly: true,
   })
 );
 
+const db = require("./src/app/models");
 const Role = db.role;
+
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(process.env.MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -47,7 +49,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to empl application." });
 });
 
-const PORT = process.env.PORT || 8080;
+require("./src/app/routes/auth.routes")(app);
+require("./src/app/routes/user.routes")(app);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
@@ -59,9 +63,8 @@ function initial() {
         name: "user",
       }).save((err) => {
         if (err) {
-          console.log("error", err);
+          console.error("error", err);
         }
-
         console.log("added 'user' to roles collection");
       });
 
@@ -69,9 +72,8 @@ function initial() {
         name: "moderator",
       }).save((err) => {
         if (err) {
-          console.log("error", err);
+          console.error("error", err);
         }
-
         console.log("added 'moderator' to roles collection");
       });
 
@@ -79,9 +81,8 @@ function initial() {
         name: "admin",
       }).save((err) => {
         if (err) {
-          console.log("error", err);
+          console.error("error", err);
         }
-
         console.log("added 'admin' to roles collection");
       });
     }
