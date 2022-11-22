@@ -12,7 +12,7 @@ export class BoardAdminComponent implements OnInit {
   content?: string;
 
   ngOnInit(): void {
-    this.UserService.getUserBoard().subscribe({
+    this.UserService.getAdminBoard().subscribe({
       next: (data) => {
         this.content = data;
       },

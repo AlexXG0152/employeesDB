@@ -1,5 +1,5 @@
 export interface IEmpl {
-  id: number;
+  employeeID: number;
   firstName: string;
   lastName: string;
   fatherName: string;
@@ -7,7 +7,7 @@ export interface IEmpl {
   homeAddress: string;
   date0: string;
   date1: string;
-  date2: string;
+  sex: string;
   dismissalDate: string;
   dismissalDocDate: string;
   dismissalDocNumer: string;

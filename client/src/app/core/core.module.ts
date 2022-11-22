@@ -45,6 +45,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatSelectModule,
   ],
-  exports: [SearchFilterPipe],
+  exports: [SearchFilterPipe, ResultPageComponent, SearchComponent],
 })
 export class CoreModule {}

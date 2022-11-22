@@ -8,6 +8,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HomeComponent } from './home/home.component';
     BoardUserComponent,
     HomeComponent,
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CoreModule],
   providers: [],
 })
 export class AuthModule {}

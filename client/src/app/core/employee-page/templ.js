@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require("fs");
 
 let start = {
-  id: "",
+  employeeID: "",
   firstName: "",
   lastName: "",
   fatherName: "",
@@ -12,7 +12,7 @@ let start = {
   nationality: "",
   date1: "",
   tradeUnionName: "",
-  date2: "",
+  sex: "",
   passportNumber: "",
   passportDateStart: "",
   passportMade: "",
@@ -4163,70 +4163,72 @@ const city_names = [
 ];
 
 const education = ["university", "college", "school", "academy"];
+const nationality = ["P", "B", "U", "L", "J", "T"];
+const tradeUnionName = ["one", "two", "free"];
 
 const dismissalReason = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
 ];
 
-let newone = {};
+let newOne = {};
 let finish = [];
 function randomData() {
   return (Math.random() + 1).toString(36).substring(3);
+}
+function randomDate() {
+  return new Date(new Date() - Math.random() * 1e12).toLocaleDateString(
+    "ru-RU"
+  );
 }
 
 function randomFromArray(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-for (let i = 0; i < 25000; i++) {
+for (let i = 1; i <= 25000; i++) {
   for (let j in start) {
-    newone[j] = randomData();
-    newone.id = i;
-    newone.firstName = randomFromArray(first_names);
-    newone.lastName = randomFromArray(last_names);
-    newone.fatherName =
-      newone.id % 7 === 0
+    newOne[j] = randomData();
+    newOne.employeeID = i;
+    newOne.firstName = randomFromArray(first_names);
+    newOne.lastName = randomFromArray(last_names);
+    newOne.fatherName =
+      newOne.employeeID % 7 !== 0
         ? `${randomFromArray(first_names)}sson`
         : `${randomFromArray(first_names)}dotter`;
-    newone.birthDate = new Date(
-      new Date() - Math.random() * 1e12
-    ).toLocaleDateString("ru-RU");
-    newone.homeAddress = `${randomFromArray(city_names)}, ${randomFromArray(
+    newOne.sex =
+      newOne.employeeID % 7 !== 0
+        ? (newOne.sex = "male")
+        : (newOne.sex = "female");
+    newOne.birthDate = randomDate();
+    newOne.nationality = randomFromArray(nationality);
+    newOne.tradeUnionName = randomFromArray(tradeUnionName);
+    newOne.homeAddress = `${randomFromArray(city_names)}, ${randomFromArray(
       city_names
     )}, ${randomFromArray(city_names)}`;
-    newone.date0 = new Date(
-      new Date() - Math.random() * 1e12
-    ).toLocaleDateString("ru-RU");
-    newone.date1 = new Date(
-      new Date() - Math.random() * 1e12
-    ).toLocaleDateString("ru-RU");
-    newone.date2 = new Date(
-      new Date() - Math.random() * 1e12
-    ).toLocaleDateString("ru-RU");
-    newone.dismissalDate =
-      newone.id % 15 === 0
-        ? `${new Date(new Date() - Math.random() * 1e12).toLocaleDateString(
-            "ru-RU"
-          )}`
-        : ``;
-    if (newone.dismissalDate !== "") {
-      newone.dismissalDocDate = new Date(
-        new Date() - Math.random() * 1e12
-      ).toLocaleDateString("ru-RU");
-      newone.dismissalDocNumer = randomData();
-      newone.dismissalReason = `${randomFromArray(dismissalReason)}`;
-    } else {
-      newone.dismissalDocDate = newone.dismissalDocNumer = newone.dismissalReason = ''
+    newOne.date0 = randomDate();
+    newOne.date1 = randomDate();
+    newOne.dismissalDate = newOne.id % 15 === 0 ? `${randomDate()}` : ``;
+    newOne.employmentDate = randomDate();
+    newOne.passportDateStart = randomDate();
 
+    if (newOne.dismissalDate !== "") {
+      newOne.dismissalDocDate = randomDate();
+      newOne.dismissalDocNumer = randomData();
+      newOne.dismissalReason = `${randomFromArray(dismissalReason)}`;
+    } else {
+      newOne.dismissalDocDate =
+        newOne.dismissalDocNumer =
+        newOne.dismissalReason =
+          "";
     }
-    newone.education = randomFromArray(education);
+    newOne.education = randomFromArray(education);
   }
-  finish.push(newone);
-  newone = {};
+  finish.push(newOne);
+  newOne = {};
 }
 
-console.log(newone);
+console.log(newOne);
 console.log(finish);
 
 let data = JSON.stringify(finish);
-fs.writeFileSync('empls.json', data);
+fs.writeFileSync("empls.json", data);

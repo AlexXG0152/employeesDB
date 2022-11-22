@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { EmployeePageComponent } from './core/employee-page/employee-page.component';
+import { ResultPageComponent } from './core/result-page/result-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: `searchResults`, component: ResultPageComponent },
   { path: 'employee/:id', component: EmployeePageComponent, pathMatch: 'full' },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' },

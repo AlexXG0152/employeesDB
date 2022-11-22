@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { debounceTime } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { DataService } from 'src/app/services/users.service';
-import { Employees } from '../../interfaces/employees';
+import { Employee } from '../../interfaces/employees';
 
 @Component({
   selector: 'app-result-page',
@@ -10,8 +10,10 @@ import { Employees } from '../../interfaces/employees';
 })
 export class ResultPageComponent implements OnInit {
   constructor(private DataService: DataService) {}
+
   show: boolean = false;
   displayedColumns: string[] = [
+    'ID',
     'firstName lastName',
     'company.department',
     'company.title',
@@ -21,29 +23,35 @@ export class ResultPageComponent implements OnInit {
 
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
-    this.getUserByName();
+    this.getUserByFirstName();
   }
 
   usersData: any = [];
+  usersData$?: Subscription;
 
-  getUserByName() {
+  getUserByFirstName() {
     if (this.searchText.length === 0 || this.searchText.match(/^\d/)) {
-      this.usersData = [];
       this.show = false;
     } else {
-      this.DataService.getUserByName(this.searchText).subscribe(
-        (data: Employees) => {
+      this.DataService.getUserByFirstName(this.searchText).subscribe(
+        (data: Employee) => {
           this.usersData = data;
 
-          this.usersData.users = this.usersData?.users?.filter(
+          this.usersData = this.usersData.filter(
             (user: { firstName: string }) =>
               user.firstName.toLowerCase() === this.searchText.toLowerCase()
           );
           this.show = true;
+          this.DataService.passResults(this.usersData);
         }
       );
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.usersData$ = this.DataService.getPassedResults().subscribe((data) => {
+      this.usersData = data;
+    });
+    this.show = true;
+  }
 }

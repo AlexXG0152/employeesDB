@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "./src/app/environments/.env" });
 const express = require("express");
+require('express-async-errors')
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 
@@ -51,6 +52,7 @@ app.get("/", (req, res) => {
 
 require("./src/app/routes/auth.routes")(app);
 require("./src/app/routes/user.routes")(app);
+require("./src/app/routes/employee.routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

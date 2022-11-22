@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IEmpl } from 'src/app/interfaces/empl';
 import empls from '../../../assets/empls.json';
+import { DataService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-employee-page',
@@ -9,27 +10,23 @@ import empls from '../../../assets/empls.json';
   styleUrls: ['./employee-page.component.scss'],
 })
 export class EmployeePageComponent implements OnInit {
-  dataBase: any = [];
-  id: number | undefined;
+  userData: IEmpl[] = [];
+  id?: number;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private DataService: DataService) {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       try {
-        if (params["id"]) {
-          this.dataBase = empls.filter((x: IEmpl) => x.id === Number(params["id"]))
-          // this.doSearch(params["id"]);
+        if (params['id']) {
+          this.DataService.getUser(params['id']).subscribe((user) => {
+            this.userData.push(user);
+          });
         }
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     });
   }
 
-  // doSearch(userID: string){
-  //   return this.dataBase.filter((x: any) => x.id === Number(userID))
-  // }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

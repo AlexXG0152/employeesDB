@@ -25,6 +25,7 @@ import { CommonModule } from '@angular/common';
     AuthModule,
     CoreModule,
   ],
+  exports:[],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
