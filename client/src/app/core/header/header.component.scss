@@ -5,4 +5,18 @@
 .navbar {
   padding: 10px;
   margin-bottom: 10px;
+  background-color: #002b5c;
+  border-radius: 10px;
+}
+
+a {
+  color: white;
+}
+
+a:focus {
+  color: yellow;
+}
+
+a:hover {
+  color: red
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EmployeePageComponent } from './employee-page/employee-page.component';
 import { AppComponent } from '../app.component';
 import { SearchFilterPipe } from '../pipes/search-filter.pipe';
 import { HeaderComponent } from './header/header.component';
@@ -19,6 +18,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmployeeModule } from '../employee/employee.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SearchComponent,
     SearchFilterPipe,
     ResultPageComponent,
-    EmployeePageComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -44,6 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    EmployeeModule,
   ],
   exports: [SearchFilterPipe, ResultPageComponent, SearchComponent],
 })

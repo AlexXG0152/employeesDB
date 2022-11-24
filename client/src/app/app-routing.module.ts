@@ -7,7 +7,6 @@ import { HomeComponent } from './auth/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { EmployeePageComponent } from './core/employee-page/employee-page.component';
 import { ResultPageComponent } from './core/result-page/result-page.component';
 
 const routes: Routes = [
@@ -18,10 +17,14 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: `searchResults`, component: ResultPageComponent },
-  { path: 'employee/:id', component: EmployeePageComponent, pathMatch: 'full' },
+  // { path: 'searchResults', component: ResultPageComponent },
+  {
+    path: 'employee/:id/',
+    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+    data: { preload: true }
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  // { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

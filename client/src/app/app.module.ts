@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { httpInterceptorProviders } from './helpers/http.interceptor';
 import { CommonModule } from '@angular/common';
+import { EmployeeModule } from './employee/employee.module';
 
 @NgModule({
   declarations: [],
@@ -24,6 +25,7 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     AuthModule,
     CoreModule,
+    EmployeeModule,
   ],
   exports:[],
   providers: [httpInterceptorProviders],
