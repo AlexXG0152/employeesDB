@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     private StorageService: StorageService
   ) {}
 
-  form: ILoginForm = {
+  form: any = {
     username: null,
     password: null,
   };

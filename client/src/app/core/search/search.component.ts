@@ -13,6 +13,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -31,33 +32,21 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
     ]),
   ],
 })
-export class SearchComponent implements AfterViewInit{
+export class SearchComponent implements AfterViewInit {
+  constructor(private router: Router) {}
   @ViewChild('searchInput') inputElement?: ElementRef;
 
   enteredSearchValue: string = '';
   @Output() searchTextChanged: EventEmitter<string> =
     new EventEmitter<string>();
 
-  // onSearchTextChanged() {
-  //   fromEvent(this.inputElement?.nativeElement, 'keyup')
-  //     .pipe(
-  //       debounceTime(1000),
-  //       distinctUntilChanged(),
-  //     )
-  //     .subscribe(() => {
-  //       this.searchTextChanged.emit(this.inputElement?.nativeElement.value);
-  //     });
-  // }
   ngAfterViewInit() {
     if (this.inputElement) {
       fromEvent(this.inputElement?.nativeElement, 'keyup')
-      .pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-      )
-      .subscribe(() => {
-        this.searchTextChanged.emit(this.inputElement?.nativeElement.value);
-      });
+        .pipe(debounceTime(1000), distinctUntilChanged())
+        .subscribe(() => {
+          this.searchTextChanged.emit(this.inputElement?.nativeElement.value);
+        });
     }
   }
 }

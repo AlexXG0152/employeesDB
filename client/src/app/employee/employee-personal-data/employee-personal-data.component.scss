@@ -1,0 +1,312 @@
+.persData,
+.profData {
+  padding: 10px;
+  height: 1.5em;
+  display: flex;
+  justify-content: center;
+  font-size: 33px;
+  font-weight: bolder;
+}
+
+.persData {
+  text-transform: capitalize;
+}
+
+.employee-grid {
+  margin-top: 1em;
+  display: grid;
+
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.75fr 1.25fr 0.25fr 0.85fr 1.15fr;
+  grid-template-areas:
+    "labels labels labels labels labels"
+    "label0 label1 . label2 label3"
+    "label4 label5 . label6 label7"
+    "label8 label9 . label10 label11"
+    "label12 label13 . label14 label15"
+    "label16 label16 label16 label16 label16"
+    "label17 label18 . label19 label20"
+    "label21 label22 label22 label23 label24"
+    "label25 label25 label25 label25 label25"
+    "label26 label27 . label28 label29"
+    "label30 label31 label31 label31 label31"
+    "label32 label32 label32 label32 label32"
+    "label33 label34 . label35 label36"
+    "label37 label38 . label39 label40"
+    "label41 label41 label41 label41 label41"
+    "label42 label43 . label44 label45"
+    "label46 label47 . label48 label49";
+  gap: 0px;
+  height: 100%;
+}
+
+.employee-grid>div {
+  display: flex;
+  height: 2em;
+  color: black;
+  font-size: 20px;
+  justify-content: left;
+  align-items: center;
+  padding: 5px;
+  // border: black 0.5px solid;
+}
+
+#item-s {
+  background-color: #58bd58;
+  grid-area: labels;
+  justify-content: center;
+}
+
+#item-0 {
+  background-color: #b77878;
+  grid-area: label0;
+}
+
+#item-1 {
+  background-color: #87b7b7;
+  grid-area: label1;
+}
+
+#item-2 {
+  background-color: #6bdf76;
+  grid-area: label2;
+}
+
+#item-3 {
+  background-color: #adba95;
+  grid-area: label3;
+}
+
+#item-4 {
+  background-color: #69fd55;
+  grid-area: label4;
+}
+
+#item-5 {
+  background-color: #f95778;
+  grid-area: label5;
+}
+
+#item-6 {
+  background-color: #be759b;
+  grid-area: label6;
+}
+
+#item-7 {
+  background-color: #957dd5;
+  grid-area: label7;
+}
+
+#item-8 {
+  background-color: #b765bc;
+  grid-area: label8;
+}
+
+#item-9 {
+  background-color: #dc8d7f;
+  grid-area: label9;
+}
+
+#item-10 {
+  background-color: #b78dc9;
+  grid-area: label10;
+}
+
+#item-11 {
+  background-color: #6ba5f8;
+  grid-area: label11;
+}
+
+#item-12 {
+  background-color: #5eaa77;
+  grid-area: label12;
+}
+
+#item-13 {
+  background-color: #bc5ade;
+  grid-area: label13;
+}
+
+#item-14 {
+  background-color: #8bb5fb;
+  grid-area: label14;
+}
+
+#item-15 {
+  background-color: #ffbd59;
+  grid-area: label15;
+}
+
+#item-16 {
+  background-color: #7c9b57;
+  grid-area: label16;
+  justify-content: center;
+}
+
+#item-17 {
+  background-color: #cebe99;
+  grid-area: label17;
+}
+
+#item-18 {
+  background-color: #5d9bc9;
+  grid-area: label18;
+}
+
+#item-19 {
+  background-color: #a57fd9;
+  grid-area: label19;
+}
+
+#item-20 {
+  background-color: #587da5;
+  grid-area: label20;
+}
+
+#item-21 {
+  background-color: #b8ab69;
+  grid-area: label21;
+}
+
+#item-22 {
+  background-color: #678ed5;
+  grid-area: label22;
+}
+
+#item-23 {
+  background-color: #576d95;
+  grid-area: label23;
+}
+
+#item-24 {
+  background-color: #7ddf56;
+  grid-area: label24;
+}
+
+#item-25 {
+  background-color: #a965b6;
+  grid-area: label25;
+  justify-content: center;
+}
+
+#item-26 {
+  background-color: #85fe55;
+  grid-area: label26;
+}
+
+#item-27 {
+  background-color: #6e55da;
+  grid-area: label27;
+}
+
+#item-28 {
+  background-color: #bebfbd;
+  grid-area: label28;
+}
+
+#item-29 {
+  background-color: #cccdf5;
+  grid-area: label29;
+}
+
+#item-30 {
+  background-color: #edb5ca;
+  grid-area: label30;
+}
+
+#item-31 {
+  background-color: #9f56a9;
+  grid-area: label31;
+}
+
+#item-32 {
+  background-color: #7a75bf;
+  grid-area: label32;
+  justify-content: center;
+}
+
+#item-33 {
+  background-color: #d9775b;
+  grid-area: label33;
+}
+
+#item-34 {
+  background-color: #adcd9e;
+  grid-area: label34;
+}
+
+#item-35 {
+  background-color: #a8d8da;
+  grid-area: label35;
+}
+
+#item-36 {
+  background-color: #ed7ab7;
+  grid-area: label36;
+}
+
+#item-37 {
+  background-color: #759adc;
+  grid-area: label37;
+}
+
+#item-38 {
+  background-color: #fab6ea;
+  grid-area: label38;
+}
+
+#item-39 {
+  background-color: #e9da5e;
+  grid-area: label39;
+}
+
+#item-40 {
+  background-color: #556f7e;
+  grid-area: label40;
+}
+
+#item-41 {
+  background-color: #6d7dd5;
+  grid-area: label41;
+  justify-content: center;
+}
+
+#item-42 {
+  background-color: #b9d75d;
+  grid-area: label42;
+}
+
+#item-43 {
+  background-color: #7e77f8;
+  grid-area: label43;
+}
+
+#item-44 {
+  background-color: #875888;
+  grid-area: label44;
+}
+
+#item-45 {
+  background-color: #d86575;
+  grid-area: label45;
+}
+
+#item-46 {
+  background-color: #8a5d6f;
+  grid-area: label46;
+}
+
+#item-47 {
+  background-color: #e5769e;
+  grid-area: label47;
+}
+
+#item-48 {
+  background-color: #eaacb8;
+  grid-area: label48;
+}
+
+#item-49 {
+  background-color: #cb97ae;
+  grid-area: label49;
+}

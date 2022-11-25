@@ -7,6 +7,7 @@ import { HomeComponent } from './auth/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ResultPageComponent } from './core/result-page/result-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,11 +17,18 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  // { path: 'searchResults', component: ResultPageComponent },
+  {
+    path: 'employee/:id/',
+    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+    data: { preload: true }
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,4 +1,4 @@
-<header class="site-header">
+<!-- <header class="site-header">
   <mat-toolbar>
     <span>Employees Data Base</span>
     <span class="example-spacer"></span>
@@ -9,4 +9,45 @@
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </mat-toolbar>
+</header> navbar-dark bg-dark-->
+
+<header>
+  <div id="app">
+    <nav class="navbar navbar-expand">
+      <a href="/home" class="navbar-brand" routerLink="home">Employees Data Base</a>
+      <span class="example-spacer"></span>
+      <ul class="navbar-nav mr-auto" routerLinkActive="active">
+        <li class="nav-item">
+          <a href="/home" class="nav-link" routerLink="home">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="showAdminBoard">
+          <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+        </li>
+        <li class="nav-item" *ngIf="showModeratorBoard">
+          <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+        </li>
+        <li class="nav-item">
+          <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User Board</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a href="/login" class="nav-link" routerLink="login">Login</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()">LogOut</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>

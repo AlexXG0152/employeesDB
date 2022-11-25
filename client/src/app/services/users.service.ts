@@ -1,20 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, share } from 'rxjs';
-import { Employees } from '../interfaces/employees';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Employee } from '../interfaces/employees';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class DataService {
   constructor(private http: HttpClient) {}
+  searchResults$ = new BehaviorSubject<any>('');
 
-  getUsers(): Observable<Employees[]> {
-    return this.http.get<Employees[]>('https://dummyjson.com/users');
+  getUser(id: string): Observable<Employee> {
+    return this.http.get<Employee>(`http://localhost:8080/api/employee/${id}`)
+    // return this.http.get<Employee[]>('https://dummyjson.com/users');
   }
-  getUserByName(name: string): Observable<Employees> {
-    return this.http.get<Employees>(
-      `https://dummyjson.com/users/search?q=${name}`
+
+  getUserByFirstName(firstName: string): Observable<Employee> {
+    return this.http.get<Employee>(
+      `http://localhost:8080/api/employee/firstName/${firstName}`
     );
+  }
+
+  passResults(results: any): void {
+    this.searchResults$.next(results);
+  }
+
+  getPassedResults(): Observable<any> {
+    return this.searchResults$.asObservable();
   }
 }

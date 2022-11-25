@@ -13,17 +13,21 @@ export class BoardModeratorComponent implements OnInit {
 
   ngOnInit(): void {
     this.UserService.getModeratorBoard().subscribe({
-      next: (data) => {
+      next: data => {
         this.content = data;
       },
-      error: (err) => {
-        console.error(err);
+      error: err => {
         if (err.error) {
-          this.content = JSON.parse(err.error).message;
+          try {
+            const res = JSON.parse(err.error);
+            this.content = res.message;
+          } catch {
+            this.content = `Error with status: ${err.status} - ${err.statusText}`;
+          }
         } else {
-          this.content = 'Error with status: ' + err.status;
+          this.content = `Error with status: ${err.status}`;
         }
-      },
+      }
     });
   }
 }
