@@ -8,6 +8,7 @@ import { Employee } from '../interfaces/employees';
 })
 export class DataService {
   constructor(private http: HttpClient) {}
+
   searchResults$ = new BehaviorSubject<any>('');
 
   getUser(id: string): Observable<Employee> {

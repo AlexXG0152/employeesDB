@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import fs from 'fs'
-require("dotenv").config({ path: "./src/app/environments/.env" });
+// require("dotenv").config({ path: "./src/app/environments/.env" });
 
 // Replace the uri string with your MongoDB deployment's connection string.
 const uri = process.env.MONGODB;
