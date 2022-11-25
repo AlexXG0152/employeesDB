@@ -10,7 +10,7 @@ const client = new MongoClient(uri);
 async function run() {
   try {
     const database = client.db("test");
-    const foods = database.collection("employeesEducations"); // COLLECTION!
+    const foods = database.collection("employeeseducations"); // COLLECTION!
 
     // create an array of documents to insert
     // const docs = [
