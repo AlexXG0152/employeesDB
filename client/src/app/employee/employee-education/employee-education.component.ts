@@ -96,6 +96,7 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
+// POP-UP
   displayStyle = 'none';
   openPopup() {
     this.displayStyle = 'block';

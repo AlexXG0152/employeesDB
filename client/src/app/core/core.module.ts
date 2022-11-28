@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from '../app.component';
 import { SearchFilterPipe } from '../pipes/search-filter.pipe';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmployeeModule } from '../employee/employee.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UploadFilesComponent } from './upload-files/upload-files.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SearchFilterPipe,
     ResultPageComponent,
     PageNotFoundComponent,
+    UploadFilesComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -36,6 +38,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatDividerModule,
     MatButtonModule,
