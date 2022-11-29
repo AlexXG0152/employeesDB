@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 
 var corsOptions = {
   origin: ["http://localhost:4200", "http://localhost:8080"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true,
 };
 
@@ -54,6 +54,7 @@ require("./src/app/routes/auth.routes")(app);
 require("./src/app/routes/user.routes")(app);
 require("./src/app/routes/employee.routes")(app);
 require("./src/app/routes/employeeEducation.routes")(app);
+require("./src/app/routes/upload.routes")(app);
 
 
 app.listen(PORT, () => {

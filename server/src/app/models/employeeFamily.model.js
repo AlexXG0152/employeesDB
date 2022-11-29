@@ -6,15 +6,19 @@ const FamilyMembers = mongoose.model(
     {
       employeeID: {
         type: "Number",
+        required: true,
       },
       familyMemberType: {
         type: "Number",
+        required: true,
       },
       familyMemberName: {
         type: "String",
+        required: true,
       },
       familyMemberBirthDate: {
         type: "String",
+        required: true,
       },
       familyMemberDateEnd: {
         type: "String",

@@ -2,17 +2,17 @@ const fs = require("fs");
 
 let start = {
   employeeID: "",
-  educaionLevel: "",
-  educaionType: "",
-  educaionCenterName: "",
-  educaionProfile: "",
-  educaionDegree: "",
-  educaionDateEnd: "",
-  educaionDiplomaNumber: "",
-  educaionDiplomaDate: "",
+  educationLevel: "",
+  educationType: "",
+  educationCenterName: "",
+  educationProfile: "",
+  educationDegree: "",
+  educationDateEnd: "",
+  educationDiplomaNumber: "",
+  educationDiplomaDate: "",
 };
-const educaionLevel = ["1", "2", "3", "4"];
-const educaionType = ["1", "2", "3"];
+const educationLevel = ["1", "2", "3", "4"];
+const educationType = ["1", "2", "3"];
 
 const universityNames = [
   "Harvard University",
@@ -1445,16 +1445,16 @@ function getRandomArbitrary(min, max) {
 for (let i = 1; i <= 25000; i++) {
   for (let j in start) {
     newOne.employeeID = i;
-    newOne.educaionLevel = randomFromArray(educaionLevel);
-    newOne.educaionType = randomFromArray(educaionType);
-    newOne.educaionCenterName = randomFromArray(universityNames);
-    newOne.educaionProfile = randomFromArray(universitySpecialisations);
-    newOne.educaionDegree = randomFromArray(universityDegrees);
-    newOne.educaionDateEnd = randomDate();
-    newOne.educaionDiplomaNumber = randomData().toLocaleUpperCase();
-    newOne.educaionDiplomaDate = addDaysToRandomDate(
-      newOne.educaionDateEnd,
-      Number(randomFromArray(educaionLevel))
+    newOne.educationLevel = randomFromArray(educationLevel);
+    newOne.educationType = randomFromArray(educationType);
+    newOne.educationCenterName = randomFromArray(universityNames);
+    newOne.educationProfile = randomFromArray(universitySpecialisations);
+    newOne.educationDegree = randomFromArray(universityDegrees);
+    newOne.educationDateEnd = randomDate();
+    newOne.educationDiplomaNumber = randomData().toUpperCase();
+    newOne.educationDiplomaDate = addDaysToRandomDate(
+      newOne.educationDateEnd,
+      Number(randomFromArray(educationLevel))
     );
   }
   finish.push(newOne);
@@ -1464,16 +1464,16 @@ for (let i = 1; i <= 25000; i++) {
 for (let i = 1; i <= 7777; i++) {
   for (let j in start) {
     newOne.employeeID = getRandomArbitrary(1, 25000);
-    newOne.educaionLevel = randomFromArray(educaionLevel);
-    newOne.educaionType = randomFromArray(educaionType);
-    newOne.educaionCenterName = randomFromArray(universityNames);
-    newOne.educaionProfile = randomFromArray(universitySpecialisations);
-    newOne.educaionDegree = randomFromArray(universityDegrees);
-    newOne.educaionDateEnd = randomDate();
-    newOne.educaionDiplomaNumber = randomData();
-    newOne.educaionDiplomaDate = addDaysToRandomDate(
-      newOne.educaionDateEnd,
-      Number(randomFromArray(educaionLevel))
+    newOne.educationLevel = randomFromArray(educationLevel);
+    newOne.educationType = randomFromArray(educationType);
+    newOne.educationCenterName = randomFromArray(universityNames);
+    newOne.educationProfile = randomFromArray(universitySpecialisations);
+    newOne.educationDegree = randomFromArray(universityDegrees);
+    newOne.educationDateEnd = randomDate();
+    newOne.educationDiplomaNumber = randomData().toUpperCase();
+    newOne.educationDiplomaDate = addDaysToRandomDate(
+      newOne.educationDateEnd,
+      Number(randomFromArray(educationLevel))
     );
   }
   finish.push(newOne);

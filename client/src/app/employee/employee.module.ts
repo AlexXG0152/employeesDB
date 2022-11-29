@@ -10,17 +10,27 @@ import { EmployeeFamilyComponent } from './employee-family/employee-family.compo
 import { EmployeeEducationComponent } from './employee-education/employee-education.component';
 import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeePersonalDataComponent } from './employee-personal-data/employee-personal-data.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [EmployeeIndexPageComponent, EmployeeFamilyComponent, EmployeeEducationComponent, EmployeePersonalDataComponent],
+  declarations: [
+    EmployeeIndexPageComponent,
+    EmployeeFamilyComponent,
+    EmployeeEducationComponent,
+    EmployeePersonalDataComponent,
+  ],
   imports: [
     CommonModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatSidenavModule,
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatDividerModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
   ],
 })
 export class EmployeeModule {}

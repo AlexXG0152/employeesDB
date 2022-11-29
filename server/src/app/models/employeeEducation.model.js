@@ -6,30 +6,39 @@ const EmployeesEducation = mongoose.model(
     {
       employeeID: {
         type: "Number",
+        required: true,
       },
       educationLevel: {
         type: "Number",
+        required: true,
       },
       educationType: {
         type: "String",
+        required: true,
       },
       educationCenterName: {
         type: "String",
+        required: true,
       },
       educationProfile: {
         type: "String",
+        required: true,
       },
       educationDegree: {
         type: "String",
+        required: true,
       },
       educationDateEnd: {
-        type: "Date",
+        type: "String",
+        required: true,
       },
       educationDiplomaNumber: {
         type: "String",
+        required: true,
       },
       educationDiplomaDate: {
-        type: "Date",
+        type: "String",
+        required: true,
       },
     },
     { timestamps: true }

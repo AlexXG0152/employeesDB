@@ -8,11 +8,11 @@ import { Employee } from '../interfaces/employees';
 })
 export class DataService {
   constructor(private http: HttpClient) {}
+
   searchResults$ = new BehaviorSubject<any>('');
 
   getUser(id: string): Observable<Employee> {
     return this.http.get<Employee>(`http://localhost:8080/api/employee/${id}`)
-    // return this.http.get<Employee[]>('https://dummyjson.com/users');
   }
 
   getUserByFirstName(firstName: string): Observable<Employee> {
