@@ -13,8 +13,6 @@ export class UploadFilesService {
 
   upload(data: any, file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-    // formData.append('data', data);
-
     formData.append('data', JSON.stringify(data));
     formData.append('file', file);
 
@@ -26,7 +24,11 @@ export class UploadFilesService {
     return this.http.request(req);
   }
 
-  getFiles(): Observable<any> {
+  getAllFiles(): Observable<any> {
     return this.http.get(`${this.baseUrl}/files`);
+  }
+
+  getEmployeeFiles(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/files/id/${id}`);
   }
 }

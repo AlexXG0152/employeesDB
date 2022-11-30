@@ -75,7 +75,9 @@ export class UploadFilesComponent implements OnInit {
                   );
                 } else if (event instanceof HttpResponse) {
                   this.message = event.body.message;
-                  this.fileInfo = this.uploadService.getFiles();
+                  this.fileInfo = this.uploadService.getEmployeeFiles(
+                    this.employeeID!
+                  );
                 }
               },
               error: (err: any) => {
@@ -102,9 +104,13 @@ export class UploadFilesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fileInfo = this.uploadService.getFiles();
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
     });
+    this.fileInfo = this.uploadService.getEmployeeFiles(this.employeeID!);
+    this.fileInfo.subscribe(data => {
+      console.log(data);
+
+    })
   }
 }

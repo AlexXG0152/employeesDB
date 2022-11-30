@@ -50,11 +50,28 @@
   <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
 
   <div class="card mt-3">
-    <div class="card-header">List of Files</div>
-    <ul class="list-group list-group-flush" *ngFor="let file of fileInfo | async">
-      <li class="list-group-item">
-        <a href="{{ file.url }}">{{ file.name }}</a>
-      </li>
-    </ul>
+    <div class="card-header table-responsive">List of Files</div>
+    <!-- <ul class="list-group list-group-flush" *ngFor="let file of fileInfo | async; let i=index"> -->
+      <!-- <li class="list-group-item"> -->
+        <table class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">№</th>
+              <th scope="col" class="date-column">Date</th>
+              <th scope="col">Comment</th>
+              <th scope="col" class="document-column">Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of fileInfo | async; let i=index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{ file.metadata?.documentDate }}</td>
+              <td>{{ file.metadata?.comment }}</td>
+              <td><a href="{{ file.url }}">{{ file.name }}</a></td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- </li> -->
+    <!-- </ul> -->
   </div>
 </div>
