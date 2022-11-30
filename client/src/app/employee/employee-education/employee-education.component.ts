@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeEducationService } from 'src/app/services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
   selector: 'app-employee-education',
@@ -15,12 +16,14 @@ export class EmployeeEducationComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private EmployeeEducationService: EmployeeEducationService,
-    private StorageService: StorageService
+    private StorageService: StorageService,
+    private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   private roles: string[] = [];
   employeeEducationData?: any;
   employeeID: string = '';
+  employeePersonalData?: any;
 
   isLoggedIn = false;
   showAdminBoard = false;
@@ -29,6 +32,7 @@ export class EmployeeEducationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
     this.isLoggedIn = this.StorageService.isLoggedIn();
 
     if (this.isLoggedIn) {
@@ -42,6 +46,14 @@ export class EmployeeEducationComponent implements OnInit {
     }
   }
 
+  getEmployee() {
+    this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
+      (employee) => {
+        this.employeePersonalData = employee;
+      }
+    );
+  }
+
   getData() {
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
@@ -52,6 +64,7 @@ export class EmployeeEducationComponent implements OnInit {
           ).subscribe((data) => {
             this.employeeEducationData = data;
           });
+          this.getEmployee();
         }
       } catch (error) {
         console.error(error);
@@ -96,7 +109,7 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-// POP-UP
+  // POP-UP
   displayStyle = 'none';
   openPopup() {
     this.displayStyle = 'block';
