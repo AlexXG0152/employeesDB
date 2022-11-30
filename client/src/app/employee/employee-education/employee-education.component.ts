@@ -46,7 +46,7 @@ export class EmployeeEducationComponent implements OnInit {
     }
   }
 
-  getEmployee() {
+  getEmployee(): void {
     this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
       (employee) => {
         this.employeePersonalData = employee;
@@ -54,7 +54,7 @@ export class EmployeeEducationComponent implements OnInit {
     );
   }
 
-  getData() {
+  getData(): void {
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
       try {
@@ -72,7 +72,7 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  deleteData(_id: string) {
+  deleteData(_id: string): void {
     this.EmployeeEducationService.deleteEmployeeEducation(
       this.employeeID,
       _id
@@ -111,10 +111,10 @@ export class EmployeeEducationComponent implements OnInit {
 
   // POP-UP
   displayStyle = 'none';
-  openPopup() {
+  openPopup(): void {
     this.displayStyle = 'block';
   }
-  closePopup() {
+  closePopup(): void {
     this.displayStyle = 'none';
   }
   employeeEducationForm = new FormGroup({
@@ -127,7 +127,7 @@ export class EmployeeEducationComponent implements OnInit {
     educationDiplomaNumber: new FormControl('', Validators.required),
     educationDiplomaDate: new FormControl('', Validators.required),
   });
-  createRecord() {
+  createRecord(): void {
     console.warn(this.employeeEducationForm.value);
     this.EmployeeEducationService.createEmployeeEducation(
       this.employeeID,
