@@ -54,8 +54,8 @@ require("./src/app/routes/auth.routes")(app);
 require("./src/app/routes/user.routes")(app);
 require("./src/app/routes/employee.routes")(app);
 require("./src/app/routes/employeeEducation.routes")(app);
-require("./src/app/routes/upload.routes")(app);
 require("./src/app/routes/employeeGrowthPlan.routes")(app);
+require("./src/app/routes/upload.routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
