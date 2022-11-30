@@ -12,6 +12,7 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeePersonalDataComponent } from './employee-personal-data/employee-personal-data.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-growth-plan.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EmployeeFamilyComponent,
     EmployeeEducationComponent,
     EmployeePersonalDataComponent,
+    EmployeeGrowthPlanComponent,
   ],
   imports: [
     CommonModule,

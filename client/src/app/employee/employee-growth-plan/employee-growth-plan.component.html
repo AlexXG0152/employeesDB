@@ -1,0 +1,45 @@
+<div class="card" style="width: 48rem;">
+  <h2 class="card-header text-center">Growth Plan</h2>
+  <div class="card-body">
+    <form [formGroup]="employeeGrowthPlanForm" (ngSubmit)="addTask()">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" formControlName="growthPlanTaskTitle">
+        <label for="floatingInput">Task Title</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" placeholder="Leave a description here" id="floatingTextarea"
+          name="growthPlanTaskDescription" formControlName="growthPlanTaskDescription" style="height: 100px"></textarea>
+        <label for="floatingTextarea">Description</label>
+      </div>
+
+      <span class="title">Add Date: </span>
+      <p class="card-text">
+        <input id="growthPlanTaskAddDate" type="date" formControlName="growthPlanTaskAddDate" class="form-control date">
+      </p>
+      <span class="title">Planned End Date: </span>
+      <p class="card-text">
+        <input id="growthPlanTaskPlannedEndDate" type="date" formControlName="growthPlanTaskPlannedEndDate"
+          class="form-control date">
+      </p>
+      <button type="button" class="btn btn-primary" [disabled]="!employeeGrowthPlanForm.valid" (click)="addTask()">Add
+        task</button>
+    </form>
+  </div>
+</div>
+
+<div class="task" *ngFor="let task of taskList; let i = index">
+  <div class="card border-dark mb-3" style="max-width: 48rem;">
+    <div class="card-header">
+      <h2>{{task.growthPlanTaskTitle}}</h2>
+    </div>
+    <div class="card-body text-dark">
+      <h3 class="card-title">{{task.growthPlanTaskDescription}}</h3>
+      <p class="card-text">Add Date: {{task.growthPlanTaskAddDate}}</p>
+      <p class="card-text">End Date: {{task.growthPlanTaskPlannedEndDate}}</p>
+    </div>
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-outline-success m-2">Finish</button>
+      <button type="button" class="btn btn-outline-danger m-2" (click)="removeTask(i)">Delete</button>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { PageNotFoundComponent } from '../core/page-not-found/page-not-found.com
 import { UploadFilesComponent } from '../core/upload-files/upload-files.component';
 import { EmployeeEducationComponent } from './employee-education/employee-education.component';
 import { EmployeeFamilyComponent } from './employee-family/employee-family.component';
+import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-growth-plan.component';
 import { EmployeeIndexPageComponent } from './employee-index-page/employee-index-page.component';
 import { EmployeePersonalDataComponent } from './employee-personal-data/employee-personal-data.component';
 
@@ -17,6 +18,7 @@ const employeeRoutes: Routes = [
       { path: 'family', component: EmployeeFamilyComponent },
       { path: 'education', component: EmployeeEducationComponent },
       { path: 'upload', component: UploadFilesComponent },
+      { path: 'growth-plan', component: EmployeeGrowthPlanComponent },
       { path: 'help', component: PageNotFoundComponent },
       { path: '**', component: PageNotFoundComponent },
     ],
