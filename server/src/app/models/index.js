@@ -10,6 +10,7 @@ db.role = require("./role.model");
 db.employee = require('./employee.model')
 db.employeeEducation = require('./employeeEducation.model')
 db.employeeFamily = require('./employeeFamily.model')
+db.growthPlan = require('./employeeGrowthPlan.model')
 
 db.ROLES = ["user", "admin", "moderator"];
 
