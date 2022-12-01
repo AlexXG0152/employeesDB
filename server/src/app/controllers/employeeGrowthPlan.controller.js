@@ -4,65 +4,73 @@ const { mongo } = require("mongoose");
 const EmployeesGrowthPlan = require("../models/employeeGrowthPlan.model");
 
 exports.getOneByID = asyncHandler(async (req, res) => {
-  if (!req.params.id) {
-    res.status(400);
-    throw new Error("Please add employeeID");
+  try {
+    if (!req.params.id) {
+      res.status(400);
+      throw new Error("Please add employeeID");
+    }
+    const employeesEducation = await EmployeesGrowthPlan.find({
+      employeeID: Number(req.params.id),
+    });
+    res.json(employeesEducation);
+  } catch (error) {
+    return res.status(200).send({ error });
   }
-  const employeesEducation = await EmployeesGrowthPlan.find({
-    employeeID: Number(req.params.id),
-  });
-  res.json(employeesEducation);
 });
 
 exports.createOne = asyncHandler(async (req, res) => {
-  const createQuery = {};
-  if (req.body.details) {
-    createQuery.details = req.body.details;
-  } else {
-    res.status(400);
-    throw new Error("No createQuery data in request");
+  try {
+    if (!req.body.details) {
+      res.status(400);
+      throw new Error("No createQuery data in request");
+    }
+    const employeesEducation = await EmployeesGrowthPlan.create(
+      req.body.details
+    );
+    res.json(employeesEducation);
+  } catch (error) {
+    return res.status(200).send({ error });
   }
-  const employeesEducation = await EmployeesGrowthPlan.create(
-    createQuery.details
-  );
-  res.json(employeesEducation);
 });
 
 exports.updateOne = asyncHandler(async (req, res) => {
-  if (!req.params.id) {
-    res.status(404);
-    throw new Error("No employeeID in request");
+  try {
+    if (!req.params.id) {
+      res.status(404);
+      throw new Error("No employeeID in request");
+    }
+    if (!req.body.details) {
+      res.status(400);
+      throw new Error("No updateQuery data in request");
+    }
+    const employeesEducation = await EmployeesGrowthPlan.findOneAndUpdate(
+      {
+        _id: new mongo.ObjectId(req.body._id),
+      },
+      req.body.details,
+      { new: true }
+    );
+    res.json(employeesEducation);
+  } catch (error) {
+    return res.status(200).send({ error });
   }
-
-  const updateQuery = {};
-  if (req.body.details) {
-    updateQuery.details = req.body.details;
-  } else {
-    res.status(400);
-    throw new Error("No updateQuery data in request");
-  }
-
-  const employeesEducation = await EmployeesGrowthPlan.findOneAndUpdate(
-    {
-      _id: new mongo.ObjectId(req.body._id),
-    },
-    updateQuery.details,
-    { new: true }
-  );
-  res.json(employeesEducation);
 });
 
 exports.deleteOnefromDB = asyncHandler(async (req, res) => {
-  if (!req.params.id) {
-    res.status(404);
-    throw new Error("No employeeID in request");
+  try {
+    if (!req.params.id) {
+      res.status(404);
+      throw new Error("No employeeID in request");
+    }
+    if (!req.body._id) {
+      res.status(404);
+      throw new Error("No '_id' in request");
+    }
+    const employeesEducation = await EmployeesGrowthPlan.findOneAndRemove({
+      _id: new mongo.ObjectId(req.body._id),
+    });
+    res.json(employeesEducation);
+  } catch (error) {
+    return res.status(200).send({ error });
   }
-  if (!req.body._id) {
-    res.status(404);
-    throw new Error("No '_id' in request");
-  }
-  const employeesEducation = await EmployeesGrowthPlan.findOneAndRemove({
-    _id: new mongo.ObjectId(req.body._id),
-  });
-  res.json(employeesEducation);
 });
