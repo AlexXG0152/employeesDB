@@ -27,14 +27,14 @@ exports.todayBirthdays = asyncHandler(async (req, res) => {
     {
       $match: {
         birthDate: {
-          $regex: new RegExp(req.body.date),
+          $regex: new RegExp(req.params.dateValue),
         },
       },
     },
   ];
   try {
     const todayBirthdays = await Employee.aggregate(agg);
-    res.json(todayBirthdays.length);
+    res.json(todayBirthdays);
   } catch (error) {
     return res.status(200).send({ error });
   }
