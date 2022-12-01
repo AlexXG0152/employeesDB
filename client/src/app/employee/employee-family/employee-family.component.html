@@ -2,46 +2,93 @@
   <div class="persData">
     <h2>FAMILY RECORDS</h2>
     <div class="persData">
-      <h3>NAME</h3>
+      <h3>{{employeePersonalData?.lastName}} {{employeePersonalData?.firstName}} {{employeePersonalData?.fatherName}}
+      </h3>
       <h4>DEPARTMENT</h4>
       <h4>POSITION</h4>
     </div>
   </div>
+  <div class="add-record">
+    <button type="button" class="btn btn-success mb-2 float-end" (click)="openPopup($event)">Add record</button>
+  </div>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th scope="col">№</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Type</th>
+        <th scope="col">Name</th>
+        <th scope="col">BirthDate</th>
+        <th scope="col">DateEnd</th>
+        <th scope="col">DateStart</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark Mark</td>
-        <td>Otto Mark Otto</td>
-        <td>@msdfdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Mark Otto</td>
-        <td>Mark Mark Otto</td>
-        <td>@mduoio</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Otto Mark</td>
-        <td>Mark Otto Otto</td>
-        <td>@mdqweo</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Otto Otto</td>
-        <td>Mark Otto Mark</td>
-        <td>@mdbnfo</td>
+      <tr *ngFor="let member of employeeFamilyMembersList;" [ngClass]="{ 'selected': member.selected }">
+        <td>{{member.familyMemberType}}</td>
+        <td>{{member.familyMemberName}}</td>
+        <td>{{member.familyMemberBirthDate}}</td>
+        <td>{{member.familyMemberDateEnd}}</td>
+        <td>{{member.familyMemberDateStart}}</td>
+        <td *ngIf="showModeratorBoard" class="actionButtons">
+          <button type="button" class="btn btn-outline-success btn-sm me-3" (click)="openPopup(member)">Edit</button>
+          <button type="button" class="btn btn-outline-danger btn-sm"
+            (click)="deleteEployeeFamilyMember(member._id)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePopup()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form [formGroup]="editEployeeFamilyMemberForm">
+            <span class="title">Type</span>
+            <p class="card-text">
+              <input class="form-control" id="familyMemberType" formControlName="familyMemberType">
+            </p>
+            <span class="title">Name</span>
+            <p class="card-text">
+              <input class="form-control" placeholder="Leave a description here" id="familyMemberName"
+                name="familyMemberName" formControlName="familyMemberName">
+            </p>
+            <span class="title">BirthDate</span>
+            <p class="card-text">
+              <input id="familyMemberBirthDate" type="date" formControlName="familyMemberBirthDate"
+                class="form-control date">
+            </p>
+            <span class="title">DateEnd</span>
+            <p class="card-text">
+              <input id="familyMemberDateEnd" type="date" formControlName="familyMemberDateEnd"
+                class="form-control date">
+            </p>
+            <span class="title">DateStart</span>
+            <p class="card-text">
+              <input id="familyMemberDateStart" type="date" formControlName="familyMemberDateStart"
+                class="form-control date">
+            </p>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="addRecordButton" type="button" class="btn btn-primary" [disabled]="!editEployeeFamilyMemberForm.valid"
+          (click)="createEployeeFamilyMember()">Add record</button>
+        <button *ngIf="!addRecordButton" type="button" class="btn btn-primary" [disabled]="!editEployeeFamilyMemberForm.valid"
+          (click)="updateEployeeFamilyMember()">Save
+          changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
+<!-- (click)="saveTask()" -->
