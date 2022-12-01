@@ -1,13 +1,6 @@
 <div class="table-responsive">
-  <div class="persData">
-    <h2>FAMILY RECORDS</h2>
-    <div class="persData">
-      <h3>{{employeePersonalData?.lastName}} {{employeePersonalData?.firstName}} {{employeePersonalData?.fatherName}}
-      </h3>
-      <h4>DEPARTMENT</h4>
-      <h4>POSITION</h4>
-    </div>
-  </div>
+  <h2 class="card-header text-center">FAMILY RECORDS</h2>
+  <app-employee-header></app-employee-header>
   <div class="add-record">
     <button type="button" class="btn btn-success mb-2 float-end" (click)="openPopup($event)">Add record</button>
   </div>
@@ -79,10 +72,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button *ngIf="addRecordButton" type="button" class="btn btn-primary" [disabled]="!editEployeeFamilyMemberForm.valid"
-          (click)="createEployeeFamilyMember()">Add record</button>
-        <button *ngIf="!addRecordButton" type="button" class="btn btn-primary" [disabled]="!editEployeeFamilyMemberForm.valid"
-          (click)="updateEployeeFamilyMember()">Save
+        <button *ngIf="addRecordButton" type="button" class="btn btn-primary"
+          [disabled]="!editEployeeFamilyMemberForm.valid" (click)="createEployeeFamilyMember()">Add record</button>
+        <button *ngIf="!addRecordButton" type="button" class="btn btn-primary"
+          [disabled]="!editEployeeFamilyMemberForm.valid" (click)="updateEployeeFamilyMember()">Save
           changes</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup()">Close</button>
       </div>

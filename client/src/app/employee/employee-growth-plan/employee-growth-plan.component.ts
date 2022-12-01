@@ -12,13 +12,11 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 export class EmployeeGrowthPlanComponent implements OnInit {
   constructor(
     private EmployeeGrowthPlanService: EmployeeGrowthPlanService,
-    private EmployeePersonalDataService: EmployeePersonalDataService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   employeeID?: string;
-  employeePersonalData?: any;
   public taskList: any = [];
 
   employeeGrowthPlanForm = new FormGroup({
@@ -27,14 +25,6 @@ export class EmployeeGrowthPlanComponent implements OnInit {
     growthPlanTaskAddDate: new FormControl('', Validators.required),
     growthPlanTaskPlannedEndDate: new FormControl('', Validators.required),
   });
-
-  async getEmployee(): Promise<void> {
-    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
-      (employee) => {
-        this.employeePersonalData = employee;
-      }
-    );
-  }
 
   async createTask(): Promise<void> {
     console.warn(this.employeeGrowthPlanForm.value);
@@ -111,7 +101,6 @@ export class EmployeeGrowthPlanComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
     });
-    await this.getEmployee();
     await this.getTasks();
   }
 }

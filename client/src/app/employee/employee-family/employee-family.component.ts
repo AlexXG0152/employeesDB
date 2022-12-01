@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeFamilyService } from '../../services/employee-family.service';
-import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -13,14 +12,13 @@ import { StorageService } from '../../services/storage.service';
 export class EmployeeFamilyComponent {
   constructor(
     private EmployeeFamilyService: EmployeeFamilyService,
-    private EmployeePersonalDataService: EmployeePersonalDataService,
     private StorageService: StorageService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   employeeID?: string;
-  employeePersonalData?: any;
+
 
   private roles: string[] = [];
   public employeeFamilyMembersList: any = [];
@@ -28,14 +26,6 @@ export class EmployeeFamilyComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
-  async getEmployee(): Promise<void> {
-    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
-      (employee) => {
-        this.employeePersonalData = employee;
-      }
-    );
-  }
 
   async createEployeeFamilyMember(): Promise<void> {
     this.EmployeeFamilyService.createEmployeeFamilyMember(
@@ -136,7 +126,7 @@ export class EmployeeFamilyComponent {
 
       this.username = user.username;
     }
-    await this.getEmployee();
+
     await this.getEployeeFamilyMember();
   }
 }

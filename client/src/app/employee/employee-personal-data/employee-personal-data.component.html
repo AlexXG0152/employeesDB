@@ -1,11 +1,5 @@
 <div *ngFor="let employee of employeeData">
-  <div class="persData"><span>{{employee.lastName}} {{employee.firstName}} {{employee.fatherName}}</span></div>
-  <div class="profData">
-    <div class="department">DEPARTMENT NAME&nbsp;&nbsp;</div>
-    <div class="code">CODE&nbsp;&nbsp;</div>
-    <div class="prof">PROF NAME&nbsp;&nbsp;</div>
-    <div class="razr">RAZR&nbsp;&nbsp;</div>
-  </div>
+  <app-employee-header></app-employee-header>
   <div class="employee-grid">
     <div id="item-s">Common info</div>
     <div id="item-0">Birth Date</div>
