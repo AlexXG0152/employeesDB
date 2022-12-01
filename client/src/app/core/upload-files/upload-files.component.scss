@@ -30,3 +30,13 @@ mat-datepicker-toggle {
 .mat-form-field {
   font-weight: 1000;
 }
+
+.files {
+  display: flex;
+}
+.date-column {
+  width: 90px;
+}
+.document-column {
+  width: 150px;
+}

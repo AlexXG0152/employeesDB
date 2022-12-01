@@ -17,4 +17,9 @@ module.exports = function (app) {
     // [authJwt.verifyToken, authJwt.isModerator],
     uploadController.download
   );
+  app.get(
+    "/files/id/:id",
+    // [authJwt.verifyToken, authJwt.isModerator],
+    uploadController.getEmployeeFiles
+  );
 };

@@ -6,16 +6,16 @@ import { Employee } from '../interfaces/employees';
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
+export class EmployeePersonalDataService {
   constructor(private http: HttpClient) {}
 
   searchResults$ = new BehaviorSubject<any>('');
 
-  getUser(id: string): Observable<Employee> {
+  getEmployee(id: string): Observable<Employee> {
     return this.http.get<Employee>(`http://localhost:8080/api/employee/${id}`)
   }
 
-  getUserByFirstName(firstName: string): Observable<Employee> {
+  getEmployeeByFirstName(firstName: string): Observable<Employee> {
     return this.http.get<Employee>(
       `http://localhost:8080/api/employee/firstName/${firstName}`
     );
