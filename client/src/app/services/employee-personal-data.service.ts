@@ -9,10 +9,15 @@ import { Employee } from '../interfaces/employees';
 export class EmployeePersonalDataService {
   constructor(private http: HttpClient) {}
 
-  searchResults$ = new BehaviorSubject<any>('');
+  allSearchResults$ = new BehaviorSubject<any>('');
+  oneSearchResult$ = new BehaviorSubject<any>('');
 
   getEmployee(id: string): Observable<Employee> {
-    return this.http.get<Employee>(`http://localhost:8080/api/employee/${id}`)
+    const result = this.http.get<Employee>(
+      `http://localhost:8080/api/employee/${id}`
+    );
+    result.subscribe(data => this.passOneResult(data));
+    return result;
   }
 
   getEmployeeByFirstName(firstName: string): Observable<Employee> {
@@ -22,10 +27,18 @@ export class EmployeePersonalDataService {
   }
 
   passResults(results: any): void {
-    this.searchResults$.next(results);
+    this.allSearchResults$.next(results);
   }
 
   getPassedResults(): Observable<any> {
-    return this.searchResults$.asObservable();
+    return this.allSearchResults$.asObservable();
+  }
+
+  passOneResult(result: any): void {
+    this.oneSearchResult$.next(result);
+  }
+
+  getOnePassedResult(): Observable<any> {
+    return this.oneSearchResult$.asObservable();
   }
 }

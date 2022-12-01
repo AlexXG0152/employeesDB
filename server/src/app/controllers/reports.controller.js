@@ -31,11 +31,78 @@ exports.todayBirthdays = asyncHandler(async (req, res) => {
         },
       },
     },
+    {
+      $project: {
+        _id: 1,
+        employeeID: 1,
+        firstName: 1,
+        lastName: 1,
+        fatherName: 1,
+        birthDate: 1,
+      },
+    },
   ];
   try {
     const todayBirthdays = await Employee.aggregate(agg);
     res.json(todayBirthdays);
   } catch (error) {
-    return res.status(200).send({ error });
+    return res.status(400).send({ error });
+  }
+});
+
+exports.getFiredInThisYear = asyncHandler(async (req, res) => {
+  const agg = [
+    {
+      $match: {
+        dismissalDate: {
+          $regex: new RegExp(req.params.yearValue),
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        employeeID: 1,
+        firstName: 1,
+        lastName: 1,
+        fatherName: 1,
+        dismissalDate: 1,
+        dismissalReason: 1,
+      },
+    },
+  ];
+  try {
+    const getFiredInThisYear = await Employee.aggregate(agg);
+    res.json(getFiredInThisYear);
+  } catch (error) {
+    return res.status(400).send({ error });
+  }
+});
+
+exports.getHiredInThisYear = asyncHandler(async (req, res) => {
+  const agg = [
+    {
+      $match: {
+        employmentDate: {
+          $regex: new RegExp(req.params.yearValue),
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        employeeID: 1,
+        firstName: 1,
+        lastName: 1,
+        fatherName: 1,
+        employmentDate: 1,
+      },
+    },
+  ];
+  try {
+    const getHiredInThisYear = await Employee.aggregate(agg);
+    res.json(getHiredInThisYear);
+  } catch (error) {
+    return res.status(400).send({ error });
   }
 });

@@ -1,21 +1,101 @@
 <div class="card mt-2">
   <div class="card-body">
-    <h2 class="card-title">Today Birthdays</h2>
-    <p class="card-text">Today birthday: {{todaysBirthDays.length || '0'}} employees.
+    <h2 class="card-title"><span><i class="fa-solid fa-cake-candles fs-2 mb-3"></i></span>&nbsp;Today Birthdays</h2>
+    <p class="card-text">Today birthday:<br><strong>{{todaysBirthDays.length || '0'}}</strong> employees.
     </p>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-    aria-expanded="false" aria-controls="collapseExample">
-    Button with data-bs-target
-  </button>
-</div>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    <div *ngFor="let employee of todaysBirthDays">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBirthdays"
+      aria-expanded="false" aria-controls="collapseBirthdays">
+      Look at list...
+    </button>
+  </div>
+  <div class="collapse" id="collapseBirthdays">
+    <div class="card card-body">
+      <div *ngFor="let employee of todaysBirthDays">
+        <div class="icon">
+          <i class="fa-solid fa-cake-candles fs-2 mb-3"></i>
+        </div>
         <p>Employee: <a href="" class="nav-link" target="_blank"
             [routerLink]="['/employee/', employee.employeeID]">{{employee?.lastName}}
             {{employee?.firstName}}</a>Age:{{employee?.age}}
         </p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-2">
+  <div class="card-body">
+    <h2 class="card-title"><span><i class="bi bi-person-fill-add fs-2 mb-3"></i></span>&nbsp;Hired in this year</h2>
+    <div class="row align-items-start">
+      <div class="col-3">
+        <p class="card-text">Hired in this year:<br><strong>{{hiredInThisYear.length || '0'}}</strong> employees.</p>
+      </div>
+      <div class="month-data">
+        <div class="row">
+          <div class="col-4" *ngFor="let month of yearHired | keyvalue; let i = index">
+            {{ months[i] }}: {{ month.value || '' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHired"
+      aria-expanded="false" aria-controls="collapseHired">
+      Look at list...
+    </button>
+  </div>
+  <div class="collapse" id="collapseHired">
+    <div class="card card-body">
+      <div *ngFor="let hired of hiredInThisYear">
+        <div class="icon">
+          <i class="bi bi-person-fill-add fs-2 mb-3"></i>
+        </div>
+        <div>
+          <!-- <img src="..." class="card-img-top" alt="..."> -->
+          <a href="" class="nav-link" target="_blank" [routerLink]="['/employee/', hired.employeeID]">
+            <p>Employee: {{hired?.lastName}} {{hired?.firstName}} <br>Date: {{hired?.dismissalDate}} Date:
+              {{hired?.employmentDate}}</p>
+          </a>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-2">
+  <div class="card-body">
+    <h2 class="card-title"><span><i class="bi bi-person-fill-dash fs-2 mb-3"></i></span>&nbsp;Fired in this year</h2>
+    <div class="row align-items-start">
+      <div class="col-3">
+        <p class="card-text">Fired in this year:<br><strong>{{firedInThisYear.length || '0'}}</strong> employees.</p>
+      </div>
+      <div class="month-data">
+        <div class="row">
+          <div class="col-4" *ngFor="let month of yearFired | keyvalue; let i = index">
+            {{ months[i] }}: {{ month.value || '' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFired"
+      aria-expanded="false" aria-controls="collapseFired">
+      Look at list...
+    </button>
+  </div>
+  <div class="collapse" id="collapseFired">
+    <div class="card card-body">
+      <div *ngFor="let fired of firedInThisYear">
+        <div class="icon">
+          <i class="bi bi-person-fill-dash fs-2 mb-3"></i>
+        </div>
+        <div>
+          <!-- <img src="..." class="card-img-top" alt="..."> -->
+          <a href="" class="nav-link" target="_blank" [routerLink]="['/employee/', fired.employeeID]">
+            <p>Employee: {{fired?.lastName}} {{fired?.firstName}} <br>Date: {{fired?.dismissalDate}} Reason:
+              {{fired?.dismissalReason}}</p>
+          </a>
+        </div>
         <hr>
       </div>
     </div>

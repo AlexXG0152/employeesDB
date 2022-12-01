@@ -26,4 +26,5 @@ export interface Employee {
   smtn1: string;
   smtn2: string;
   smtn3: string;
+  age?: number;
 }
