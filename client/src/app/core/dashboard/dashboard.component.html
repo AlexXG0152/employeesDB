@@ -1,0 +1,23 @@
+<div class="card mt-2">
+  <div class="card-body">
+    <h2 class="card-title">Today Birthdays</h2>
+    <p class="card-text">Today birthday: {{todaysBirthDays.length || '0'}} employees.
+    </p>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+    aria-expanded="false" aria-controls="collapseExample">
+    Button with data-bs-target
+  </button>
+</div>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <div *ngFor="let employee of todaysBirthDays">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <p>Employee: <a href="" class="nav-link" target="_blank"
+            [routerLink]="['/employee/', employee.employeeID]">{{employee?.lastName}}
+            {{employee?.firstName}}</a>Age:{{employee?.age}}
+        </p>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>

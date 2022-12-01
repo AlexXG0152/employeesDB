@@ -1,12 +1,6 @@
 <div class="table-responsive">
-  <div class="persData">
-    <h2>EDUCATION RECORDS</h2>
-    <div class="persData">
-      <h3>{{employeePersonalData?.lastName}} {{employeePersonalData?.firstName}} {{employeePersonalData?.fatherName}}</h3>
-      <h4>DEPARTMENT</h4>
-      <h4>POSITION</h4>
-    </div>
-  </div>
+  <h2 class="card-header text-center">EDUCATION RECORDS</h2>
+  <app-employee-header></app-employee-header>
   <div class="add-record">
     <button type="button" class="btn btn-success mb-2 float-end" (click)="openPopup()">Add record</button>
   </div>

@@ -13,6 +13,7 @@ import { EmployeePersonalDataComponent } from './employee-personal-data/employee
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-growth-plan.component';
+import { EmployeeHeaderComponent } from './employee-header/employee-header.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-gro
     EmployeeEducationComponent,
     EmployeePersonalDataComponent,
     EmployeeGrowthPlanComponent,
+    EmployeeHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -34,5 +36,6 @@ import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-gro
     MatDividerModule,
     EmployeeRoutingModule,
   ],
+  exports: [EmployeeHeaderComponent],
 })
 export class EmployeeModule {}

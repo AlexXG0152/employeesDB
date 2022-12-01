@@ -1,14 +1,12 @@
-.container {
-  margin-top: 10px;
-}
-
-.row {
+.table-responsive {
+  padding: 5px;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: nowrap;
   align-content: space-around;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow: hidden;
 }
 
 #input-files {

@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmployeeModule } from '../employee/employee.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { UploadFilesComponent } from './upload-files/upload-files.component';
     ResultPageComponent,
     PageNotFoundComponent,
     UploadFilesComponent,
+    DashboardComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -50,6 +52,6 @@ import { UploadFilesComponent } from './upload-files/upload-files.component';
     MatSelectModule,
     EmployeeModule,
   ],
-  exports: [SearchFilterPipe, ResultPageComponent, SearchComponent],
+  exports: [SearchFilterPipe, ResultPageComponent, SearchComponent, DashboardComponent],
 })
 export class CoreModule {}
