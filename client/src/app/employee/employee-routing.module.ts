@@ -7,6 +7,7 @@ import { EmployeeFamilyComponent } from './employee-family/employee-family.compo
 import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-growth-plan.component';
 import { EmployeeIndexPageComponent } from './employee-index-page/employee-index-page.component';
 import { EmployeePersonalDataComponent } from './employee-personal-data/employee-personal-data.component';
+import { EmployeePrintFormsComponent } from './employee-print-forms/employee-print-forms.component';
 
 const employeeRoutes: Routes = [
   {
@@ -19,6 +20,7 @@ const employeeRoutes: Routes = [
       { path: 'education', component: EmployeeEducationComponent },
       { path: 'upload', component: UploadFilesComponent },
       { path: 'growth-plan', component: EmployeeGrowthPlanComponent },
+      { path: 'print-forms', component: EmployeePrintFormsComponent },
       { path: 'help', component: PageNotFoundComponent },
       { path: '**', component: PageNotFoundComponent },
     ],

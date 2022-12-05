@@ -1,3 +1,1 @@
-module.exports = {
-  secret: "empl-secret-key"
-};
+export const secret = "empl-secret-key";

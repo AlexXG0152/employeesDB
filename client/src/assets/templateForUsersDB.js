@@ -4207,7 +4207,8 @@ for (let i = 1; i <= 25000; i++) {
     )}, ${randomFromArray(city_names)}`;
     newOne.date0 = randomDate();
     newOne.date1 = randomDate();
-    newOne.dismissalDate = newOne.id % 15 === 0 ? `${randomDate()}` : ``;
+    newOne.dismissalDate =
+      Math.floor(Math.random() * 10) < 5 ? `${randomDate()}` : ``;
     newOne.employmentDate = randomDate();
     newOne.passportDateStart = randomDate();
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Employee } from 'src/app/interfaces/employees';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
@@ -17,18 +18,12 @@ export class EmployeeHeaderComponent implements OnInit {
   employeePersonalData?: any;
   employeeID?: string;
 
-  async getEmployee(): Promise<void> {
-    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
-      (employee) => {
-        this.employeePersonalData = employee;
-      }
-    );
-  }
-
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
     });
-    await this.getEmployee();
+    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
+      (data) => (this.employeePersonalData = data)
+    );
   }
 }

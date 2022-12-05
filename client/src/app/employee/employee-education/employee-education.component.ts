@@ -52,6 +52,11 @@ export class EmployeeEducationComponent implements OnInit {
         this.employeePersonalData = employee;
       }
     );
+    // this.EmployeePersonalDataService.getOnePassedResult().subscribe(
+    //   (employee) => {
+    //     this.employeePersonalData = employee;
+    //   }
+    // )
   }
 
   getData(): void {
@@ -64,7 +69,7 @@ export class EmployeeEducationComponent implements OnInit {
           ).subscribe((data) => {
             this.employeeEducationData = data;
           });
-          this.getEmployee();
+          // this.getEmployee();
         }
       } catch (error) {
         console.error(error);

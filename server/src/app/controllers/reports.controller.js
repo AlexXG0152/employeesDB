@@ -19,10 +19,10 @@
 // const result = await cursor.toArray();
 // await client.close();
 
-const asyncHandler = require("express-async-handler");
-const Employee = require("../models/employee.model");
+import asyncHandler from "express-async-handler";
+import aggregate from "../models/employee.model";
 
-exports.todayBirthdays = asyncHandler(async (req, res) => {
+export const todayBirthdays = asyncHandler(async (req, res) => {
   const agg = [
     {
       $match: {
@@ -31,11 +31,78 @@ exports.todayBirthdays = asyncHandler(async (req, res) => {
         },
       },
     },
+    {
+      $project: {
+        _id: 1,
+        employeeID: 1,
+        firstName: 1,
+        lastName: 1,
+        fatherName: 1,
+        birthDate: 1,
+      },
+    },
   ];
   try {
-    const todayBirthdays = await Employee.aggregate(agg);
+    const todayBirthdays = await aggregate(agg);
     res.json(todayBirthdays);
   } catch (error) {
-    return res.status(200).send({ error });
+    return res.status(400).send({ error });
+  }
+});
+
+export const getFiredInThisYear = asyncHandler(async (req, res) => {
+  const agg = [
+    {
+      $match: {
+        dismissalDate: {
+          $regex: new RegExp(req.params.yearValue),
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        employeeID: 1,
+        firstName: 1,
+        lastName: 1,
+        fatherName: 1,
+        dismissalDate: 1,
+        dismissalReason: 1,
+      },
+    },
+  ];
+  try {
+    const getFiredInThisYear = await aggregate(agg);
+    res.json(getFiredInThisYear);
+  } catch (error) {
+    return res.status(400).send({ error });
+  }
+});
+
+export const getHiredInThisYear = asyncHandler(async (req, res) => {
+  const agg = [
+    {
+      $match: {
+        employmentDate: {
+          $regex: new RegExp(req.params.yearValue),
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        employeeID: 1,
+        firstName: 1,
+        lastName: 1,
+        fatherName: 1,
+        employmentDate: 1,
+      },
+    },
+  ];
+  try {
+    const getHiredInThisYear = await aggregate(agg);
+    res.json(getHiredInThisYear);
+  } catch (error) {
+    return res.status(400).send({ error });
   }
 });

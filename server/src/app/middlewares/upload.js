@@ -1,10 +1,11 @@
-const util = require("util");
-const multer = require("multer");
-const { GridFsStorage } = require("multer-gridfs-storage");
-const dbConfig = require("../config/db");
+import dotenv from "dotenv";
+dotenv.config({ path: "./src/app/environments/.env" });
+import { promisify } from "util";
+import multer from "multer";
+import { GridFsStorage } from "multer-gridfs-storage";
 
 var storage = new GridFsStorage({
-  url: dbConfig.url,
+  url: process.env.MONGODBUPLOAD,
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: async (req, file) => {
     const match = ["image/png", "image/jpeg", "image/jpg", "application/pdf"];
@@ -16,13 +17,13 @@ var storage = new GridFsStorage({
 
     return {
       filename: `${Date.now()}-employee-${file.originalname}`,
-      bucketName: dbConfig.filesBucket,
+      bucketName: process.env.FILESBUCKET,
       metadata: JSON.parse(req.body.data),
     };
   },
 });
 
 var uploadFiles = multer({ storage: storage }).array("file", 10);
-var uploadFilesMiddleware = util.promisify(uploadFiles);
+var uploadFilesMiddleware = promisify(uploadFiles);
 
-module.exports = uploadFilesMiddleware;
+export default uploadFilesMiddleware;

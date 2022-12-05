@@ -19,19 +19,25 @@ export class EmployeePersonalDataComponent implements OnInit {
   ) {
     this.route.params.subscribe(() => {
       this.id = this.router.url.split('/')[2];
-      try {
-        if (this.id) {
-          this.EmployeePersonalDataService.getEmployee(this.id).subscribe(
-            (employee) => {
-              this.employeeData.push(employee);
-            }
-          );
-        }
-      } catch (error) {
-        console.error(error);
-      }
+      // try {
+      //   if (this.id) {
+      //     this.EmployeePersonalDataService.getEmployee(this.id).subscribe(
+      //       (employee) => {
+      //         this.employeeData.push(employee);
+      //       }
+      //     );
+      //   }
+      // } catch (error) {
+      //   console.error(error);
+      // }
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.EmployeePersonalDataService.getEmployee(this.id!).subscribe(
+      (employee) => {
+        this.employeeData.push(employee);
+      }
+    )
+  }
 }

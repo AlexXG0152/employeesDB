@@ -1,6 +1,20 @@
-const reportsController = require("../controllers/reports.controller");
-const { authJwt } = require("../middlewares");
+import {
+  todayBirthdays,
+  getFiredInThisYear,
+  getHiredInThisYear,
+} from "../controllers/reports.controller";
+import authJwt from "../middlewares/authJwt";
+import { Router } from "express";
 
-module.exports = function (app) {
-  app.get("/api/reports/todayBirtdays/:dateValue", reportsController.todayBirthdays);
-};
+const reportsRouter = Router();
+
+reportsRouter.get("/api/reports/todayBirtdays/:dateValue", todayBirthdays);
+reportsRouter.get(
+  "/api/reports/getFiredInThisYear/:yearValue",
+  getFiredInThisYear
+);
+reportsRouter.get(
+  "/api/reports/getHiredInThisYear/:yearValue",
+  getHiredInThisYear
+);
+export default reportsRouter;

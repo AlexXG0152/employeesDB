@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+import { model, Schema } from "mongoose";
 
-const Employee = mongoose.model(
+const Employee = model(
   "Employee",
-  new mongoose.Schema(
+  new Schema(
     {
       employeeID: {
         type: "Number",
@@ -96,4 +96,4 @@ const Employee = mongoose.model(
   )
 );
 
-module.exports = Employee;
+export default Employee;

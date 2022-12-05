@@ -52,9 +52,11 @@ export class ResultPageComponent implements OnInit {
 
   ngOnInit() {
     this.employeesData$ =
-      this.EmployeePersonalDataService.getPassedResults().subscribe((employee) => {
-        this.employeesData = employee;
-      });
+      this.EmployeePersonalDataService.getPassedResults().subscribe(
+        (employee) => {
+          this.employeesData = employee;
+        }
+      );
     this.show = true;
   }
 }

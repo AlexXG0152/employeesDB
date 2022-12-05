@@ -1,15 +1,27 @@
-exports.allAccess = (req, res) => {
+import asyncHandler from "express-async-handler";
+import User from "../models/user.model";
+
+export function allAccess(req, res) {
   res.status(200).send("Public Content.");
-};
+}
 
-exports.userBoard = (req, res) => {
+export function userBoard(req, res) {
   res.status(200).send("User Content.");
-};
+}
 
-exports.adminBoard = (req, res) => {
+export function adminBoard(req, res) {
   res.status(200).send("Admin Content.");
-};
+}
 
-exports.moderatorBoard = (req, res) => {
+export function moderatorBoard(req, res) {
   res.status(200).send("Moderator Content.");
-};
+}
+
+export const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await User.find({}, { password: 0 }).populate('roles');
+    res.json(users);
+  } catch (error) {
+    return res.status(200).send({ error });
+  }
+});

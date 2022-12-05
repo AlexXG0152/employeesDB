@@ -1,28 +1,36 @@
-const controller = require("../controllers/employeeEducation.controller");
-const { authJwt } = require("../middlewares");
+import {
+  getOneByID,
+  createOne,
+  updateOne,
+  deleteOnefromDB,
+} from "../controllers/employeeEducation.controller";
+import authJwt from "../middlewares/authJwt";
+import { Router } from "express";
 
-module.exports = function (app) {
-  app.get(
-    "/api/employee/:id/education",
-    [authJwt.verifyToken],
-    controller.getOneByID
-  );
+const employeeEducationRouter = Router();
 
-  app.post(
-    "/api/employee/:id/education",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.createOne
-  );
+employeeEducationRouter.get(
+  "/api/employee/:id/education",
+  [authJwt.verifyToken],
+  getOneByID
+);
 
-  app.patch(
-    "/api/employee/:id/education",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.updateOne
-  );
+employeeEducationRouter.post(
+  "/api/employee/:id/education",
+  [authJwt.verifyToken, authJwt.isModerator],
+  createOne
+);
 
-  app.delete(
-    "/api/employee/:id/education",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.deleteOnefromDB
-  );
-};
+employeeEducationRouter.patch(
+  "/api/employee/:id/education",
+  [authJwt.verifyToken, authJwt.isModerator],
+  updateOne
+);
+
+employeeEducationRouter.delete(
+  "/api/employee/:id/education",
+  [authJwt.verifyToken, authJwt.isModerator],
+  deleteOnefromDB
+);
+
+export default employeeEducationRouter;

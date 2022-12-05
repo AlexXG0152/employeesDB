@@ -13,3 +13,26 @@
     height: auto;
   }
 }
+
+.ng-star-inserted {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+}
+
+.month-data {
+  width: 360px;
+  ;
+}
+
+.col-3 {
+  flex: 0 0 auto;
+  width: 20%;
+}

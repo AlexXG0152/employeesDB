@@ -1,8 +1,8 @@
-const authJwt = require("./authJwt");
-const verifySignUp = require("./verifySignUp");
-const uploadFilesMiddleware = require("./upload");
+import authJwt from "./authJwt";
+import verifySignUp from "./verifySignUp";
+import uploadFilesMiddleware from "./upload";
 
-module.exports = {
+export default {
   authJwt,
   verifySignUp,
   uploadFilesMiddleware

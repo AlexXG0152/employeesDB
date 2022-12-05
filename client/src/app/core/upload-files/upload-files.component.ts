@@ -106,20 +106,11 @@ export class UploadFilesComponent implements OnInit {
     }
   }
 
-  getEmployee(employeeID: string) {
-    this.EmployeePersonalDataService.getEmployee(employeeID).subscribe(
-      (employee) => {
-        this.employeePersonalData = employee;
-      }
-    );
-  }
-
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
     });
     this.fileInfo = this.uploadService.getEmployeeFiles(this.employeeID!);
     this.fileInfo.subscribe(() => {})
-    this.getEmployee(this.employeeID!)
   }
 }

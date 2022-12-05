@@ -1,23 +1,25 @@
-const { verifySignUp } = require("../middlewares");
-const controller = require("../controllers/auth.controller");
+import { signup, signin, signout } from "../controllers/auth.controller";
+import authJwt from "../middlewares/authJwt";
+import { Router } from "express";
+import verifySignUp from "../middlewares/verifySignUp"
 
-module.exports = function (app) {
-  app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-  });
+const authRouter = Router();
 
-  app.post(
-    "/api/auth/signup",
-    [
-      verifySignUp.checkDuplicateUsernameOrEmail,
-      verifySignUp.checkRolesExisted,
-    ],
-    controller.signup
-  );
+authRouter.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
-  app.post("/api/auth/signin", controller.signin);
+authRouter.post(
+  "/api/auth/signup",
+  [verifySignUp.checkDuplicateUsernameOrEmail, verifySignUp.checkRolesExisted],
+  signup
+);
 
-  app.post("/api/auth/signout", controller.signout);
-};
+authRouter.post("/api/auth/signin", signin);
+
+authRouter.post("/api/auth/signout", signout);
+
+
+export default authRouter;

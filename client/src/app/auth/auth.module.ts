@@ -9,6 +9,8 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from '../core/core.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,13 @@ import { CoreModule } from '../core/core.module';
     BoardUserComponent,
     HomeComponent,
   ],
-  imports: [CommonModule, FormsModule, CoreModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CoreModule,
+    MatTableModule,
+    MatSortModule,
+  ],
   providers: [],
 })
 export class AuthModule {}

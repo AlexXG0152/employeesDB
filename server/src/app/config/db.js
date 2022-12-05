@@ -1,5 +1,9 @@
-module.exports = {
-  url: process.env.MONGODBUPLOAD,
-  database: "mernstack",
-  filesBucket: "employee_files_db",
+const url = process.env.MONGODBUPLOAD;
+const database = "mernstack";
+const filesBucket = "employee_files_db";
+
+export default {
+  url,
+  database,
+  filesBucket,
 };
