@@ -1,28 +1,36 @@
-const controller = require("../controllers/employeeFamily.controller");
-const { authJwt } = require("../middlewares");
+import {
+  getOneByID,
+  createOne,
+  updateOne,
+  deleteOnefromDB,
+} from "../controllers/employeeFamily.controller";
+import authJwt from "../middlewares/authJwt";
 
-module.exports = function (app) {
-  app.get(
-    "/api/employee/:id/family",
-    [authJwt.verifyToken],
-    controller.getOneByID
-  );
+import { Router } from "express";
 
-  app.post(
-    "/api/employee/:id/family",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.createOne
-  );
+const employeeFamilyRouter = Router();
 
-  app.patch(
-    "/api/employee/:id/family",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.updateOne
-  );
+employeeFamilyRouter.get(
+  "/api/employee/:id/family",
+  [authJwt.verifyToken],
+  getOneByID
+);
 
-  app.delete(
-    "/api/employee/:id/family",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.deleteOnefromDB
-  );
-};
+employeeFamilyRouter.post(
+  "/api/employee/:id/family",
+  [authJwt.verifyToken, authJwt.isModerator],
+  createOne
+);
+
+employeeFamilyRouter.patch(
+  "/api/employee/:id/family",
+  [authJwt.verifyToken, authJwt.isModerator],
+  updateOne
+);
+
+employeeFamilyRouter.delete(
+  "/api/employee/:id/family",
+  [authJwt.verifyToken, authJwt.isModerator],
+  deleteOnefromDB
+);
+export default employeeFamilyRouter;

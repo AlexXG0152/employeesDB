@@ -19,10 +19,10 @@
 // const result = await cursor.toArray();
 // await client.close();
 
-const asyncHandler = require("express-async-handler");
-const Employee = require("../models/employee.model");
+import asyncHandler from "express-async-handler";
+import aggregate from "../models/employee.model";
 
-exports.todayBirthdays = asyncHandler(async (req, res) => {
+export const todayBirthdays = asyncHandler(async (req, res) => {
   const agg = [
     {
       $match: {
@@ -43,14 +43,14 @@ exports.todayBirthdays = asyncHandler(async (req, res) => {
     },
   ];
   try {
-    const todayBirthdays = await Employee.aggregate(agg);
+    const todayBirthdays = await aggregate(agg);
     res.json(todayBirthdays);
   } catch (error) {
     return res.status(400).send({ error });
   }
 });
 
-exports.getFiredInThisYear = asyncHandler(async (req, res) => {
+export const getFiredInThisYear = asyncHandler(async (req, res) => {
   const agg = [
     {
       $match: {
@@ -72,14 +72,14 @@ exports.getFiredInThisYear = asyncHandler(async (req, res) => {
     },
   ];
   try {
-    const getFiredInThisYear = await Employee.aggregate(agg);
+    const getFiredInThisYear = await aggregate(agg);
     res.json(getFiredInThisYear);
   } catch (error) {
     return res.status(400).send({ error });
   }
 });
 
-exports.getHiredInThisYear = asyncHandler(async (req, res) => {
+export const getHiredInThisYear = asyncHandler(async (req, res) => {
   const agg = [
     {
       $match: {
@@ -100,7 +100,7 @@ exports.getHiredInThisYear = asyncHandler(async (req, res) => {
     },
   ];
   try {
-    const getHiredInThisYear = await Employee.aggregate(agg);
+    const getHiredInThisYear = await aggregate(agg);
     res.json(getHiredInThisYear);
   } catch (error) {
     return res.status(400).send({ error });

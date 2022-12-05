@@ -1,14 +1,13 @@
-const upload = require("../middlewares/upload");
-const dbConfig = require("../config/db");
+import dotenv from "dotenv";
+dotenv.config({ path: "./src/app/environments/.env" });
 
-const MongoClient = require("mongodb").MongoClient;
-const GridFSBucket = require("mongodb").GridFSBucket;
-
-const url = dbConfig.url;
+import upload from "../middlewares/upload";
+import { MongoClient } from "mongodb";
+import { GridFSBucket } from "mongodb";
 
 const baseUrl = "http://localhost:8080/files/";
 
-const mongoClient = new MongoClient(url);
+const mongoClient = new MongoClient(process.env.MONGODBUPLOAD);
 
 const uploadFiles = async (req, res) => {
   try {
@@ -42,8 +41,8 @@ const getListFiles = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db(dbConfig.database);
-    const images = database.collection(dbConfig.filesBucket + ".files");
+    const database = mongoClient.db(process.env.DATABASE);
+    const images = database.collection(process.env.FILESBUCKET + ".files");
     const cursor = images.find({});
 
     if ((await images.estimatedDocumentCount()) === 0) {
@@ -72,8 +71,8 @@ const getEmployeeFiles = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db(dbConfig.database);
-    const images = database.collection(dbConfig.filesBucket + ".files");
+    const database = mongoClient.db(process.env.DATABASE);
+    const images = database.collection(process.env.FILESBUCKET + ".files");
     const cursor = images.find({ "metadata.employeeID": req.params.id });
 
     if ((await images.estimatedDocumentCount()) === 0) {
@@ -103,9 +102,9 @@ const download = async (req, res) => {
   try {
     await mongoClient.connect();
 
-    const database = mongoClient.db(dbConfig.database);
+    const database = mongoClient.db(process.env.DATABASE);
     const bucket = new GridFSBucket(database, {
-      bucketName: dbConfig.filesBucket,
+      bucketName: process.env.FILESBUCKET,
     });
 
     let downloadStream = bucket.openDownloadStreamByName(req.params.name);
@@ -128,7 +127,7 @@ const download = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   uploadFiles,
   getListFiles,
   getEmployeeFiles,

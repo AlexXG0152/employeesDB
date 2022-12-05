@@ -1,6 +1,9 @@
-const employeePrintForms = require("../controllers/employeePrintForms.controller");
-const { authJwt } = require("../middlewares");
+import { download } from "../controllers/employeePrintForms.controller";
+import authJwt from "../middlewares/authJwt";
+import { Router } from "express";
 
-module.exports = function (app) {
-  app.get("/api/employee/:id/print-forms", employeePrintForms.download);
-};
+const printFormsRouter = Router();
+
+printFormsRouter.get("/api/employee/:id/print-forms", download);
+
+export default printFormsRouter;

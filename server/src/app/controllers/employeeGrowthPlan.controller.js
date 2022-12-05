@@ -1,15 +1,15 @@
-const asyncHandler = require("express-async-handler");
-const { mongo } = require("mongoose");
+import asyncHandler from "express-async-handler";
+import { mongo } from "mongoose";
 
-const EmployeesGrowthPlan = require("../models/employeeGrowthPlan.model");
+import GrowthPlan from "../models/employeeGrowthPlan.model";
 
-exports.getOneByID = asyncHandler(async (req, res) => {
+export const getOneByID = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(400);
       throw new Error("Please add employeeID");
     }
-    const employeesEducation = await EmployeesGrowthPlan.find({
+    const employeesEducation = await GrowthPlan.find({
       employeeID: Number(req.params.id),
     });
     res.json(employeesEducation);
@@ -18,13 +18,13 @@ exports.getOneByID = asyncHandler(async (req, res) => {
   }
 });
 
-exports.createOne = asyncHandler(async (req, res) => {
+export const createOne = asyncHandler(async (req, res) => {
   try {
     if (!req.body.details) {
       res.status(400);
       throw new Error("No createQuery data in request");
     }
-    const employeesEducation = await EmployeesGrowthPlan.create(
+    const employeesEducation = await GrowthPlan.create(
       req.body.details
     );
     res.json(employeesEducation);
@@ -33,7 +33,7 @@ exports.createOne = asyncHandler(async (req, res) => {
   }
 });
 
-exports.updateOne = asyncHandler(async (req, res) => {
+export const updateOne = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(404);
@@ -43,7 +43,7 @@ exports.updateOne = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("No updateQuery data in request");
     }
-    const employeesEducation = await EmployeesGrowthPlan.findOneAndUpdate(
+    const employeesEducation = await GrowthPlan.findOneAndUpdate(
       {
         _id: new mongo.ObjectId(req.body._id),
       },
@@ -56,7 +56,7 @@ exports.updateOne = asyncHandler(async (req, res) => {
   }
 });
 
-exports.deleteOnefromDB = asyncHandler(async (req, res) => {
+export const deleteOnefromDB = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(404);
@@ -66,7 +66,7 @@ exports.deleteOnefromDB = asyncHandler(async (req, res) => {
       res.status(404);
       throw new Error("No '_id' in request");
     }
-    const employeesEducation = await EmployeesGrowthPlan.findOneAndRemove({
+    const employeesEducation = await GrowthPlan.findOneAndRemove({
       _id: new mongo.ObjectId(req.body._id),
     });
     res.json(employeesEducation);

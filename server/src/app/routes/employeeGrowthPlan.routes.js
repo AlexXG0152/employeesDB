@@ -1,28 +1,35 @@
-const controller = require("../controllers/employeeGrowthPlan.controller");
-const { authJwt } = require("../middlewares");
+import {
+  getOneByID,
+  createOne,
+  updateOne,
+  deleteOnefromDB,
+} from "../controllers/employeeGrowthPlan.controller";
+import authJwt from "../middlewares/authJwt";
+import { Router } from "express";
 
-module.exports = function (app) {
-  app.get(
-    "/api/employee/:id/growth-plan",
-    [authJwt.verifyToken],
-    controller.getOneByID
-  );
+const employeeGrowthPlanRouter = Router();
 
-  app.post(
-    "/api/employee/:id/growth-plan",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.createOne
-  );
+employeeGrowthPlanRouter.get(
+  "/api/employee/:id/growth-plan",
+  [authJwt.verifyToken],
+  getOneByID
+);
 
-  app.patch(
-    "/api/employee/:id/growth-plan",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.updateOne
-  );
+employeeGrowthPlanRouter.post(
+  "/api/employee/:id/growth-plan",
+  [authJwt.verifyToken, authJwt.isModerator],
+  createOne
+);
 
-  app.delete(
-    "/api/employee/:id/growth-plan",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.deleteOnefromDB
-  );
-};
+employeeGrowthPlanRouter.patch(
+  "/api/employee/:id/growth-plan",
+  [authJwt.verifyToken, authJwt.isModerator],
+  updateOne
+);
+
+employeeGrowthPlanRouter.delete(
+  "/api/employee/:id/growth-plan",
+  [authJwt.verifyToken, authJwt.isModerator],
+  deleteOnefromDB
+);
+export default employeeGrowthPlanRouter;

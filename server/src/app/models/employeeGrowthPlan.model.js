@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+import { model, Schema } from "mongoose";
 
-const GrowthPlan = mongoose.model(
+const GrowthPlan = model(
   "growthPlan",
-  new mongoose.Schema(
+  new Schema(
     {
       employeeID: {
         type: "Number",
@@ -31,4 +31,4 @@ const GrowthPlan = mongoose.model(
   )
 );
 
-module.exports = GrowthPlan;
+export default GrowthPlan;

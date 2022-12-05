@@ -1,17 +1,28 @@
-const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
+import mongoose from "mongoose";
+Promise = global.Promise;
 
 const db = {};
 
 db.mongoose = mongoose;
 
-db.user = require("./user.model");
-db.role = require("./role.model");
-db.employee = require('./employee.model')
-db.employeeEducation = require('./employeeEducation.model')
-db.employeeFamily = require('./employeeFamily.model')
-db.growthPlan = require('./employeeGrowthPlan.model')
+import User from './user.model'
+db.user = User;
+
+import Role from './role.model'
+db.role = Role;
+
+import Employee from './employee.model'
+db.employee = Employee;
+
+import EmployeesEducation from './employeeEducation.model'
+db.employeeEducation = EmployeesEducation;
+
+import FamilyMembers from './employeeFamily.model'
+db.employeeFamily = FamilyMembers;
+
+import GrowthPlan from './employeeGrowthPlan.model'
+db.growthPlan = GrowthPlan;
 
 db.ROLES = ["user", "admin", "moderator"];
 
-module.exports = db;
+export default db;

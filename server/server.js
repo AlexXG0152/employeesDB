@@ -1,8 +1,12 @@
-require("dotenv").config({ path: "./src/app/environments/.env" });
-const express = require("express");
-require("express-async-errors");
-const cors = require("cors");
-const cookieSession = require("cookie-session");
+import dotenv from "dotenv";
+import express, { json, urlencoded } from "express";
+import router from "../server/src/app/routes/index";
+import db from "./src/app/models/index";
+import expressAsyncErrors from "express-async-errors";
+import cors from "cors";
+import cookieSession from "cookie-session";
+
+dotenv.config({ path: "./src/app/environments/.env" });
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -16,9 +20,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(json());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
+app.use(express.static('assets'))
 
 app.use(
   cookieSession({
@@ -29,7 +34,8 @@ app.use(
   })
 );
 
-const db = require("./src/app/models");
+app.use(router);
+
 const Role = db.role;
 
 db.mongoose
@@ -49,16 +55,6 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to empl application." });
 });
-
-require("./src/app/routes/auth.routes")(app);
-require("./src/app/routes/user.routes")(app);
-require("./src/app/routes/employee.routes")(app);
-require("./src/app/routes/employeeEducation.routes")(app);
-require("./src/app/routes/employeeFamily.routes")(app);
-require("./src/app/routes/employeeGrowthPlan.routes")(app);
-require("./src/app/routes/employeePrintForms.routes")(app);
-require("./src/app/routes/upload.routes")(app);
-require("./src/app/routes/reports.routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

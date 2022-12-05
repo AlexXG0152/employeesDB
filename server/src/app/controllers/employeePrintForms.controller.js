@@ -1,37 +1,45 @@
-const fs = require("fs");
-const asyncHandler = require("express-async-handler");
+import fs from "fs";
+import { createReport } from "docx-templates";
+import asyncHandler from "express-async-handler";
+import path from "path";
 
+const __dirname = path.resolve(path.dirname(""));
 
-exports.download = asyncHandler(async (req, res) => {
-  // const importDotx = new ImportDotx();
-  // const filePath = "../server/src/assets/certificate-temlpate.docx";
+export const download = asyncHandler(async (req, res) => {
+  try {
+    const template = fs.readFileSync(
+      __dirname + "/src/assets/certificate-temlpate.docx"
+    );
 
-  // fs.readFile(filePath, { encoding: "binary" }, (err, data) => {
-  //   if (err) {
-  //     throw new Error(`Failed to read file ${filePath}.`);
-  //   }
+    const employee = {
+      employee: {
+        department: "template department",
+        occupation: "template occupation",
+        personalData: {
+          firstName: "John",
+          lastName: "Johnsson",
+          since: "01.03.1977",
+        },
+        date: new Date().toLocaleDateString(),
+      },
+    };
 
-  //   importDotx.extract(data).then((templateDocument) => {
-  //     const doc = new Document(
-  //       {
-  //         sections: [
-  //           {
-  //             headers: templateDocument.headers,
-  //             properties: {
-  //               titlePage: templateDocument.titlePageIsDefined,
-  //             },
-  //             children: [new Paragraph("Hello World")],
-  //           },
-  //         ],
-  //       }, 
-  //       {
-  //         template: templateDocument,
-  //       }
-  //     );
+    const buffer = await createReport({
+      template,
+      data: employee,
+    });
 
-  //     Packer.toBuffer(doc).then((buffer) => {
-  //       fs.writeFileSync(`../server/src/assets/kkk.docx`, buffer);
-  //     });
-  //   });
-  // });
+    fs.writeFileSync(
+      __dirname +
+        `/src/assets/temp/[Certificate-work-place]-${
+          employee.employee.personalData.lastName
+        }_${employee.employee.personalData.firstName}-${Math.floor(
+          Math.random() * 10000000000000
+        )}.docx`,
+      buffer
+    );
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+  }
 });

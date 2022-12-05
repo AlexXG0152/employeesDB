@@ -1,9 +1,9 @@
-const asyncHandler = require("express-async-handler");
-const { mongo } = require("mongoose");
+import asyncHandler from "express-async-handler";
+import { mongo } from "mongoose";
 
-const EmployeesEducation = require("../models/employeeEducation.model");
+import EmployeesEducation from "../models/employeeEducation.model";
 
-exports.getOneByID = asyncHandler(async (req, res) => {
+export const getOneByID = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(400);
@@ -18,7 +18,7 @@ exports.getOneByID = asyncHandler(async (req, res) => {
   }
 });
 
-exports.createOne = asyncHandler(async (req, res) => {
+export const createOne = asyncHandler(async (req, res) => {
   try {
     if (!req.body.details) {
       res.status(400);
@@ -33,7 +33,7 @@ exports.createOne = asyncHandler(async (req, res) => {
   }
 });
 
-exports.updateOne = asyncHandler(async (req, res) => {
+export const updateOne = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(404);
@@ -57,7 +57,7 @@ exports.updateOne = asyncHandler(async (req, res) => {
   }
 });
 
-exports.deleteOnefromDB = asyncHandler(async (req, res) => {
+export const deleteOnefromDB = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(404);

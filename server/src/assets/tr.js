@@ -1,25 +1,29 @@
-const createReport = require("docx-templates").default;
-const { readFileSync, writeFileSync } = require("fs");
+import { createReport } from "docx-templates";
+import fs from "fs";
 
-const template = readFileSync("certificate-temlpate.docx");
+const template = fs.readFileSync("certificate-temlpate.docx");
 
-const data = {
-  Beers: [
-    { Brand: "Carlsberg", Price: 1 },
-    { Brand: "Leaf Blonde", Price: 2 },
-    { Brand: "Weihenstephan", Price: 1.5 },
-  ],
+const employee = {
+  employee: {
+    department: "template department",
+    occupation: "template occupation",
+    personalData: {
+      firstName: "John",
+      lastName: "Johnsson",
+      since: "01.03.1977",
+    },
+    date: new Date().toLocaleDateString(),
+  },
 };
 
-async function da() {
-  const buffer = await createReport({
-    template,
-    data,
-  });
-  return buffer
-}
+const buffer = await createReport({
+  template,
+  data: employee,
+});
 
-let rr;
-da().then(data => this.rr = data)
-
-writeFileSync("report.docx", rr);
+fs.writeFileSync(
+  `./temp/certificate-work-place-${employee.employee.personalData.lastName}_${
+    employee.employee.personalData.firstName
+  }_${Math.floor(Math.random() * 10000000000000)}.docx`,
+  buffer
+);

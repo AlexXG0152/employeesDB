@@ -1,8 +1,8 @@
-const asyncHandler = require("express-async-handler");
+import asyncHandler from "express-async-handler";
 
-const Employee = require("../models/employee.model");
+import Employee from "../models/employee.model";
 
-exports.getAllByFirstName = asyncHandler(async (req, res) => {
+export const getAllByFirstName = asyncHandler(async (req, res) => {
   try {
     if (!req.params.firstName) {
       res.status(400);
@@ -15,7 +15,7 @@ exports.getAllByFirstName = asyncHandler(async (req, res) => {
   }
 });
 
-exports.getOneByID = asyncHandler(async (req, res) => {
+export const getOneByID = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(400);
@@ -30,7 +30,7 @@ exports.getOneByID = asyncHandler(async (req, res) => {
   }
 });
 
-exports.createOne = asyncHandler(async (req, res) => {
+export const createOne = asyncHandler(async (req, res) => {
   try {
     if (!req.body.details) {
       res.status(400);
@@ -43,7 +43,7 @@ exports.createOne = asyncHandler(async (req, res) => {
   }
 });
 
-exports.updateOne = asyncHandler(async (req, res) => {
+export const updateOne = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(404);
@@ -67,7 +67,7 @@ exports.updateOne = asyncHandler(async (req, res) => {
   }
 });
 
-exports.deleteOnefromDB = asyncHandler(async (req, res) => {
+export const deleteOnefromDB = asyncHandler(async (req, res) => {
   try {
     if (!req.params.id) {
       res.status(404);
