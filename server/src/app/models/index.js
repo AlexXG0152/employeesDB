@@ -1,26 +1,21 @@
 import mongoose from "mongoose";
+import User from "./user.model";
+import Role from "./role.model";
+import Employee from "./employee.model";
+import EmployeesEducation from "./employeeEducation.model";
+import FamilyMembers from "./employeeFamily.model";
+import GrowthPlan from "./employeeGrowthPlan.model";
+
 Promise = global.Promise;
 
 const db = {};
-
 db.mongoose = mongoose;
 
-import User from './user.model'
 db.user = User;
-
-import Role from './role.model'
 db.role = Role;
-
-import Employee from './employee.model'
 db.employee = Employee;
-
-import EmployeesEducation from './employeeEducation.model'
 db.employeeEducation = EmployeesEducation;
-
-import FamilyMembers from './employeeFamily.model'
 db.employeeFamily = FamilyMembers;
-
-import GrowthPlan from './employeeGrowthPlan.model'
 db.growthPlan = GrowthPlan;
 
 db.ROLES = ["user", "admin", "moderator"];

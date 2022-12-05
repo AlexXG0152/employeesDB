@@ -4,6 +4,7 @@ import {
   userBoard,
   moderatorBoard,
   adminBoard,
+  getAllUsers,
 } from "../controllers/user.controller";
 import { Router } from "express";
 
@@ -26,4 +27,11 @@ userRouter.get(
   [authJwt.verifyToken, authJwt.isAdmin],
   adminBoard
 );
+
+userRouter.get(
+  "/api/test/allUsers",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  getAllUsers
+);
+
 export default userRouter;
