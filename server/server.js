@@ -56,6 +56,7 @@ require("./src/app/routes/employee.routes")(app);
 require("./src/app/routes/employeeEducation.routes")(app);
 require("./src/app/routes/employeeFamily.routes")(app);
 require("./src/app/routes/employeeGrowthPlan.routes")(app);
+require("./src/app/routes/employeePrintForms.routes")(app);
 require("./src/app/routes/upload.routes")(app);
 require("./src/app/routes/reports.routes")(app);
 

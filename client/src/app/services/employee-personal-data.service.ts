@@ -13,11 +13,11 @@ export class EmployeePersonalDataService {
   oneSearchResult$ = new BehaviorSubject<any>('');
 
   getEmployee(id: string): Observable<Employee> {
-    const result = this.http.get<Employee>(
+    return this.http.get<Employee>(
       `http://localhost:8080/api/employee/${id}`
     );
-    result.subscribe(data => this.passOneResult(data));
-    return result;
+    // result.subscribe(data => this.passOneResult(data));
+    // return result;
   }
 
   getEmployeeByFirstName(firstName: string): Observable<Employee> {

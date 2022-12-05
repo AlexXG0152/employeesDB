@@ -22,7 +22,7 @@ export class EmployeeHeaderComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
     });
-    this.EmployeePersonalDataService.getOnePassedResult().subscribe(
+    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
       (data) => (this.employeePersonalData = data)
     );
   }

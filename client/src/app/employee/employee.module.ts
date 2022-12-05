@@ -14,6 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-growth-plan.component';
 import { EmployeeHeaderComponent } from './employee-header/employee-header.component';
+import { EmployeePrintFormsComponent } from './employee-print-forms/employee-print-forms.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EmployeeHeaderComponent } from './employee-header/employee-header.compo
     EmployeePersonalDataComponent,
     EmployeeGrowthPlanComponent,
     EmployeeHeaderComponent,
+    EmployeePrintFormsComponent,
   ],
   imports: [
     CommonModule,
