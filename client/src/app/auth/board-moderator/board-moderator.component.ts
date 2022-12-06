@@ -30,22 +30,25 @@ export class BoardModeratorComponent implements OnInit {
     // this.myColumns = cols;
     // this.loading = this.myColumns ? false : true;
 
-    this.UserService.getAllUsers().subscribe(async (data) => {
-      this.myData = data;
-      let rr = [];
 
-      this.myData.forEach((allUsersData: any) => {
-        let roles = '';
-        allUsersData.roles.forEach((e: any) => {
-          roles += e.name + ', ';
-        });
-        allUsersData.roles = roles.slice(0, -2);
-        rr.push(allUsersData);
-      });
 
-      this.myColumns = await this.setColumns(this.myData);
-      this.loading = this.myColumns ? false : true;
-    });
+
+    // this.UserService.getAllUsers().subscribe(async (data) => {
+    //   this.myData = data;
+
+    //   let rr = [];
+    //   this.myData.forEach((allUsersData: any) => {
+    //     let roles = '';
+    //     allUsersData.roles.forEach((e: any) => {
+    //       roles += e.name + ', ';
+    //     });
+    //     allUsersData.roles = roles.slice(0, -2);
+    //     rr.push(allUsersData);
+    //   });
+
+    //   this.myColumns = await this.setColumns(this.myData);
+    //   this.loading = this.myColumns ? false : true;
+    // });
 
     this.UserService.getModeratorBoard().subscribe({
       next: async (data) => {

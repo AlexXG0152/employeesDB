@@ -2,8 +2,10 @@
   class="mat-elevation-z8">
   <ng-container *ngFor="let c of columns" [matColumnDef]="c.caption">
     <th mat-header-cell mat-sort-header *matHeaderCellDef [sortActionDescription]="c.caption">{{c.caption}}</th>
-    <td mat-cell *matCellDef="let element">{{element[c.field]}}</td>
+    <td mat-cell *matCellDef="let element">{{element[c.field]}}
+    </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+ <!-- (dblclick)="onRowClicked(row)" -->

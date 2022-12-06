@@ -5,6 +5,7 @@ import {
   moderatorBoard,
   adminBoard,
   getAllUsers,
+  updateOne
 } from "../controllers/user.controller";
 import { Router } from "express";
 
@@ -16,12 +17,15 @@ userRouter.use(function (req, res, next) {
 });
 
 userRouter.get("/api/test/all", allAccess);
+
 userRouter.get("/api/test/user", [authJwt.verifyToken], userBoard);
+
 userRouter.get(
   "/api/test/mod",
   [authJwt.verifyToken, authJwt.isModerator],
   moderatorBoard
 );
+
 userRouter.get(
   "/api/test/admin",
   [authJwt.verifyToken, authJwt.isAdmin],
@@ -32,6 +36,12 @@ userRouter.get(
   "/api/test/allUsers",
   [authJwt.verifyToken, authJwt.isAdmin],
   getAllUsers
+);
+
+userRouter.patch(
+  "/api/test/user/:id",
+  [authJwt.verifyToken, authJwt.isAdmin],
+  updateOne
 );
 
 export default userRouter;

@@ -29,6 +29,10 @@ export class UserService {
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get(API_URL + 'allUsers', { responseType: 'json' });
+    return this.http.get(API_URL + 'allUsers');
+  }
+
+  patchUserRight(id: string, roles: any) {
+    return this.http.patch<any>(API_URL + `user/${id}`, roles);
   }
 }

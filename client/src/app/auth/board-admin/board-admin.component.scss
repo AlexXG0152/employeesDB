@@ -5,3 +5,26 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
+
+.modal-title {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.modal-body-row>div {
+  padding: 10px 0;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.check-statuses {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.form-check-label {
+  padding-top: 7px;
+}
