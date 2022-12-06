@@ -19,7 +19,7 @@ export function moderatorBoard(req, res) {
 
 export const getAllUsers = asyncHandler(async (req, res) => {
   try {
-    const users = await User.find({}, { password: 0 }).populate('roles');
+    const users = await User.find({}, { password: 0, __v:0 }).populate('roles');
     res.json(users);
   } catch (error) {
     return res.status(200).send({ error });
