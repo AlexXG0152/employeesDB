@@ -2,6 +2,7 @@ import jsonwebtoken from "jsonwebtoken";
 import { secret } from "../config/auth.config.js";
 import User from "../models/user.model";
 import Role from "../models/role.model";
+import logger from "../../utils/logger.js";
 // const User = _user;
 // const Role = _role;
 
@@ -54,7 +55,6 @@ const isModerator = (req, res, next) => {
     if (err) {
       return res.status(500).send({ message: err });
     }
-
     Role.find(
       {
         _id: { $in: user.roles },

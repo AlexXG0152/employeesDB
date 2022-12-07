@@ -2,7 +2,9 @@ import dotenv from "dotenv";
 import express, { json, urlencoded } from "express";
 import router from "../server/src/app/routes/index";
 import db from "./src/app/models/index";
+import morganMiddleware from "./src/app/middlewares/morgan";
 import expressAsyncErrors from "express-async-errors";
+import logger from "../server/src/utils/logger";
 import cors from "cors";
 import cookieSession from "cookie-session";
 
@@ -34,6 +36,7 @@ app.use(
   })
 );
 
+app.use(morganMiddleware);
 app.use(router);
 
 const Role = db.role;
@@ -44,11 +47,11 @@ db.mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Successfully connect to MongoDB.");
+    logger.info("Successfully connect to MongoDB.");
     initial();
   })
   .catch((err) => {
-    console.error("Connection error", err);
+    logger.error("Connection error", err);
     process.exit();
   });
 
@@ -57,7 +60,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  logger.info(`Server is running on port ${PORT}.`);
 });
 
 function initial() {
