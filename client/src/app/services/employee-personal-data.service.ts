@@ -11,13 +11,12 @@ export class EmployeePersonalDataService {
 
   allSearchResults$ = new BehaviorSubject<any>('');
   oneSearchResult$ = new BehaviorSubject<any>('');
+  showContentOnHomePage$ = new BehaviorSubject<boolean>(true);
 
   getEmployee(id: string): Observable<Employee> {
     return this.http.get<Employee>(
       `http://localhost:8080/api/employee/${id}`
     );
-    // result.subscribe(data => this.passOneResult(data));
-    // return result;
   }
 
   getEmployeeByFirstName(firstName: string): Observable<Employee> {
@@ -41,4 +40,13 @@ export class EmployeePersonalDataService {
   getOnePassedResult(): Observable<any> {
     return this.oneSearchResult$.asObservable();
   }
+
+  passShowContentOnHomePage(result: boolean): void {
+    this.showContentOnHomePage$.next(result);
+  }
+
+  getShowContentOnHomePage(): Observable<boolean> {
+    return this.showContentOnHomePage$.asObservable();
+  }
+
 }

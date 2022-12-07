@@ -25,6 +25,7 @@ export class ResultPageComponent implements OnInit {
 
   onSearchTextEntered(searchValue: string) {
     this.searchText = searchValue;
+    this.EmployeePersonalDataService.passShowContentOnHomePage(this.show);
     this.getUserByFirstName();
   }
 
@@ -39,13 +40,13 @@ export class ResultPageComponent implements OnInit {
         this.searchText
       ).subscribe((employee: Employee) => {
         this.employeesData = employee;
-
         this.employeesData = this.employeesData.filter(
           (user: { firstName: string }) =>
             user.firstName.toLowerCase() === this.searchText.toLowerCase()
         );
         this.show = true;
         this.EmployeePersonalDataService.passResults(this.employeesData);
+        this.EmployeePersonalDataService.passShowContentOnHomePage(!this.show);
       });
     }
   }
@@ -58,5 +59,9 @@ export class ResultPageComponent implements OnInit {
         }
       );
     this.show = true;
+  }
+
+  clear() {
+    window.location.reload();
   }
 }

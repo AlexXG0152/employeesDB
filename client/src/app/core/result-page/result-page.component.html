@@ -1,6 +1,8 @@
 <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
 
+
 <div class="employees" *ngIf="show">
+  <button *ngIf="employeesData.length" type="button" class="btn btn-primary float-end mb-2 me-3" (click)="clear()">Clear</button>
   <table mat-table [dataSource]="employeesData" class="mat-elevation-z8" *ngIf="employeesData">
     <ng-container matColumnDef="ID">
       <th mat-header-cell *matHeaderCellDef>ID</th>

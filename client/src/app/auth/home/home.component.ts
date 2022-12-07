@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -7,11 +8,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private UserService: UserService) {}
+  constructor(
+    private UserService: UserService,
+    private EmployeePersonalDataService: EmployeePersonalDataService
+  ) {}
 
   content?: string;
+  showThisContent$: any;
 
   ngOnInit(): void {
+    this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
+      (data) => {
+        this.showThisContent$ = data;
+      }
+    );
+
     this.UserService.getPublicContent().subscribe({
       next: (data) => {
         this.content = data;

@@ -15,3 +15,5 @@ export class EmployeePrintFormsComponent implements OnInit {
 
   ngOnInit(): void {}
 }
+
+//https://www.npmjs.com/package/docx-templates

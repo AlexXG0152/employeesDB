@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
+import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   constructor(
     private StorageService: StorageService,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   title = 'employees';
@@ -35,21 +36,30 @@ export class HeaderComponent implements OnInit {
 
       this.username = user.username;
     }
+    this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
+      (data) => {
+        this.showButton$ = data;
+        console.log(this.showButton$);
+      }
+    );
   }
 
   logout(): void {
     this.AuthService.logout().subscribe({
-      next: res => {
+      next: (res) => {
         console.log(res);
         this.StorageService.clean();
 
         window.location.reload();
-        window.location.assign('/home')
+        window.location.assign('/home');
       },
-      error: err => {
+      error: (err) => {
         console.error(err);
-      }
-    })
+      },
+    });
   }
+
+  showButton$: any;
+
 
 }

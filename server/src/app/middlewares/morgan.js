@@ -2,7 +2,7 @@ import morgan from "morgan";
 import logger from "../../utils/logger";
 
 const stream = {
-  write: (message) => logger.http(message),
+  write: (message) => logger.http(message.trim()),
 };
 
 const skip = () => {
@@ -19,6 +19,7 @@ morgan.token("param", function (req, res, param) {
   return req.params[param];
 });
 morgan.token("body", function (req, res, param) {
+  delete req.body.password
   return JSON.stringify(req.body);
 });
 morgan.token("userID", function (req, res, param) {
