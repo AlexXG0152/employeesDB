@@ -20,7 +20,7 @@
 // await client.close();
 
 import asyncHandler from "express-async-handler";
-import aggregate from "../models/employee.model";
+import Employee from "../models/employee.model";
 
 export const todayBirthdays = asyncHandler(async (req, res) => {
   const agg = [
@@ -43,7 +43,7 @@ export const todayBirthdays = asyncHandler(async (req, res) => {
     },
   ];
   try {
-    const todayBirthdays = await aggregate(agg);
+    const todayBirthdays = await Employee.aggregate(agg);
     res.json(todayBirthdays);
   } catch (error) {
     return res.status(400).send({ error });
@@ -72,7 +72,7 @@ export const getFiredInThisYear = asyncHandler(async (req, res) => {
     },
   ];
   try {
-    const getFiredInThisYear = await aggregate(agg);
+    const getFiredInThisYear = await Employee.aggregate(agg);
     res.json(getFiredInThisYear);
   } catch (error) {
     return res.status(400).send({ error });
@@ -100,7 +100,7 @@ export const getHiredInThisYear = asyncHandler(async (req, res) => {
     },
   ];
   try {
-    const getHiredInThisYear = await aggregate(agg);
+    const getHiredInThisYear = await Employee.aggregate(agg);
     res.json(getHiredInThisYear);
   } catch (error) {
     return res.status(400).send({ error });

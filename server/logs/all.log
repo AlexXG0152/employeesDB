@@ -1,0 +1,8 @@
+07.12.2022 15:48:54:4854 info: Server is running on port 8080.
+07.12.2022 15:48:54:4854 info: Successfully connect to MongoDB.
+07.12.2022 15:49:06:496 http: ::1 - - [07/Dec/2022:12:49:06 +0000] "PATCH /api/employee/1726/family" "USERID:6373b624c974b" 1726 {"_id":"63907821c","details":{"_id":"63907821c","employeeID":"1726","familyMemberType":1,"familyMemberName":"werwerkerr","familyMemberBirthDate":"2022-12-01"}} 200 228 "http://localhost:4200/"
+
+07.12.2022 15:49:06:496 http: ::1 - - [07/Dec/2022:12:49:06 +0000] "GET /api/employee/1726/family" "USERID:6373b624c974b" 1726 {} 200 610 "http://localhost:4200/"
+
+07.12.2022 15:49:32:4932 info: Server is running on port 8080.
+07.12.2022 15:49:32:4932 info: Successfully connect to MongoDB.

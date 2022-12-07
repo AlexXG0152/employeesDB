@@ -22,6 +22,9 @@ import { EmployeeModule } from '../employee/employee.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TableComponent } from './table/table.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PageNotFoundComponent,
     UploadFilesComponent,
     DashboardComponent,
+    TableComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -51,7 +55,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatIconModule,
     MatSelectModule,
     EmployeeModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
-  exports: [SearchFilterPipe, ResultPageComponent, SearchComponent, DashboardComponent],
+  exports: [
+    SearchFilterPipe,
+    ResultPageComponent,
+    SearchComponent,
+    DashboardComponent,
+    TableComponent,
+  ],
 })
 export class CoreModule {}

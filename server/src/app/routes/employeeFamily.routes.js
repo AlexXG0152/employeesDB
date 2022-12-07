@@ -5,6 +5,7 @@ import {
   deleteOnefromDB,
 } from "../controllers/employeeFamily.controller";
 import authJwt from "../middlewares/authJwt";
+import morganMiddleware from "../middlewares/morgan"
 
 import { Router } from "express";
 
