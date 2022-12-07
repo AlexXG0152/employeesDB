@@ -1,7 +1,4 @@
 <div class="container">
-  <div class="jumbotron">
-    <!-- <p>{{ content }}</p> -->
-  </div>
   <app-result-page></app-result-page>
-  <app-dashboard></app-dashboard>
+  <app-dashboard *ngIf="showThisContent$"></app-dashboard>
 </div>

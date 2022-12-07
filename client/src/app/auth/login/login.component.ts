@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -14,7 +15,8 @@ export interface ILoginForm {
 export class LoginComponent implements OnInit {
   constructor(
     private AuthService: AuthService,
-    private StorageService: StorageService
+    private StorageService: StorageService,
+    private router: Router
   ) {}
 
   form: any = {
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.isLoginFailed = false;
         this.roles = this.StorageService.getUser().roles;
+        // this.router.navigate([''])
         this.reloadPage();
       },
       error: (err) => {
@@ -52,6 +55,6 @@ export class LoginComponent implements OnInit {
     });
   }
   reloadPage(): void {
-    window.location.reload();
+    window.location.assign('/home')
   }
 }

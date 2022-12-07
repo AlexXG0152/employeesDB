@@ -31,3 +31,10 @@ body {
 .mat-form-field-infix{
   display: flex;
 }
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+}
+
+.mat-form-field-no-padding .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}

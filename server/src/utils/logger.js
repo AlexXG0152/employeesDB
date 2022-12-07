@@ -31,6 +31,7 @@ winston.addColors(colors);
 const transports = [
   new winston.transports.Console({
     format: winston.format.combine(
+      winston.format.align(),
       winston.format.timestamp({ format: "DD.MM.YYYY HH:mm:ss:ms" }),
       winston.format.colorize({ all: true }),
       winston.format.printf(
@@ -43,6 +44,8 @@ const transports = [
     level: "error",
     maxsize: 1024 * 1024 * 10,
     format: winston.format.combine(
+      winston.format.align(),
+      winston.format.json(),
       winston.format.timestamp({ format: "DD.MM.YYYY HH:mm:ss:ms" }),
       winston.format.printf(
         (info) => `${info.timestamp} ${info.level}: ${info.message}`
@@ -53,6 +56,8 @@ const transports = [
     filename: "logs/all.log",
     maxsize: 1024 * 1024 * 10,
     format: winston.format.combine(
+      winston.format.align(),
+      winston.format.json(),
       winston.format.timestamp({ format: "DD.MM.YYYY HH:mm:ss:ms" }),
       winston.format.printf(
         (info) => `${info.timestamp} ${info.level}: ${info.message}`
