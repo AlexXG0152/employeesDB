@@ -45,8 +45,4 @@ export class TableComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-
-//   onRowClicked(row: any) {
-//     console.log('Row clicked: ', row);
-// }
 }

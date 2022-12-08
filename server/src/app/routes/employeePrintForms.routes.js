@@ -1,9 +1,11 @@
-import { download } from "../controllers/employeePrintForms.controller";
+import { create, send } from "../controllers/employeePrintForms.controller";
 import authJwt from "../middlewares/authJwt";
 import { Router } from "express";
 
 const printFormsRouter = Router();
 
-printFormsRouter.get("/api/employee/:id/print-forms", download);
+printFormsRouter.post("/api/employee/:id/print-forms", create);
+printFormsRouter.get("/api/employee/:id/print-forms/:fileName", send);
+
 
 export default printFormsRouter;
