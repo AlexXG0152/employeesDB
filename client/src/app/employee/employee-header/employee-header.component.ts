@@ -23,7 +23,10 @@ export class EmployeeHeaderComponent implements OnInit {
       this.employeeID = this.router.url.split('/')[2];
     });
     this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
-      (data) => (this.employeePersonalData = data)
+      (data) => {
+        this.employeePersonalData = data;
+        this.EmployeePersonalDataService.passOneResult(data);
+      }
     );
   }
 }

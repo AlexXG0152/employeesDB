@@ -15,14 +15,13 @@ export class HeaderComponent implements OnInit {
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
-  title = 'employees';
-
   private roles: string[] = [];
 
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  showButton$: any;
 
   ngOnInit(): void {
     this.isLoggedIn = this.StorageService.isLoggedIn();
@@ -39,7 +38,6 @@ export class HeaderComponent implements OnInit {
     this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
       (data) => {
         this.showButton$ = data;
-        console.log(this.showButton$);
       }
     );
   }
@@ -58,8 +56,5 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
-
-  showButton$: any;
-
 
 }
