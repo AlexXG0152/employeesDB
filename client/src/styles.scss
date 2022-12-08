@@ -29,10 +29,12 @@ body {
 .mat-drawer-content {
   margin: 0px;
 }
+
 /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-.mat-form-field-infix{
+.mat-form-field-infix {
   display: flex;
 }
+
 /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
   margin: 0;
@@ -41,4 +43,8 @@ body {
 /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-no-padding .mat-form-field-wrapper {
   margin-bottom: -1.25em;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

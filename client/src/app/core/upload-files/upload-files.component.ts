@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadFilesService } from 'src/app/services/upload-files.service';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+// import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-upload-files',
@@ -15,10 +16,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UploadFilesComponent implements OnInit {
   constructor(
     private uploadService: UploadFilesService,
-    private EmployeePersonalDataService: EmployeePersonalDataService,
+    // private EmployeePersonalDataService: EmployeePersonalDataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private StorageService: StorageService
   ) {}
+
+  private roles: string[] = [];
+  public employeeFamilyMembersList: any = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
 
   selectedFiles?: FileList;
   currentFile?: File;
@@ -26,7 +35,7 @@ export class UploadFilesComponent implements OnInit {
   message = '';
   date?: Date;
   employeeID?: string;
-  employeePersonalData?: any;
+  // employeePersonalData?: any;
   fileInfo?: Observable<any>;
 
   uploadCommentForm = new FormGroup({
@@ -107,10 +116,19 @@ export class UploadFilesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.StorageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      const user = this.StorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+
     this.route.params.subscribe(() => {
       this.employeeID = this.router.url.split('/')[2];
     });
     this.fileInfo = this.uploadService.getEmployeeFiles(this.employeeID!);
-    this.fileInfo.subscribe(() => {})
+    this.fileInfo.subscribe(() => {});
   }
 }

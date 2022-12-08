@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { take } from 'rxjs/operators';
-import { async } from '@angular/core/testing';
+import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 
 @Component({
   selector: 'app-board-moderator',
@@ -9,21 +8,31 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./board-moderator.component.scss'],
 })
 export class BoardModeratorComponent implements OnInit {
-  constructor(private UserService: UserService) {}
+  constructor(
+    private UserService: UserService,
+    private EmployeePersonalDataService: EmployeePersonalDataService
+  ) {}
 
   content?: string;
-  loading: boolean = true;
-  myData: any;
-  myColumns: any;
+  showThisContent$: any;
+  // loading: boolean = true;
+  // myData: any;
+  // myColumns: any;
 
-  async setColumns(data: any) {
-    const result = Object.keys(data[0]).slice(1);
-    const res: { caption: string; field: string }[] = [];
-    result.forEach((column) => res.push({ caption: column, field: column }));
-    return res;
-  }
+  // async setColumns(data: any) {
+  //   const result = Object.keys(data[0]).slice(1);
+  //   const res: { caption: string; field: string }[] = [];
+  //   result.forEach((column) => res.push({ caption: column, field: column }));
+  //   return res;
+  // }
 
   async ngOnInit(): Promise<void> {
+    this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
+      (data) => {
+        this.showThisContent$ = data;
+      }
+    );
+
     // const data = await this.UserService.getAllUsers().pipe(take(1)).toPromise();
     // this.myData = data;
     // const cols = await this.setColumns(this.myData);

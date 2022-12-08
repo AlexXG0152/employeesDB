@@ -1,6 +1,6 @@
 <h2 class="card-header text-center">GROWTH PLAN</h2>
 <app-employee-header></app-employee-header>
-<div class="card">
+<div class="card" *ngIf="showModeratorBoard">
   <div class="card-body">
     <form [formGroup]="employeeGrowthPlanForm" (ngSubmit)="createTask()">
       <div class="form-floating mb-3">
@@ -38,11 +38,48 @@
       <h3 class="card-title">{{task.growthPlanTaskDescription}}</h3>
       <p class="card-text">Add Date: {{task.growthPlanTaskAddDate}}</p>
       <p class="card-text">End Date: {{task.growthPlanTaskPlannedEndDate}}</p>
+      <p class="card-text" *ngIf="task.growthPlanTaskFactEndDate">Finish Date: {{task.growthPlanTaskFactEndDate}}</p>
     </div>
-    <div class="col-md-12 text-center">
-      <button type="button" class="btn btn-outline-primary m-2" (click)="openPopup(task)">Edit</button>
-      <button type="button" class="btn btn-outline-success m-2">Finish</button>
-      <button type="button" class="btn btn-outline-danger m-2" (click)="deleteTask(task._id)">Delete</button>
+    <div class="col-md-12 text-center" *ngIf="showModeratorBoard">
+      <button type="button" class="btn btn-outline-primary m-2" (click)="openPopup(task)" *ngIf="!task.growthPlanTaskFactEndDate">Edit</button>
+      <button type="button" class="btn btn-outline-success m-2" (click)="openPopupU('displayFinish')" *ngIf="!task.growthPlanTaskFactEndDate">Finish</button>
+      <button type="button" class="btn btn-outline-danger m-2" (click)="openPopupU('displayDelete')" *ngIf="!task.growthPlanTaskFactEndDate">Delete</button>
+    </div>
+
+    <div class="modal" tabindex="-1" [ngStyle]="{'display':displayFinish}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Finish Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closePopupU('displayFinish')"></button>
+          </div>
+          <div class="modal-body">
+            <p>You will finish this task by today's date.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closePopupU('displayFinish')">Close</button>
+            <button type="button" class="btn btn-outline-success m-2" (click)="finishTask(task)">Finish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" [ngStyle]="{'display':displayDelete}">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closePopupU('displayDelete')"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure want delete this task?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closePopupU('displayDelete')">Close</button>
+            <button type="button" class="btn btn-primary" (click)="deleteTask(task._id)">Delete</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -52,10 +89,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePopup()">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title">Edit Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closePopup()"></button>
       </div>
       <div class="modal-body">
         <div class="row">
