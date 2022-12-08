@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-
 
 html,
 body {
@@ -15,11 +15,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-wrapper {
   width: 90%;
 }
 
-.mat-header-cell {
+.mat-mdc-header-cell {
   color: black;
   font-size: 22px;
   font-weight: bolder;
@@ -28,13 +29,16 @@ body {
 .mat-drawer-content {
   margin: 0px;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-infix{
   display: flex;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
   margin: 0;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
 .mat-form-field-no-padding .mat-form-field-wrapper {
   margin-bottom: -1.25em;
 }
