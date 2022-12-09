@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeGrowthPlanService } from '../../services/employee-growth-plan.service';
-import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { StorageService } from '../../services/storage.service';
+
 
 @Component({
   selector: 'app-employee-growth-plan',
@@ -13,8 +14,16 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   constructor(
     private EmployeeGrowthPlanService: EmployeeGrowthPlanService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private StorageService: StorageService,
   ) {}
+
+  private roles: string[] = [];
+  public employeeFamilyMembersList: any = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
 
   employeeID?: string;
   public taskList: any = [];
@@ -33,6 +42,8 @@ export class EmployeeGrowthPlanComponent implements OnInit {
       this.employeeGrowthPlanForm.value
     ).subscribe(() => {
       this.getTasks();
+      this.employeeGrowthPlanForm.get('growthPlanTaskTitle')?.reset();
+      this.employeeGrowthPlanForm.get('growthPlanTaskDescription')?.reset();
     });
   }
 
@@ -57,12 +68,28 @@ export class EmployeeGrowthPlanComponent implements OnInit {
     this.closePopup();
   }
 
+  async finishTask(task: any): Promise<void> {
+    let update = {
+      _id: task._id,
+      employeeID: this.employeeID,
+      growthPlanTaskFactEndDate: new Date().toISOString().slice(0, 10),
+    };
+    this.EmployeeGrowthPlanService.patchEmployeeGrowthPlan(
+      this.employeeID!,
+      update
+    ).subscribe(() => {
+      this.getTasks();
+      this.closePopupU("displayFinish")
+    });
+  }
+
   async deleteTask(_id: string): Promise<void> {
     this.EmployeeGrowthPlanService.deleteEmployeeGrowthPlan(
       this.employeeID!,
       _id
     ).subscribe(() => {
       this.getTasks();
+      this.closePopupU("displayDelete")
     });
   }
 
@@ -102,5 +129,29 @@ export class EmployeeGrowthPlanComponent implements OnInit {
       this.employeeID = this.router.url.split('/')[2];
     });
     await this.getTasks();
+
+    this.isLoggedIn = this.StorageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      const user = this.StorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+  }
+
+  displayFinish = 'none';
+  displayDelete = 'none';
+
+  openPopupU(modal: string): void {
+    modal === 'displayFinish'
+      ? (this.displayFinish = 'block')
+      : (this.displayDelete = 'block');
+  }
+
+  closePopupU(modal: string): void {
+    modal === 'displayFinish'
+      ? (this.displayFinish = 'none')
+      : (this.displayDelete = 'none');
   }
 }

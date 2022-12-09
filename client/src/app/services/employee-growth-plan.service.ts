@@ -24,6 +24,8 @@ export class EmployeeGrowthPlanService {
   }
 
   patchEmployeeGrowthPlan(id: string, details: any) {
+    console.log(details);
+
     const body = {
       _id: details._id,
       details,

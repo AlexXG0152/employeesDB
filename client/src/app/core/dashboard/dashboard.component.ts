@@ -24,9 +24,11 @@ export class DashboardComponent implements OnInit {
         new Date().toLocaleDateString().slice(0, 2)
       );
     } else {
-      this.todaysBirthDays = JSON.parse(window.localStorage.getItem('b')!)
-      this.hiredInThisYear = JSON.parse(window.localStorage.getItem('h')!)
-      this.firedInThisYear = JSON.parse(window.localStorage.getItem('f')!)
+      this.todaysBirthDays = JSON.parse(window.localStorage.getItem('b')!);
+      this.hiredInThisYear = JSON.parse(window.localStorage.getItem('h')!);
+      this.firedInThisYear = JSON.parse(window.localStorage.getItem('f')!);
+      this.divideByMonth(this.hiredInThisYear,'employmentDate', this.yearHired);
+      this.divideByMonth(this.firedInThisYear, 'dismissalDate', this.yearFired);
 
       // this.ReportService.getDashboardData().subscribe((data) => {
       //   this.dash = data;
@@ -92,8 +94,8 @@ export class DashboardComponent implements OnInit {
     const dateToday = new Date().toLocaleDateString().slice(0, 6);
     this.ReportService.getTodayBirthdays(dateToday).subscribe((data) => {
       this.todaysBirthDays = data;
-      this.ReportService.passDashboardData('b', data);
-      window.localStorage.setItem('b', JSON.stringify(this.todaysBirthDays))
+      // this.ReportService.passDashboardData('b', data);
+      window.localStorage.setItem('b', JSON.stringify(this.todaysBirthDays));
       this.todaysBirthDays.forEach((element: any) => {
         element.age = this.getAge(element.birthDate);
       });
@@ -103,8 +105,8 @@ export class DashboardComponent implements OnInit {
   getHiredInThisYear(): void {
     this.ReportService.getHiredInThisYear(this.yearToday).subscribe((data) => {
       this.hiredInThisYear = data;
-      this.ReportService.passDashboardData('h', data);
-      window.localStorage.setItem('h', JSON.stringify(this.hiredInThisYear))
+      // this.ReportService.passDashboardData('h', data);
+      window.localStorage.setItem('h', JSON.stringify(this.hiredInThisYear));
       this.divideByMonth(
         this.hiredInThisYear,
         'employmentDate',
@@ -115,8 +117,8 @@ export class DashboardComponent implements OnInit {
   getFiredInThisYear(): void {
     this.ReportService.getFiredInThisYear(this.yearToday).subscribe((data) => {
       this.firedInThisYear = data;
-      this.ReportService.passDashboardData('f', data);
-      window.localStorage.setItem('f', JSON.stringify(this.firedInThisYear))
+      // this.ReportService.passDashboardData('f', data);
+      window.localStorage.setItem('f', JSON.stringify(this.firedInThisYear));
       this.divideByMonth(this.firedInThisYear, 'dismissalDate', this.yearFired);
     });
   }

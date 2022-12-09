@@ -44,29 +44,51 @@
           <div>username: {{userInfoForModal?.username}}</div>
           <div>email: {{userInfoForModal?.email}}</div>
           <div class="check-statuses">
-            <div class="form-check form-switch" #q>
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="admin"
-                #ch_admin [checked]="this.admin">
-              <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultA" #ch_admin
+              [checked]="this.admin">
+              <label class="form-check-label" for="flexSwitchCheckDefaultA">Admin</label>
             </div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" #ch_moderator
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultM" #ch_moderator
                 [checked]="this.moderator">
-              <label class="form-check-label" for="flexSwitchCheckDefault">Moderator</label>
+              <label class="form-check-label" for="flexSwitchCheckDefaultM">Moderator</label>
             </div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" #ch_user
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefaultU" #ch_user
                 [checked]="this.user">
-              <label class="form-check-label" for="flexSwitchCheckDefault">User</label>
+              <label class="form-check-label" for="flexSwitchCheckDefaultU">User</label>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"
+        <!-- <button type="button" class="btn btn-primary"
           (click)="saveChanges([ch_admin.checked, ch_moderator.checked, ch_user.checked])">Save
-          changes</button>
+          changes</button> -->
+        <button type="button" class="btn btn-outline-success m-2" (click)="openPopupU()">Finish</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closePopup()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" [ngStyle]="{'display':displayFinish}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Action confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            (click)="closePopup()"></button>
+        </div>
+        <div class="modal-body">
+          <p>Confirm your action.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closePopup()">Close</button>
+          <button type="button" class="btn btn-primary"
+            (click)="saveChanges([ch_admin.checked, ch_moderator.checked, ch_user.checked])">Save
+            changes</button>
+        </div>
       </div>
     </div>
   </div>

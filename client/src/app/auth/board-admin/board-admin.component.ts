@@ -92,7 +92,7 @@ export class BoardAdminComponent implements OnInit {
     this.user = this.strUserInfoForModal.includes('"name":"user"');
   }
   closePopup(): void {
-    this.displayStyle = 'none';
+    this.displayStyle = this.displayFinish = 'none';
     this.userInfoForModal =
       this.admin =
       this.moderator =
@@ -113,5 +113,9 @@ export class BoardAdminComponent implements OnInit {
     }
     this.updateUserRights(this.updatedUserID, this.newRoles);
     this.newRoles = [];
+  }
+  displayFinish = 'none';
+  openPopupU(): void {
+    this.displayFinish = 'block';
   }
 }

@@ -19,7 +19,6 @@ export class EmployeeFamilyComponent {
 
   employeeID?: string;
 
-
   private roles: string[] = [];
   public employeeFamilyMembersList: any = [];
   isLoggedIn = false;
@@ -116,14 +115,11 @@ export class EmployeeFamilyComponent {
     });
 
     this.isLoggedIn = this.StorageService.isLoggedIn();
-
     if (this.isLoggedIn) {
       const user = this.StorageService.getUser();
       this.roles = user.roles;
-
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
       this.username = user.username;
     }
 

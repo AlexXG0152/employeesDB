@@ -1,7 +1,7 @@
 <div class="table-responsive">
   <h2 class="card-header text-center">UPLOAD FILES</h2>
   <app-employee-header></app-employee-header>
-  <div class="form-comtainer">
+  <div class="form-comtainer" *ngIf="showModeratorBoard">
     <form [formGroup]="uploadCommentForm" (ngSubmit)="submit()" enctype="multipart/form-data">
       <div class="row">
         <div class="col-sm-4 me-auto d-flex pb-2">

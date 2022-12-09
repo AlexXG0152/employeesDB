@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit {
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
+  longText = `Here can be some interesting functionality for simple homepage witout
+  login or registration. All interestion on moderator's board.`;
+
   content?: string;
   showThisContent$: any;
 
