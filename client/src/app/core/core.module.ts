@@ -5,14 +5,6 @@ import { SearchFilterPipe } from '../pipes/search-filter.pipe';
 import { HeaderComponent } from './header/header.component';
 import { ResultPageComponent } from './result-page/result-page.component';
 import { SearchComponent } from './search/search.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,8 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { UploadFilesComponent } from './upload-files/upload-files.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TableComponent } from './table/table.component';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgMaterialModule } from '../ng-material.module';
 
 @NgModule({
   declarations: [
@@ -46,17 +37,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatSelectModule,
+    NgMaterialModule,
     EmployeeModule,
-    MatPaginatorModule,
-    MatSortModule,
   ],
   exports: [
     SearchFilterPipe,

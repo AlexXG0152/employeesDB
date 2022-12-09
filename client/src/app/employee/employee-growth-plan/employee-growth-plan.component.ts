@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { EmployeeGrowthPlanService } from '../../services/employee-growth-plan.service';
 import { StorageService } from '../../services/storage.service';
 
@@ -14,7 +14,6 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   constructor(
     private EmployeeGrowthPlanService: EmployeeGrowthPlanService,
     private route: ActivatedRoute,
-    private router: Router,
     private StorageService: StorageService,
   ) {}
 
@@ -36,7 +35,6 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   });
 
   async createTask(): Promise<void> {
-    console.warn(this.employeeGrowthPlanForm.value);
     this.EmployeeGrowthPlanService.createEmployeeGrowthPlan(
       this.employeeID!,
       this.employeeGrowthPlanForm.value
@@ -125,8 +123,8 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.route.params.subscribe(() => {
-      this.employeeID = this.router.url.split('/')[2];
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
     });
     await this.getTasks();
 

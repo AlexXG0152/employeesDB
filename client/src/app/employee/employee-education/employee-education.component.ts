@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { EmployeeEducationService } from 'src/app/services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
@@ -14,7 +14,6 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 export class EmployeeEducationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private EmployeeEducationService: EmployeeEducationService,
     private StorageService: StorageService,
     private EmployeePersonalDataService: EmployeePersonalDataService
@@ -31,6 +30,9 @@ export class EmployeeEducationComponent implements OnInit {
   username?: string;
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
+    });
     this.getData();
 
     this.isLoggedIn = this.StorageService.isLoggedIn();
@@ -52,28 +54,13 @@ export class EmployeeEducationComponent implements OnInit {
         this.employeePersonalData = employee;
       }
     );
-    // this.EmployeePersonalDataService.getOnePassedResult().subscribe(
-    //   (employee) => {
-    //     this.employeePersonalData = employee;
-    //   }
-    // )
   }
 
   getData(): void {
-    this.route.params.subscribe(() => {
-      this.employeeID = this.router.url.split('/')[2];
-      try {
-        if (this.employeeID) {
-          this.EmployeeEducationService.getEmployeeEducation(
-            this.employeeID
-          ).subscribe((data) => {
-            this.employeeEducationData = data;
-          });
-          // this.getEmployee();
-        }
-      } catch (error) {
-        console.error(error);
-      }
+    this.EmployeeEducationService.getEmployeeEducation(
+      this.employeeID
+    ).subscribe((data) => {
+      this.employeeEducationData = data;
     });
   }
 

@@ -1,7 +1,7 @@
 {
-  "name": "node-js-express--mongodb",
+  "name": "node-js-express-mongodb-employee-crm",
   "version": "1.0.0",
-  "description": "Node.js Express + MongoDB: Server with Mongoose",
+  "description": "Node.js Express + MongoDB: Server with Mongoose for employee CRM",
   "main": "server.js",
   "scripts": {
     "start": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js",

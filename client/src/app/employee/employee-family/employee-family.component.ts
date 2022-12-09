@@ -110,8 +110,8 @@ export class EmployeeFamilyComponent {
   }
 
   async ngOnInit(): Promise<void> {
-    this.route.params.subscribe(() => {
-      this.employeeID = this.router.url.split('/')[2];
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
     });
 
     this.isLoggedIn = this.StorageService.isLoggedIn();
