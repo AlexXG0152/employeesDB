@@ -10,11 +10,9 @@ export class EmployeeGrowthPlanService {
   constructor(private http: HttpClient) {}
 
   createEmployeeGrowthPlan(id: string, details: any) {
-    details.employeeID = id;
-    const body = { details };
     return this.http.post<IGrowthTask>(
       `http://localhost:8080/api/employee/${id}/growth-plan`,
-      body
+      { details }
     );
   }
 
@@ -25,23 +23,16 @@ export class EmployeeGrowthPlanService {
   }
 
   patchEmployeeGrowthPlan(id: string, details: any) {
-    const body = {
-      _id: details._id,
-      details,
-    };
     return this.http.patch<IGrowthTask>(
       `http://localhost:8080/api/employee/${id}/growth-plan`,
-      body
+      { details }
     );
   }
 
   deleteEmployeeGrowthPlan(id: string, _id: string): Observable<IGrowthTask> {
-    const options = {
-      body: { _id },
-    };
     return this.http.delete<IGrowthTask>(
       `http://localhost:8080/api/employee/${id}/growth-plan`,
-      options
+      { body: { _id } }
     );
   }
 }

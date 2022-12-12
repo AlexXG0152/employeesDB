@@ -10,11 +10,9 @@ export class EmployeeFamilyService {
   constructor(private http: HttpClient) {}
 
   createEmployeeFamilyMember(id: string, details: any) {
-    details.employeeID = id;
-    const body = { details };
     return this.http.post<IEmployeeFamilyMember>(
       `http://localhost:8080/api/employee/${id}/family`,
-      body
+      { details }
     );
   }
 
@@ -25,23 +23,19 @@ export class EmployeeFamilyService {
   }
 
   patchEmployeeFamilyMember(id: string, details: any) {
-    const body = {
-      _id: details._id,
-      details,
-    };
     return this.http.patch<IEmployeeFamilyMember>(
       `http://localhost:8080/api/employee/${id}/family`,
-      body
+      { details }
     );
   }
 
-  deleteEmployeeFamilyMember(id: string, _id: string): Observable<IEmployeeFamilyMember> {
-    const options = {
-      body: { _id },
-    };
+  deleteEmployeeFamilyMember(
+    id: string,
+    _id: string
+  ): Observable<IEmployeeFamilyMember> {
     return this.http.delete<IEmployeeFamilyMember>(
       `http://localhost:8080/api/employee/${id}/family`,
-      options
+      { body: { _id } }
     );
   }
 }

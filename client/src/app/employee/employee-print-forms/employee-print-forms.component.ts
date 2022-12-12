@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeePrintFormsService } from 'src/app/services/employee-print-forms.service';
 import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
-import { Employee } from 'src/app/interfaces/employee';
+import { IEmployee } from 'src/app/interfaces/employee';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEmployeeCertificate } from 'src/app/interfaces/employeeCertificate';
 
@@ -19,7 +19,7 @@ export class EmployeePrintFormsComponent implements OnInit {
   ) {}
 
   link?: string;
-  user?: Employee;
+  user?: IEmployee;
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {

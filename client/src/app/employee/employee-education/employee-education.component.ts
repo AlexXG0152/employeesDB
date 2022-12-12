@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EmployeeEducationService } from 'src/app/services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
-import { Employee } from 'src/app/interfaces/employee';
+import { IEmployee } from 'src/app/interfaces/employee';
 import { IEmployeeEducation } from 'src/app/interfaces/employeeEducation';
 
 @Component({
@@ -24,7 +24,7 @@ export class EmployeeEducationComponent implements OnInit {
   private roles: string[] = [];
   employeeEducationData?: IEmployeeEducation[];
   employeeID: string = '';
-  employeePersonalData?: Employee;
+  employeePersonalData?: IEmployee;
 
   isLoggedIn = false;
   showAdminBoard = false;
@@ -76,15 +76,17 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   makeEditable(data: string) {
-    this.employeeEducationData = this.employeeEducationData!.map((row: IEmployeeEducation) => {
-      if (row._id === data) {
-        row.selected = row.editable = true;
-        return row;
-      } else {
-        row.selected = row.editable = false;
-        return row;
+    this.employeeEducationData = this.employeeEducationData!.map(
+      (row: IEmployeeEducation) => {
+        if (row._id === data) {
+          row.selected = row.editable = true;
+          return row;
+        } else {
+          row.selected = row.editable = false;
+          return row;
+        }
       }
-    });
+    );
   }
 
   saveData(updatedData: IEmployeeEducation) {
@@ -97,10 +99,12 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   cancel() {
-    this.employeeEducationData = this.employeeEducationData!.map((row: IEmployeeEducation) => {
-      row.selected = row.editable = false;
-      return row;
-    });
+    this.employeeEducationData = this.employeeEducationData!.map(
+      (row: IEmployeeEducation) => {
+        row.selected = row.editable = false;
+        return row;
+      }
+    );
   }
 
   // POP-UP
@@ -121,11 +125,15 @@ export class EmployeeEducationComponent implements OnInit {
     educationDiplomaNumber: new FormControl('', Validators.required),
     educationDiplomaDate: new FormControl('', Validators.required),
   });
+
   createRecord(): void {
-    console.warn(this.employeeEducationForm.value);
+    const details = {
+      employeeID: this.employeeID,
+      ...this.employeeEducationForm.value,
+    };
     this.EmployeeEducationService.createEmployeeEducation(
       this.employeeID,
-      this.employeeEducationForm.value
+      details
     ).subscribe(() => {
       this.getData();
     });

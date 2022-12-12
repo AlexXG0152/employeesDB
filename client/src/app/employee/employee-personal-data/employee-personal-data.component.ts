@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IEmpl } from 'src/app/interfaces/empl';
+import { IEmployee } from 'src/app/interfaces/employee';
 import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+import { emptyEmployee } from 'src/assets/emptyEmployee';
 
 @Component({
   selector: 'app-employee-personal-data',
@@ -9,15 +10,15 @@ import { EmployeePersonalDataService } from 'src/app/services/employee-personal-
   styleUrls: ['./employee-personal-data.component.scss'],
 })
 export class EmployeePersonalDataComponent implements OnInit {
-  employeeData: IEmpl[] = [];
+  employeeData: IEmployee[] = [];
   employeeID?: string;
 
   constructor(
     private route: ActivatedRoute,
-    private EmployeePersonalDataService: EmployeePersonalDataService,
+    private EmployeePersonalDataService: EmployeePersonalDataService
   ) {
     this.route.params.subscribe((params) => {
-      this.employeeID = params['id']
+      this.employeeID = params['id'];
     });
   }
 
@@ -27,5 +28,9 @@ export class EmployeePersonalDataComponent implements OnInit {
         this.employeeData.push(employee);
       }
     );
+  }
+
+  createOneEmployee() {
+    this.employeeData = emptyEmployee;
   }
 }

@@ -34,9 +34,13 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   });
 
   async createTask(): Promise<void> {
+    const details = {
+      ...this.employeeGrowthPlanForm.value,
+      employeeID: this.employeeID,
+    };
     this.EmployeeGrowthPlanService.createEmployeeGrowthPlan(
       this.employeeID!,
-      this.employeeGrowthPlanForm.value
+      details
     ).subscribe(() => {
       this.getTasks();
       this.employeeGrowthPlanForm.get('growthPlanTaskTitle')?.reset();
@@ -53,7 +57,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   }
 
   async saveTask(): Promise<void> {
-    let update = { _id: this.openTaskId, employeeID: this.employeeID };
+    let update = { _id: this.taskId, employeeID: this.employeeID };
     update = { ...update, ...this.editEmployeeGrowthPlanForm.value };
 
     this.EmployeeGrowthPlanService.patchEmployeeGrowthPlan(
@@ -67,7 +71,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
 
   async finishTask(): Promise<void> {
     let update = {
-      _id: this.openTaskId,
+      _id: this.taskId,
       employeeID: this.employeeID,
       growthPlanTaskFactEndDate: new Date().toISOString().slice(0, 10),
     };
@@ -83,7 +87,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   async deleteTask(): Promise<void> {
     this.EmployeeGrowthPlanService.deleteEmployeeGrowthPlan(
       this.employeeID!,
-      this.openTaskId!
+      this.taskId!
     ).subscribe(() => {
       this.getTasks();
       this.closePopupU('displayDelete');
@@ -92,7 +96,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
 
   // POP-UP
   displayStyle = 'none';
-  openTaskId?: string;
+  taskId?: string;
   editEmployeeGrowthPlanForm = new FormGroup({
     growthPlanTaskTitle: new FormControl('', Validators.required),
     growthPlanTaskDescription: new FormControl('', Validators.required),
@@ -101,7 +105,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   });
 
   openPopup(taskData: IGrowthTask): void {
-    this.openTaskId = taskData._id;
+    this.taskId = taskData._id;
     this.displayStyle = 'block';
     this.editEmployeeGrowthPlanForm
       .get('growthPlanTaskTitle')
@@ -116,9 +120,10 @@ export class EmployeeGrowthPlanComponent implements OnInit {
       .get('growthPlanTaskPlannedEndDate')
       ?.setValue(taskData.growthPlanTaskPlannedEndDate);
   }
+
   closePopup(): void {
     this.displayStyle = 'none';
-    this.openTaskId = '';
+    this.taskId = '';
   }
 
   async ngOnInit(): Promise<void> {
@@ -141,7 +146,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   displayDelete = 'none';
 
   openPopupU(task: IGrowthTask, modal: string): void {
-    this.openTaskId = task._id;
+    this.taskId = task._id;
     modal === 'displayFinish'
       ? (this.displayFinish = 'block')
       : (this.displayDelete = 'block');
@@ -151,6 +156,6 @@ export class EmployeeGrowthPlanComponent implements OnInit {
     modal === 'displayFinish'
       ? (this.displayFinish = 'none')
       : (this.displayDelete = 'none');
-    this.openTaskId = '';
+    this.taskId = '';
   }
 }
