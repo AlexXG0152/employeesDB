@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Employee } from '../interfaces/employees';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Employee } from '../interfaces/employee';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class EmployeePersonalDataService {
 
   allSearchResults$ = new BehaviorSubject<any>('');
   oneSearchResult$ = new BehaviorSubject<any>('');
-  showContentOnHomePage$ = new BehaviorSubject<boolean>(true);
+  showContentOnHomePage$: Subject<boolean> = new BehaviorSubject<boolean>(true);
 
   getEmployee(id: string): Observable<Employee> {
     return this.http.get<Employee>(
@@ -19,25 +19,25 @@ export class EmployeePersonalDataService {
     );
   }
 
-  getEmployeeByFirstName(firstName: string): Observable<Employee> {
-    return this.http.get<Employee>(
+  getEmployeeByFirstName(firstName: string): Observable<Employee[]> {
+    return this.http.get<Employee[]>(
       `http://localhost:8080/api/employee/firstName/${firstName}`
     );
   }
 
-  passResults(results: any): void {
+  passResults(results: Employee[]): void {
     this.allSearchResults$.next(results);
   }
 
-  getPassedResults(): Observable<any> {
+  getPassedResults(): Observable<Employee[]> {
     return this.allSearchResults$.asObservable();
   }
 
-  passOneResult(result: any): void {
+  passOneResult(result: Employee): void {
     this.oneSearchResult$.next(result);
   }
 
-  getOnePassedResult(): Observable<any> {
+  getOnePassedResult(): Observable<Employee> {
     return this.oneSearchResult$.asObservable();
   }
 

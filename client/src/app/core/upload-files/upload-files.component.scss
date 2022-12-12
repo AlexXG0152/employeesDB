@@ -13,6 +13,10 @@
   width: 600px;
 }
 
+.alert {
+  margin: 0px;
+}
+
 .dateControl {
   color: black;
   font-size: 30px;
@@ -32,9 +36,15 @@ mat-datepicker-toggle {
 .files {
   display: flex;
 }
-.date-column {
-  width: 90px;
+
+.number-column {
+  width: 50px;
 }
+
+.date-column {
+  width: 110px;
+}
+
 .document-column {
-  width: 150px;
+  width: 300px;
 }

@@ -16,14 +16,26 @@ const morganMiddleware = morgan(
 );
 
 morgan.token("param", function (req, res, param) {
-  return req.params[param];
+  try {
+    return req.params[param];
+  } catch (error) {
+    console.log(error);
+  }
 });
 morgan.token("body", function (req, res, param) {
-  delete req.body.password
-  return JSON.stringify(req.body);
+  try {
+    delete req.body.password;
+    return JSON.stringify(req.body);
+  } catch (error) {
+    console.log(error);
+  }
 });
 morgan.token("userID", function (req, res, param) {
-  return req.userId
+  try {
+    return req.userId;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export default morganMiddleware;

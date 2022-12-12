@@ -26,7 +26,7 @@
         </div>
 
         <div class="col-2">
-          <button class="btn btn-success btn" [disabled]="!selectedFiles || !uploadCommentForm.valid"
+          <button class="btn btn-success btn mt-2" [disabled]="!selectedFiles || !uploadCommentForm.valid"
             (click)="upload()">
             Upload
           </button>
@@ -35,7 +35,7 @@
     </form>
   </div>
 
-  <div *ngIf="currentFile" class="progress my-3">
+  <div *ngIf="currentFile && progress !==0" class="progress my-3">
     <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
       attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
       {{ progress }}%
@@ -49,7 +49,7 @@
     <table class="table table-striped table-hover table-bordered">
       <thead>
         <tr>
-          <th scope="col">№</th>
+          <th scope="col" class="number-column">№</th>
           <th scope="col" class="date-column">Date</th>
           <th scope="col">Comment</th>
           <th scope="col" class="document-column">Document</th>

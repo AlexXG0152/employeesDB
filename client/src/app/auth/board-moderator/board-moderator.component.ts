@@ -14,50 +14,14 @@ export class BoardModeratorComponent implements OnInit {
   ) {}
 
   content?: string;
-  showThisContent$: any;
-  // loading: boolean = true;
-  // myData: any;
-  // myColumns: any;
-
-  // async setColumns(data: any) {
-  //   const result = Object.keys(data[0]).slice(1);
-  //   const res: { caption: string; field: string }[] = [];
-  //   result.forEach((column) => res.push({ caption: column, field: column }));
-  //   return res;
-  // }
+  showThisContent$?: boolean;
 
   async ngOnInit(): Promise<void> {
     this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
-      (data) => {
+      (data: boolean) => {
         this.showThisContent$ = data;
       }
     );
-
-    // const data = await this.UserService.getAllUsers().pipe(take(1)).toPromise();
-    // this.myData = data;
-    // const cols = await this.setColumns(this.myData);
-    // this.myColumns = cols;
-    // this.loading = this.myColumns ? false : true;
-
-
-
-
-    // this.UserService.getAllUsers().subscribe(async (data) => {
-    //   this.myData = data;
-
-    //   let rr = [];
-    //   this.myData.forEach((allUsersData: any) => {
-    //     let roles = '';
-    //     allUsersData.roles.forEach((e: any) => {
-    //       roles += e.name + ', ';
-    //     });
-    //     allUsersData.roles = roles.slice(0, -2);
-    //     rr.push(allUsersData);
-    //   });
-
-    //   this.myColumns = await this.setColumns(this.myData);
-    //   this.loading = this.myColumns ? false : true;
-    // });
 
     this.UserService.getModeratorBoard().subscribe({
       next: async (data) => {

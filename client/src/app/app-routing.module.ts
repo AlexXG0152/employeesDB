@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { BoardAdminComponent } from './auth/board-admin/board-admin.component';
 import { BoardModeratorComponent } from './auth/board-moderator/board-moderator.component';
 import { BoardUserComponent } from './auth/board-user/board-user.component';
@@ -20,15 +20,19 @@ const routes: Routes = [
   // { path: 'searchResults', component: ResultPageComponent },
   {
     path: 'employee/:id/',
-    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
-    data: { preload: true }
+    loadChildren: () =>
+      import('./employee/employee.module').then((m) => m.EmployeeModule),
+    data: { preload: true },
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: '**', component: PageNotFoundComponent },
 ];
+export const routingConfiguration: ExtraOptions = {
+  paramsInheritanceStrategy: 'always',
+};
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routingConfiguration)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

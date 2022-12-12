@@ -12,6 +12,8 @@ import { CoreModule } from './core/core.module';
 import { httpInterceptorProviders } from './helpers/http.interceptor';
 import { CommonModule } from '@angular/common';
 import { EmployeeModule } from './employee/employee.module';
+import { NgMaterialModule } from './ng-material.module';
+// import { SharedModule } from './shared.module';
 
 @NgModule({
   declarations: [],
@@ -23,9 +25,11 @@ import { EmployeeModule } from './employee/employee.module';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgMaterialModule,
     AuthModule,
     CoreModule,
     EmployeeModule,
+    // SharedModule
   ],
   exports:[],
   providers: [httpInterceptorProviders],

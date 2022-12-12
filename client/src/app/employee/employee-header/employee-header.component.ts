@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from 'src/app/interfaces/employees';
+import { ActivatedRoute } from '@angular/router';
+import { Employee } from 'src/app/interfaces/employee';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
@@ -11,16 +11,15 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 export class EmployeeHeaderComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
-  employeePersonalData?: any;
+  employeePersonalData?: Employee;
   employeeID?: string;
 
   ngOnInit(): void {
-    this.route.params.subscribe(() => {
-      this.employeeID = this.router.url.split('/')[2];
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
     });
     this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
       (data) => {

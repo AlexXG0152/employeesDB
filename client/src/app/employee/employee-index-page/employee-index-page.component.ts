@@ -7,7 +7,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -21,19 +21,10 @@ export class EmployeeIndexPageComponent
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   id?: string | number;
-  sub?: any;
 
-  constructor(
-    private observer: BreakpointObserver,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private observer: BreakpointObserver, private router: Router) {}
 
-  ngOnInit(): void {
-    this.sub = this.route.params.subscribe((params) => {
-      this.id = +params['id'];
-    });
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
@@ -55,6 +46,6 @@ export class EmployeeIndexPageComponent
       });
   }
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 }

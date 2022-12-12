@@ -24,7 +24,7 @@ export const create = asyncHandler(async (req, res) => {
     //   },
     // };
 
-    const employee = {employee:req.body.employee};
+    const employee = {employee:req.body};
 
     const buffer = await createReport({
       template,

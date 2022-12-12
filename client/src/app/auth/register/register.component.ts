@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
+interface IRegisterForm {
+  username: string;
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-register',
@@ -8,11 +13,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  form: any = {
-    username: null,
-    email: null,
-    password: null,
+  form: IRegisterForm = {
+    username: '',
+    email: '',
+    password: '',
   };
+
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
@@ -25,12 +31,12 @@ export class RegisterComponent implements OnInit {
     const { username, email, password } = this.form;
 
     this.authService.register(username, email, password).subscribe({
-      next: (data: any) => {
+      next: (data: IRegisterForm) => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
-      error: (err: { error: { message: string; }; }) => {
+      error: (err: { error: { message: string } }) => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       },

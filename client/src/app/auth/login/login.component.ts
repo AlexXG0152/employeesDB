@@ -19,10 +19,10 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  form: any = {
-    username: null,
-    password: null,
-  };
+  form: {
+    username: string;
+    password: string;
+  } = { username: '', password: '' };
 
   isLoggedIn = false;
   isLoginFailed = false;
@@ -55,6 +55,6 @@ export class LoginComponent implements OnInit {
     });
   }
   reloadPage(): void {
-    window.location.assign('/home')
+    window.location.assign('/home');
   }
 }

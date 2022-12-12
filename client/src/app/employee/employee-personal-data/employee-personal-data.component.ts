@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IEmpl } from 'src/app/interfaces/empl';
 import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 
@@ -10,34 +10,22 @@ import { EmployeePersonalDataService } from 'src/app/services/employee-personal-
 })
 export class EmployeePersonalDataComponent implements OnInit {
   employeeData: IEmpl[] = [];
-  id?: string;
+  employeeID?: string;
 
   constructor(
     private route: ActivatedRoute,
     private EmployeePersonalDataService: EmployeePersonalDataService,
-    private router: Router
   ) {
-    this.route.params.subscribe(() => {
-      this.id = this.router.url.split('/')[2];
-      // try {
-      //   if (this.id) {
-      //     this.EmployeePersonalDataService.getEmployee(this.id).subscribe(
-      //       (employee) => {
-      //         this.employeeData.push(employee);
-      //       }
-      //     );
-      //   }
-      // } catch (error) {
-      //   console.error(error);
-      // }
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id']
     });
   }
 
   ngOnInit(): void {
-    this.EmployeePersonalDataService.getEmployee(this.id!).subscribe(
+    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
       (employee) => {
         this.employeeData.push(employee);
       }
-    )
+    );
   }
 }

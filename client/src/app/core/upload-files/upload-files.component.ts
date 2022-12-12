@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UploadFilesService } from 'src/app/services/upload-files.service';
-// import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -16,14 +15,11 @@ import { StorageService } from '../../services/storage.service';
 export class UploadFilesComponent implements OnInit {
   constructor(
     private uploadService: UploadFilesService,
-    // private EmployeePersonalDataService: EmployeePersonalDataService,
     private route: ActivatedRoute,
-    private router: Router,
     private StorageService: StorageService
   ) {}
 
   private roles: string[] = [];
-  public employeeFamilyMembersList: any = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
@@ -35,7 +31,6 @@ export class UploadFilesComponent implements OnInit {
   message = '';
   date?: Date;
   employeeID?: string;
-  // employeePersonalData?: any;
   fileInfo?: Observable<any>;
 
   uploadCommentForm = new FormGroup({
@@ -125,8 +120,8 @@ export class UploadFilesComponent implements OnInit {
       this.username = user.username;
     }
 
-    this.route.params.subscribe(() => {
-      this.employeeID = this.router.url.split('/')[2];
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
     });
     this.fileInfo = this.uploadService.getEmployeeFiles(this.employeeID!);
     this.fileInfo.subscribe(() => {});

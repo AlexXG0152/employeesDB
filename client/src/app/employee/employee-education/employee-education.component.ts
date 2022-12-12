@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { EmployeeEducationService } from 'src/app/services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { Employee } from 'src/app/interfaces/employee';
+import { IEmployeeEducation } from 'src/app/interfaces/employeeEducation';
 
 @Component({
   selector: 'app-employee-education',
@@ -14,16 +16,15 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 export class EmployeeEducationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private EmployeeEducationService: EmployeeEducationService,
     private StorageService: StorageService,
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   private roles: string[] = [];
-  employeeEducationData?: any;
+  employeeEducationData?: IEmployeeEducation[];
   employeeID: string = '';
-  employeePersonalData?: any;
+  employeePersonalData?: Employee;
 
   isLoggedIn = false;
   showAdminBoard = false;
@@ -31,6 +32,9 @@ export class EmployeeEducationComponent implements OnInit {
   username?: string;
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
+    });
     this.getData();
 
     this.isLoggedIn = this.StorageService.isLoggedIn();
@@ -52,28 +56,13 @@ export class EmployeeEducationComponent implements OnInit {
         this.employeePersonalData = employee;
       }
     );
-    // this.EmployeePersonalDataService.getOnePassedResult().subscribe(
-    //   (employee) => {
-    //     this.employeePersonalData = employee;
-    //   }
-    // )
   }
 
   getData(): void {
-    this.route.params.subscribe(() => {
-      this.employeeID = this.router.url.split('/')[2];
-      try {
-        if (this.employeeID) {
-          this.EmployeeEducationService.getEmployeeEducation(
-            this.employeeID
-          ).subscribe((data) => {
-            this.employeeEducationData = data;
-          });
-          // this.getEmployee();
-        }
-      } catch (error) {
-        console.error(error);
-      }
+    this.EmployeeEducationService.getEmployeeEducation(
+      this.employeeID
+    ).subscribe((data) => {
+      this.employeeEducationData = data;
     });
   }
 
@@ -86,8 +75,8 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  makeEditable(data: any) {
-    this.employeeEducationData = this.employeeEducationData.map((row: any) => {
+  makeEditable(data: string) {
+    this.employeeEducationData = this.employeeEducationData!.map((row: IEmployeeEducation) => {
       if (row._id === data) {
         row.selected = row.editable = true;
         return row;
@@ -98,7 +87,7 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  saveData(updatedData: any) {
+  saveData(updatedData: IEmployeeEducation) {
     this.EmployeeEducationService.patchEmployeeEducation(
       this.employeeID,
       updatedData
@@ -108,7 +97,7 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   cancel() {
-    this.employeeEducationData = this.employeeEducationData.map((row: any) => {
+    this.employeeEducationData = this.employeeEducationData!.map((row: IEmployeeEducation) => {
       row.selected = row.editable = false;
       return row;
     });
