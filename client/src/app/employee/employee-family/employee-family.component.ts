@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { EmployeeFamilyService } from '../../services/employee-family.service';
 import { StorageService } from '../../services/storage.service';
+import { ModalComponent } from '../modal/modal.component'; //111
 
 @Component({
   selector: 'app-employee-family',
@@ -14,7 +16,7 @@ export class EmployeeFamilyComponent {
     private EmployeeFamilyService: EmployeeFamilyService,
     private StorageService: StorageService,
     private route: ActivatedRoute,
-    private router: Router
+    public dialog: MatDialog //111
   ) {}
 
   employeeID?: string;
@@ -81,8 +83,8 @@ export class EmployeeFamilyComponent {
   });
 
   openPopup(familyMemberData: any): void {
-    if(!familyMemberData._id) {
-      this.addRecordButton = 'add'
+    if (!familyMemberData._id) {
+      this.addRecordButton = 'add';
     }
     this.editEployeeFamilyMemberID = familyMemberData._id;
     this.displayStyle = 'block';
@@ -101,12 +103,12 @@ export class EmployeeFamilyComponent {
     this.editEployeeFamilyMemberForm
       .get('familyMemberDateStart')
       ?.setValue(familyMemberData.familyMemberDateStart);
-      // this.addRecordButton = ''
+    // this.addRecordButton = ''
   }
   closePopup(): void {
     this.displayStyle = 'none';
     this.editEployeeFamilyMemberID = '';
-    this.addRecordButton = ''
+    this.addRecordButton = '';
   }
 
   async ngOnInit(): Promise<void> {
@@ -124,5 +126,15 @@ export class EmployeeFamilyComponent {
     }
 
     await this.getEployeeFamilyMember();
+  }
+  //111
+  openDialog() {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '550px',
+      data: { name: 'Angular', color: 'this.color' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

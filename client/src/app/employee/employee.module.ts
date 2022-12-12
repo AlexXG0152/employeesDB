@@ -11,6 +11,7 @@ import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-gro
 import { EmployeeHeaderComponent } from './employee-header/employee-header.component';
 import { EmployeePrintFormsComponent } from './employee-print-forms/employee-print-forms.component';
 import { NgMaterialModule } from '../ng-material.module';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NgMaterialModule } from '../ng-material.module';
     EmployeeGrowthPlanComponent,
     EmployeeHeaderComponent,
     EmployeePrintFormsComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,

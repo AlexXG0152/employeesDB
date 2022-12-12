@@ -4,6 +4,9 @@
   <div class="add-record">
     <button type="button" *ngIf="showModeratorBoard" class="btn btn-success mb-2 float-end" (click)="openPopup($event)">Add record</button>
   </div>
+
+  <button mat-raised-button color="primary" (click)="openDialog()">Open dialog</button>
+
   <table class="table table-striped table-hover">
     <thead>
       <tr>
