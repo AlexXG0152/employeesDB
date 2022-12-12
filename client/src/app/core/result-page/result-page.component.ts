@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
-import { Employee } from '../../interfaces/employees';
+import { Employee } from '../../interfaces/employee';
 
 @Component({
   selector: 'app-result-page',
@@ -29,7 +29,7 @@ export class ResultPageComponent implements OnInit {
     this.getUserByFirstName();
   }
 
-  employeesData: any = [];
+  employeesData: Employee[] = [];
   employeesData$?: Subscription;
 
   getUserByFirstName() {
@@ -38,7 +38,7 @@ export class ResultPageComponent implements OnInit {
     } else {
       this.EmployeePersonalDataService.getEmployeeByFirstName(
         this.searchText
-      ).subscribe((employee: Employee) => {
+      ).subscribe((employee: Employee[]) => {
         this.employeesData = employee;
         this.employeesData = this.employeesData.filter(
           (user: { firstName: string }) =>

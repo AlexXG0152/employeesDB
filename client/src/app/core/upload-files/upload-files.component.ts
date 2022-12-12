@@ -20,7 +20,6 @@ export class UploadFilesComponent implements OnInit {
   ) {}
 
   private roles: string[] = [];
-  public employeeFamilyMembersList: any = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;

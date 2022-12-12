@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   displayedColumns!: string[];
 
   @Input() columns!: TableColumn[];
-  @Input() set dataSource(data: any[]) {
+  @Input() set dataSource(data: MatTableDataSource<[]>[]) {
     if (data) {
       this.setDataSource(data);
     }

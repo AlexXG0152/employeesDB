@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeePrintFormsService } from 'src/app/services/employee-print-forms.service';
 import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
-import { Employee } from 'src/app/interfaces/employees';
+import { Employee } from 'src/app/interfaces/employee';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IEmployeeCertificate } from 'src/app/interfaces/employeeCertificate';
 
 @Component({
   selector: 'app-employee-print-forms',
@@ -34,20 +35,18 @@ export class EmployeePrintFormsComponent implements OnInit {
   }
 
   createCertificateFromWorkPlace() {
-    const employee = {
-      employee: {
-        department: 'template department',
-        occupation: 'template occupation',
-        personalData: {
-          firstName: this.user?.firstName,
-          lastName: this.user?.lastName,
-          since: this.user?.employmentDate,
-        },
-        date: new Date().toLocaleDateString(),
+    const employeeData: IEmployeeCertificate = {
+      department: 'template department',
+      occupation: 'template occupation',
+      personalData: {
+        firstName: this.user?.firstName,
+        lastName: this.user?.lastName,
+        since: this.user?.employmentDate,
       },
+      date: new Date().toLocaleDateString(),
     };
 
-    this.CertificateService.createCertificateFromWorkPlace(employee).subscribe(
+    this.CertificateService.createCertificateFromWorkPlace(this.user!.employeeID, employeeData).subscribe(
       (filename) => {
         this.link = filename;
         this.downloadFile();
@@ -56,15 +55,16 @@ export class EmployeePrintFormsComponent implements OnInit {
   }
 
   downloadFile() {
-    this.CertificateService.download(this.user!.employeeID, this.link!.split('/').at(-1)!).subscribe(
-      (file) => {
-        this.downloadBlob(
-          file,
-          this.link!.split('/').at(-1)!,
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        );
-      }
-    );
+    this.CertificateService.download(
+      this.user!.employeeID,
+      this.link!.split('/').at(-1)!
+    ).subscribe((file) => {
+      this.downloadBlob(
+        file,
+        this.link!.split('/').at(-1)!,
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      );
+    });
   }
 
   downloadURL(data: string, fileName: string) {

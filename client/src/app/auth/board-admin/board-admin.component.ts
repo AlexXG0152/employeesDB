@@ -4,6 +4,15 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
+interface IModalData {
+  _id?: string;
+  username: string;
+  email: string;
+  roles?: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 @Component({
   selector: 'app-board-admin',
   templateUrl: './board-admin.component.html',
@@ -39,7 +48,7 @@ export class BoardAdminComponent implements OnInit {
     });
   }
 
-  getAllUsers() {
+  getAllUsers(): void {
     this.UserService.getAllUsers().subscribe((users) => {
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.sort = this.sort;
@@ -47,11 +56,11 @@ export class BoardAdminComponent implements OnInit {
     });
   }
 
-  dataSource?: any;
+  dataSource: MatTableDataSource<[string]> = new MatTableDataSource();
   displayedColumns: string[] = ['username', 'email', 'roles'];
   @ViewChild(MatSort) sort!: MatSort;
 
-  announceSortChange(sortState: Sort) {
+  announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -59,7 +68,7 @@ export class BoardAdminComponent implements OnInit {
     }
   }
 
-  updateUserRights(id: string, roles: any) {
+  updateUserRights(id: string, roles: string[]): void {
     const update = {
       _id: id,
       roles: roles,
@@ -73,14 +82,16 @@ export class BoardAdminComponent implements OnInit {
 
   // POP-UP
   displayStyle = 'none';
-  addRecordButton = '';
-  userInfoForModal?: any;
-  strUserInfoForModal?: any;
-  admin = '';
-  moderator = '';
-  user = '';
+  addRecordButton?: string;
+  userInfoForModal?: IModalData;
+  strUserInfoForModal?: string;
+  admin: boolean = false;
+  moderator: boolean = false;
+  user: boolean = false;
 
-  openPopup(data: any): void {
+  openPopup(data: IModalData): void {
+    console.log(data);
+
     if (!data._id) {
       this.addRecordButton = 'add';
     }
@@ -93,18 +104,15 @@ export class BoardAdminComponent implements OnInit {
   }
   closePopup(): void {
     this.displayStyle = this.displayFinish = 'none';
-    this.userInfoForModal =
-      this.admin =
-      this.moderator =
-      this.user =
-      this.addRecordButton =
-        '';
+    this.userInfoForModal = undefined;
+    this.admin = this.moderator = this.user = false;
+    this.addRecordButton = '';
   }
 
   newRoles: string[] = [];
   updatedUserID: string = '';
-  saveChanges(data: any) {
-    this.updatedUserID = this.userInfoForModal._id;
+  saveChanges(data: boolean[]): void {
+    this.updatedUserID = this.userInfoForModal?._id!;
     const roles = ['admin', 'moderator', 'user'];
     for (let i = 0; i < data.length; i++) {
       if (data[i]) {

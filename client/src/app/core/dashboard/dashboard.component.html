@@ -34,7 +34,7 @@
       <div class="month-data">
         <div class="row">
           <div class="col-4" *ngFor="let month of yearHired | keyvalue; let i = index">
-            {{ months[i] }}: {{ month.value || '' }}
+            {{ monthsForTemplate[i] }}: {{ month.value || '' }}
           </div>
         </div>
       </div>
@@ -53,8 +53,7 @@
         <div>
           <!-- <img src="..." class="card-img-top" alt="..."> -->
           <a href="" class="nav-link" target="_blank" [routerLink]="['/employee/', hired.employeeID]">
-            <p>Employee: {{hired?.lastName}} {{hired?.firstName}} <br>Date: {{hired?.dismissalDate}} Date:
-              {{hired?.employmentDate}}</p>
+            <p>Employee: {{hired?.lastName}} {{hired?.firstName}} <br>Date: {{hired?.employmentDate}}</p>
           </a>
         </div>
         <hr>
@@ -73,7 +72,7 @@
       <div class="month-data">
         <div class="row">
           <div class="col-4" *ngFor="let month of yearFired | keyvalue; let i = index">
-            {{ months[i] }}: {{ month.value || '' }}
+            {{ monthsForTemplate[i] }}: {{ month.value || '' }}
           </div>
         </div>
       </div>

@@ -42,8 +42,8 @@
     </div>
     <div class="col-md-12 text-center" *ngIf="showModeratorBoard">
       <button type="button" class="btn btn-outline-primary m-2" (click)="openPopup(task)" *ngIf="!task.growthPlanTaskFactEndDate">Edit</button>
-      <button type="button" class="btn btn-outline-success m-2" (click)="openPopupU('displayFinish')" *ngIf="!task.growthPlanTaskFactEndDate">Finish</button>
-      <button type="button" class="btn btn-outline-danger m-2" (click)="openPopupU('displayDelete')" *ngIf="!task.growthPlanTaskFactEndDate">Delete</button>
+      <button type="button" class="btn btn-outline-success m-2" (click)="openPopupU(task, 'displayFinish')" *ngIf="!task.growthPlanTaskFactEndDate">Finish</button>
+      <button type="button" class="btn btn-outline-danger m-2" (click)="openPopupU(task, 'displayDelete')" *ngIf="!task.growthPlanTaskFactEndDate">Delete</button>
     </div>
 
     <div class="modal" tabindex="-1" [ngStyle]="{'display':displayFinish}">
@@ -58,7 +58,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closePopupU('displayFinish')">Close</button>
-            <button type="button" class="btn btn-outline-success m-2" (click)="finishTask(task)">Finish</button>
+            <button type="button" class="btn btn-outline-success m-2" (click)="finishTask()">Finish</button>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closePopupU('displayDelete')">Close</button>
-            <button type="button" class="btn btn-primary" (click)="deleteTask(task._id)">Delete</button>
+            <button type="button" class="btn btn-primary" (click)="deleteTask()">Delete</button>
           </div>
         </div>
       </div>

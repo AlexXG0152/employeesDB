@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   login or registration. All interestion on moderator's board.`;
 
   content?: string;
-  showThisContent$: any;
+  showThisContent$?: boolean;
 
   ngOnInit(): void {
     this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(

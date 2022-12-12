@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-  showButton$: any;
+  showButton$?: boolean;
 
   ngOnInit(): void {
     this.isLoggedIn = this.StorageService.isLoggedIn();
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
       this.username = user.username;
     }
     this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
-      (data) => {
+      (data: boolean) => {
         this.showButton$ = data;
       }
     );
@@ -45,7 +45,6 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.AuthService.logout().subscribe({
       next: (res) => {
-        console.log(res);
         this.StorageService.clean();
 
         window.location.reload();

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { IEmployeeFamilyMember } from 'src/app/interfaces/employeeFamilyMember';
 import { EmployeeFamilyService } from '../../services/employee-family.service';
 import { StorageService } from '../../services/storage.service';
 import { ModalComponent } from '../modal/modal.component'; //111
@@ -22,7 +23,7 @@ export class EmployeeFamilyComponent {
   employeeID?: string;
 
   private roles: string[] = [];
-  public employeeFamilyMembersList: any = [];
+  public employeeFamilyMembersList: IEmployeeFamilyMember[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;

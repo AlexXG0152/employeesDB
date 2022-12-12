@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { EmployeeEducationService } from 'src/app/services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { Employee } from 'src/app/interfaces/employee';
+import { IEmployeeEducation } from 'src/app/interfaces/employeeEducation';
 
 @Component({
   selector: 'app-employee-education',
@@ -20,9 +22,9 @@ export class EmployeeEducationComponent implements OnInit {
   ) {}
 
   private roles: string[] = [];
-  employeeEducationData?: any;
+  employeeEducationData?: IEmployeeEducation[];
   employeeID: string = '';
-  employeePersonalData?: any;
+  employeePersonalData?: Employee;
 
   isLoggedIn = false;
   showAdminBoard = false;
@@ -73,8 +75,8 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  makeEditable(data: any) {
-    this.employeeEducationData = this.employeeEducationData.map((row: any) => {
+  makeEditable(data: string) {
+    this.employeeEducationData = this.employeeEducationData!.map((row: IEmployeeEducation) => {
       if (row._id === data) {
         row.selected = row.editable = true;
         return row;
@@ -85,7 +87,7 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  saveData(updatedData: any) {
+  saveData(updatedData: IEmployeeEducation) {
     this.EmployeeEducationService.patchEmployeeEducation(
       this.employeeID,
       updatedData
@@ -95,7 +97,7 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   cancel() {
-    this.employeeEducationData = this.employeeEducationData.map((row: any) => {
+    this.employeeEducationData = this.employeeEducationData!.map((row: IEmployeeEducation) => {
       row.selected = row.editable = false;
       return row;
     });

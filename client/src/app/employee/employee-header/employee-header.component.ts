@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Employee } from 'src/app/interfaces/employee';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class EmployeeHeaderComponent implements OnInit {
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
-  employeePersonalData?: any;
+  employeePersonalData?: Employee;
   employeeID?: string;
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Employee } from '../interfaces/employees';
+import { IEmployeeCertificate } from '../interfaces/employeeCertificate';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +9,13 @@ import { Employee } from '../interfaces/employees';
 export class EmployeePrintFormsService {
   constructor(private http: HttpClient) {}
 
-  createCertificateFromWorkPlace(employee: any): Observable<string> {
+  createCertificateFromWorkPlace(id: number, employee: IEmployeeCertificate): Observable<string> {
     return this.http.post<string>(
-      `http://localhost:8080/api/employee/${employee.employee.employeeID}/print-forms`,
+      `http://localhost:8080/api/employee/${id}/print-forms`,
       employee
     );
   }
-  download(id: number, filename: string): Observable<any> {
+  download(id: number, filename: string): Observable<Blob> {
     return this.http.get(
       `http://localhost:8080/api/employee/${id}/print-forms/${filename}`,
       {
