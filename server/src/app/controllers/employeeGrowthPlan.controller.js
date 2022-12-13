@@ -20,6 +20,7 @@ export const getOneByID = asyncHandler(async (req, res) => {
 
 export const createOne = asyncHandler(async (req, res) => {
   try {
+    console.log(req.body);
     if (!req.body.details) {
       res.status(400);
       throw new Error("No createQuery data in request");
@@ -45,7 +46,7 @@ export const updateOne = asyncHandler(async (req, res) => {
     }
     const employeesEducation = await GrowthPlan.findOneAndUpdate(
       {
-        _id: new mongo.ObjectId(req.body._id),
+        _id: new mongo.ObjectId(req.body.details._id),
       },
       req.body.details,
       { new: true }

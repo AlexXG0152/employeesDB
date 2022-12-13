@@ -30,9 +30,13 @@ export class EmployeeFamilyComponent {
   username?: string;
 
   async createEployeeFamilyMember(): Promise<void> {
+    const details = {
+      employeeID: this.employeeID!,
+      ...this.editEployeeFamilyMemberForm.value,
+    };
     this.EmployeeFamilyService.createEmployeeFamilyMember(
       this.employeeID!,
-      this.editEployeeFamilyMemberForm.value
+      details
     ).subscribe(() => {
       this.getEployeeFamilyMember();
     });
@@ -47,11 +51,11 @@ export class EmployeeFamilyComponent {
   }
 
   async updateEployeeFamilyMember(): Promise<void> {
-    let update = {
+    const update = {
       _id: this.editEployeeFamilyMemberID,
       employeeID: this.employeeID,
+      ...this.editEployeeFamilyMemberForm.value,
     };
-    update = { ...update, ...this.editEployeeFamilyMemberForm.value };
 
     this.EmployeeFamilyService.patchEmployeeFamilyMember(
       this.employeeID!,

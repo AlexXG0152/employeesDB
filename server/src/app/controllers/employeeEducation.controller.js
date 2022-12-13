@@ -46,7 +46,7 @@ export const updateOne = asyncHandler(async (req, res) => {
 
     const employeesEducation = await EmployeesEducation.findOneAndUpdate(
       {
-        _id: new mongo.ObjectId(req.body._id),
+        _id: new mongo.ObjectId(req.body.details._id),
       },
       req.body.details,
       { new: true }
