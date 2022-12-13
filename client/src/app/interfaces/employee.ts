@@ -27,4 +27,5 @@ export interface IEmployee {
   smtn2: string;
   smtn3: string;
   age?: number;
+  _id?: string;
 }

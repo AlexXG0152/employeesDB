@@ -29,6 +29,12 @@ export class EmployeePersonalDataService {
     });
   }
 
+  patchEmployeePersonalData(id: string, details: any): Observable<IEmployee> {
+    return this.http.patch<IEmployee>(`http://localhost:8080/api/employee/${id}`, {
+      details,
+    });
+  }
+
   passResults(results: IEmployee[]): void {
     this.allSearchResults$.next(results);
   }

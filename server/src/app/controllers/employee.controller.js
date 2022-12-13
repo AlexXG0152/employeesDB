@@ -49,8 +49,6 @@ export const updateOne = asyncHandler(async (req, res) => {
       throw new Error("No employeeID in request");
     }
     if (!req.body.details) {
-      updateQuery.details = req.body.details;
-    } else {
       res.status(400);
       throw new Error("No updateQuery data in request");
     }

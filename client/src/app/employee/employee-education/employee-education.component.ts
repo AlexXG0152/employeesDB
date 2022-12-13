@@ -4,7 +4,6 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { EmployeeEducationService } from 'src/app/services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
-import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { IEmployee } from 'src/app/interfaces/employee';
 import { IEmployeeEducation } from 'src/app/interfaces/employeeEducation';
 
@@ -18,13 +17,11 @@ export class EmployeeEducationComponent implements OnInit {
     private route: ActivatedRoute,
     private EmployeeEducationService: EmployeeEducationService,
     private StorageService: StorageService,
-    private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   private roles: string[] = [];
   employeeEducationData?: IEmployeeEducation[];
   employeeID: string = '';
-  employeePersonalData?: IEmployee;
 
   isLoggedIn = false;
   showAdminBoard = false;
@@ -48,14 +45,6 @@ export class EmployeeEducationComponent implements OnInit {
 
       this.username = user.username;
     }
-  }
-
-  getEmployee(): void {
-    this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
-      (employee) => {
-        this.employeePersonalData = employee;
-      }
-    );
   }
 
   getData(): void {

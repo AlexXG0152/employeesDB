@@ -14,15 +14,16 @@ export class EmployeeHeaderComponent implements OnInit {
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
 
-  employeePersonalData?: IEmployee;
-  employeeID?: string;
+  employeePersonalData: any;
+  employeeID: string = '';
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.employeeID = params['id'];
     });
-    this.EmployeePersonalDataService.getEmployee(this.employeeID!).subscribe(
+    this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
       (data) => {
+        console.log('heasfe', data);
         this.employeePersonalData = data;
         this.EmployeePersonalDataService.passOneResult(data);
       }
