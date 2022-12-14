@@ -1,5 +1,5 @@
-export const emptyEmployee = [{
-    "employeeID": 0,
+export const emptyEmployee = {
+    "employeeID": "",
     "firstName": "",
     "lastName": "",
     "fatherName": "",
@@ -26,4 +26,4 @@ export const emptyEmployee = [{
     "smtn1": "",
     "smtn2": "",
     "smtn3": "",
-  }]
+  }

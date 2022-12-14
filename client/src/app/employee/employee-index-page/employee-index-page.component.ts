@@ -9,6 +9,7 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
 
 @Component({
   selector: 'app-employee-index-page',
@@ -21,10 +22,19 @@ export class EmployeeIndexPageComponent
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   id?: string | number;
+  show: boolean = true;
 
-  constructor(private observer: BreakpointObserver, private router: Router) {}
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    private EmployeePersonalDataService: EmployeePersonalDataService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.EmployeePersonalDataService.getData().subscribe((result) => {
+      this.show = result
+    });
+  }
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
@@ -47,5 +57,6 @@ export class EmployeeIndexPageComponent
   }
   ngOnDestroy() {
     // this.sub.unsubscribe();
+    this.EmployeePersonalDataService.setData(true)
   }
 }

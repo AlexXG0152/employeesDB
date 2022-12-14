@@ -9,13 +9,13 @@ import { IEmployeeCertificate } from '../interfaces/employeeCertificate';
 export class EmployeePrintFormsService {
   constructor(private http: HttpClient) {}
 
-  createCertificateFromWorkPlace(id: number, employee: IEmployeeCertificate): Observable<string> {
+  createCertificateFromWorkPlace(id: string, employee: IEmployeeCertificate): Observable<string> {
     return this.http.post<string>(
       `http://localhost:8080/api/employee/${id}/print-forms`,
       employee
     );
   }
-  download(id: number, filename: string): Observable<Blob> {
+  download(id: string, filename: string): Observable<Blob> {
     return this.http.get(
       `http://localhost:8080/api/employee/${id}/print-forms/${filename}`,
       {

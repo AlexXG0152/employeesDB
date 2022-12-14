@@ -23,7 +23,7 @@ export class EmployeePrintFormsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
-      this.user!.employeeID = Number(this.router.url.split('/')[2]);
+      this.user!.employeeID = this.router.url.split('/')[2];
     });
     this.getUserData();
   }

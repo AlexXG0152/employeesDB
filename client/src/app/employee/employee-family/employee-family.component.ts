@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog'; //111
 import { ActivatedRoute } from '@angular/router';
 import { IEmployeeFamilyMember } from 'src/app/interfaces/employeeFamilyMember';
 import { EmployeeFamilyService } from '../../services/employee-family.service';
@@ -28,6 +28,23 @@ export class EmployeeFamilyComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+
+  async ngOnInit(): Promise<void> {
+    this.route.params.subscribe((params) => {
+      this.employeeID = params['id'];
+    });
+
+    this.isLoggedIn = this.StorageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      const user = this.StorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+
+    await this.getEployeeFamilyMember();
+  }
 
   async createEployeeFamilyMember(): Promise<void> {
     const details = {
@@ -116,27 +133,11 @@ export class EmployeeFamilyComponent {
     this.addRecordButton = '';
   }
 
-  async ngOnInit(): Promise<void> {
-    this.route.params.subscribe((params) => {
-      this.employeeID = params['id'];
-    });
-
-    this.isLoggedIn = this.StorageService.isLoggedIn();
-    if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
-      this.roles = user.roles;
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-      this.username = user.username;
-    }
-
-    await this.getEployeeFamilyMember();
-  }
   //111
   openDialog() {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '550px',
-      data: { name: 'Angular', color: 'this.color' },
+      data: { header: 'Angular', textTitle: 'this.color', text: 'this.color' },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

@@ -4,6 +4,7 @@ import {
   createOne,
   updateOne,
   deleteOnefromDB,
+  getMaxID,
 } from "../controllers/employee.controller";
 import authJwt from "../middlewares/authJwt";
 
@@ -11,6 +12,7 @@ import { Router } from "express";
 
 const employeeRouter = Router();
 
+employeeRouter.get("/api/employee/getMaxEmployeeID", [authJwt.verifyToken], getMaxID)
 employeeRouter.get("/api/employee/:id", [authJwt.verifyToken], getOneByID);
 employeeRouter.get(
   "/api/employee/firstName/:firstName",

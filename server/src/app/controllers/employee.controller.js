@@ -23,7 +23,22 @@ export const getOneByID = asyncHandler(async (req, res) => {
     const employee = await Employee.findOne({
       employeeID: Number(req.params.id),
     });
-    res.json(employee);
+    if (!employee) {
+      res.status(400).send({ error: "Provide right employeeID" });
+    } else {
+      res.json(employee);
+    }
+  } catch (error) {
+    return res.status(200).send({ error });
+  }
+});
+
+export const getMaxID = asyncHandler(async (req, res) => {
+  try {
+    const maxID = await Employee.find({}, { employeeID: 1, _id: 0 })
+      .sort({ employeeID: -1 })
+      .limit(1);
+    res.json(maxID);
   } catch (error) {
     return res.status(200).send({ error });
   }
@@ -52,7 +67,7 @@ export const updateOne = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("No updateQuery data in request");
     }
-
+    console.log(req.body.details);
     const employee = await Employee.findOneAndUpdate(
       { employeeID: Number(req.params.id) },
       req.body.details,
