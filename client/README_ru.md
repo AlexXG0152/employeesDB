@@ -1,7 +1,7 @@
 <div align="center">
 
   <img src="assets/logo_large.png" alt="logo" width="200" height="auto" />
-  <h1>Awesome CRM for HR management </h1>
+  <h1>Awesome template CRM for HR management </h1>
   
   <p>
     An awesome README template for your projects! 
@@ -48,9 +48,10 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-  <!-- - [Screenshots](#camera-screenshots) -->
+  - [Screenshots](#camera-screenshots)
   - [Tech Stack](#space_invader-tech-stack)
   - [Features](#dart-features)
+  - [Color Reference](#art-color-reference)
   - [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   - [Prerequisites](#bangbang-prerequisites)
@@ -71,13 +72,12 @@
 
 ## :star2: About the Project
 
-This is a pet project that I came up with for myself after finishing courses in JavaScript and Angular to consolidate the knowledge gained in the courses and from a mentor.
-And here is a brief background, why HR CRM...
-I had a whole zoo of systems at work (4 different systems written on something in MS DOS, FoxPro and Delphi, C#) where we had to work with personnel data. As the requirements grew, the number of systems increased and there were no willing to integrate them into one until it was too late, the developers were waiting for a CRM from 1C (as practice has shown - in vain).
-As certain events happened in Belarus in 2020, I took a course at RSSschool on JavaScript and Angular. And in 2022, after the end of the course and some other events, I have more time and after a short rest, I decided to strengthen my knowledge in JavaScript, TypeScript, NodeJS and Angular and make a CRM for HR management on the specified stack of technologies, the one that would be convenient for me at my previous place of work, combining all 4 systems features and functionality in one.
-Both server and client were written by myself, based on lessons and articles from the Internet.
-The project is far from perfect, as I did not restore all types of stored information in the templates, based on the logic that if I could make a CRUD for the data about the employee, his family and education, then I can make any other similar functionality for another set of data.  
-Of course, this will remain my home project for which I will have more time to practice and consolidate my knowledge until I find a job as a developer, and less time after I find one, as I am going to put all my energy into my training for this new and exciting job.
+Это домашний проект, который я придумал для себя после окончания курсов по JavaScript и Angular, чтобы закрепить знания, полученные на курсах и от наставника.
+У меня на работе был целый зоопарк )) систем (4 различные системы, написанные на чем-то в МСДОС, ФоксПро и Дельфи, С#) в которых нам приходилось работать с данными о персонале. По мере нарастания требований систем становилось все больше, интегрировать их в одну пока не поздно желающих не было, разработчики сидели в ожидании ЦРМ от 1С (как показала практика - напрасно).
+По мере развития определенных событий в Беларуси в 2020 году я прошел курс обучения в RSSschool по JavaScript и Angular. И вот в 2022 году после окончания курса и еще кое-каких событий у меня стало больше времени, и после небольшого отдыха я решил укрепить свои знания в JavaScript, TypeScript, NodeJS и Angular и сделать CRM для управления персоналом на указанном стекетехнологий, такой, которая была бы удобна мне на моем прошлом месте работы, объединяющей все 4 системы в одной.
+И сервер и клиент написаны мной самостоятельно, на основе уроков и статей из Интернета.
+Проект далек от совершенства, так как восстанавливать все типы хранящейся информации в шаблонах я не стал, исходя из той логики, что если я смог сделать CRUD для данных о работнике, его семье и образовании, то сделать любой другой аналогичный функционал для другого набора данных я смогу.  
+Само собой, это останется моим домашним проектом на который у меня будет больше времени для практики и закрепления знаний пока я не найду работу разработчика, и меньше времени после того, как я ее найду, так как я собираюсь вложить все силы в свое обучение этой новой и увлекающей меня работе.
 
 <!-- Screenshots -->
 
@@ -94,7 +94,7 @@ Of course, this will remain my home project for which I will have more time to p
 <details>
   <summary>Client</summary>
   <div>
-  Again, due to the fact that the project is conceived and made for training, so Angular Material and Bootstrap are used. On live commercial projects this is probably not the case, but I need to learn, so I used both libraries.
+Повторюсь, в связи с тем, что проект задуман и сделан для обучения, поэтому использованы Angular Material и Bootstrap. На боевых коммерческих проектах скорее всего так не делается, но мне нужно учиться, поэтому использовал обе библиотеки.
   </div>
   <ul>
     <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
@@ -140,6 +140,17 @@ Of course, this will remain my home project for which I will have more time to p
 - Feature 1
 - Feature 2
 - Feature 3
+
+<!-- Color Reference -->
+
+### :art: Color Reference
+
+| Color           | Hex                                                              |
+| --------------- | ---------------------------------------------------------------- |
+| Primary Color   | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
+| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
+| Accent Color    | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
+| Text Color      | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
 
 <!-- Env Variables -->
 
@@ -281,7 +292,10 @@ Distributed under the no License. See LICENSE.txt for more information.
 
 ## :handshake: Contact
 
-Contact by PR to this project or by e-mail 😉
+Связь с помощью PR в этот проект или по электронной почте 😉
+
+
+Project Link: [https://github.com/AlexXG0152/employeesDB](https://github.com/AlexXG0152/employeesDB)
 
 <!-- Acknowledgments -->
 
