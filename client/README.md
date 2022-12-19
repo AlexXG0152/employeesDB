@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="assets/logo_large.png" alt="logo" width="200" height="auto" />
+  <img src="https://github.com/AlexXG0152/employeesDB/blob/main/client/src/assets/logo_large.png" alt="logo" width="200" height="auto" />
   <h1>Awesome CRM for HR management </h1>
   
   <p>
