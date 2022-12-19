@@ -1,13 +1,12 @@
-<h2 mat-dialog-title>Install {{ data.name }}</h2>
+<h2 mat-dialog-title>{{ data.header }}</h2>
 <mat-dialog-content class="mat-typography">
-  <h3>What is {{ data.name }}?</h3>
-  <p>{{ data.name }} is a platform that makes it easy to build applications with the web. {{ data.name }}
-    combines declarative templates, dependency injection, end to end tooling, and integrated
-    best practices to solve development challenges. {{ data.name }} empowers developers to build
-    applications that live on the web, mobile, or the desktop {{ data.color }} </p>
+  <h3>{{ data.textTitle }}</h3>
+  <p>{{ data.text }}</p>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
+  <!-- <ng-template> -->
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <!-- </ng-template> -->
 </mat-dialog-actions>

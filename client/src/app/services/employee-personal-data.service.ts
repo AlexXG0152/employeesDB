@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IEmployee } from '../interfaces/employee';
 
+type MaxID = {
+  employeeID: number;
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -23,16 +26,25 @@ export class EmployeePersonalDataService {
     );
   }
 
-  createOneEmployee(details: IEmployee): Observable<IEmployee> {
+  getMaxEmployeeID(): Observable<MaxID[]> {
+    return this.http.get<MaxID[]>(
+      `http://localhost:8080/api/employee/getMaxEmployeeID`
+    );
+  }
+
+  createEmployee(details: IEmployee): Observable<IEmployee> {
     return this.http.post<IEmployee>(`http://localhost:8080/api/employee/`, {
       details,
     });
   }
 
   patchEmployeePersonalData(id: string, details: any): Observable<IEmployee> {
-    return this.http.patch<IEmployee>(`http://localhost:8080/api/employee/${id}`, {
-      details,
-    });
+    return this.http.patch<IEmployee>(
+      `http://localhost:8080/api/employee/${id}`,
+      {
+        details,
+      }
+    );
   }
 
   passResults(results: IEmployee[]): void {
@@ -57,5 +69,13 @@ export class EmployeePersonalDataService {
 
   getShowContentOnHomePage(): Observable<boolean> {
     return this.showContentOnHomePage$.asObservable();
+  }
+
+  messageSubject$: Subject<boolean> = new Subject<boolean>();
+  setData(message: boolean) {
+    this.messageSubject$.next(message);
+  }
+  getData(): Observable<boolean> {
+    return this.messageSubject$.asObservable();
   }
 }

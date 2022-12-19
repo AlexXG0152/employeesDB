@@ -9,6 +9,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from '../core/core.module';
+import { RouterModule } from '@angular/router';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +30,7 @@ import { NgMaterialModule } from '../ng-material.module';
     FormsModule,
     CoreModule,
     BrowserModule,
+    RouterModule,
     BrowserAnimationsModule,
     NgMaterialModule,
   ],

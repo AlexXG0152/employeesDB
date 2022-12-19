@@ -1,15 +1,25 @@
 <ng-container>
   <div *ngFor="let employee of employeeData;">
     <div class="controls" *ngIf="showModeratorBoard">
-      <!-- <button type="button" class="btn btn-outline-primary mb-2 float-end" (click)="createOneEmployee()" *ngIf="!editable">Add record</button> -->
-      <button type="button" class="btn btn-outline-success mb-2 float-end" (click)="edit(employee)"
-        *ngIf="!editable">Edit record</button>
-      <button type="button" class="btn btn-outline-success mb-2 float-end" (click)="save()" *ngIf="editable">Save
-        record</button>
-      <button type="button" class="btn btn-outline-dark mb-2 float-end" (click)="cancel()"
-        *ngIf="editable">Cancel</button>
+      <div class="createNew" *ngIf="createNew">
+        <button type="button" class="btn btn-outline-success mb-2" (click)="createEmployee()" *ngIf="createNew"
+        [disabled]="!editEployeeForm.valid"
+          >Save record</button>
+        <button type="button" class="btn btn-outline-dark mb-2" (click)="cancel()" *ngIf="createNew">Cancel</button>
+      </div>
+      <div *ngIf="!createNew">
+        <button type="button" class="btn btn-outline-success mb-2" (click)="edit(employee)"
+          *ngIf="!editable && !dismissal">Edit record</button>
+        <button type="button" class="btn btn-outline-danger mb-2" (click)="dismiss(employee)"
+          *ngIf="employee.dismissalDate === '' && (!editable && !dismissal)">Dismiss</button>
+        <button type="button" class="btn btn-outline-success mb-2" (click)="openDialog()" *ngIf="editable || dismissal"
+          [disabled]="dismissal && !editEployeeForm.valid">Save record</button>
+        <button type="button" class="btn btn-outline-dark mb-2" (click)="cancel()"
+          *ngIf="editable || dismissal">Cancel</button>
+      </div>
     </div>
     <br>
+
     <div>
       <form [formGroup]="editEployeeForm">
         <div class="personal-data">
@@ -87,37 +97,38 @@
           <div id="item-31" *ngIf="editable"><input class="form-control" id="homeAddress" formControlName="homeAddress">
           </div>
           <div id="item-32" style="border-bottom-style: groove;">Additional info</div>
-          <div id="item-33">SMTH</div>
+          <div id="item-33">SMTH0</div>
           <div id="item-34" *ngIf="!editable">{{employee.smtn0}}</div>
           <div id="item-34" *ngIf="editable"><input class="form-control" id="smtn0" formControlName="smtn0"></div>
-          <div id="item-35">SMTH</div>
+          <div id="item-35">SMTH1</div>
           <div id="item-36" *ngIf="!editable">{{employee.smtn1}}</div>
-          <div id="item-35" *ngIf="editable"><input class="form-control" id="smtn1" formControlName="smtn1"></div>
-          <div id="item-37">SMTH</div>
+          <div id="item-36" *ngIf="editable"><input class="form-control" id="smtn1" formControlName="smtn1"></div>
+          <div id="item-37">SMTH2</div>
           <div id="item-38" *ngIf="!editable">{{employee.smtn2}}</div>
           <div id="item-38" *ngIf="editable"><input class="form-control" id="smtn2" formControlName="smtn2"></div>
-          <div id="item-39">SMTH</div>
+          <div id="item-39">SMTH3</div>
           <div id="item-40" *ngIf="!editable">{{employee.smtn3}}</div>
           <div id="item-40" *ngIf="editable"><input class="form-control" id="smtn3" formControlName="smtn3"></div>
           <div id="item-41" style="border-bottom-style: groove;">Dismissal info</div>
           <div id="item-42">Date</div>
-          <div id="item-43" *ngIf="!editable">{{employee.dismissalDate}}</div>
-          <div id="item-43" *ngIf="editable"><input class="form-control" id="dismissalDate"
+          <div id="item-43" *ngIf="!dismissal">{{employee.dismissalDate}}</div>
+          <div id="item-43" *ngIf="dismissal"><input class="form-control" id="dismissalDate"
               formControlName="dismissalDate"></div>
           <div id="item-44">Document date</div>
-          <div id="item-45" *ngIf="!editable">{{employee.dismissalDocDate}}</div>
-          <div id="item-45" *ngIf="editable"><input class="form-control" id="dismissalDocDate"
+          <div id="item-45" *ngIf="!dismissal">{{employee.dismissalDocDate}}</div>
+          <div id="item-45" *ngIf="dismissal"><input class="form-control" id="dismissalDocDate"
               formControlName="dismissalDocDate"></div>
           <div id="item-46">Document №</div>
-          <div id="item-47" *ngIf="!editable">{{employee.dismissalDocNumer}}</div>
-          <div id="item-47" *ngIf="editable"><input class="form-control" id="dismissalDocNumer"
+          <div id="item-47" *ngIf="!dismissal">{{employee.dismissalDocNumer}}</div>
+          <div id="item-47" *ngIf="dismissal"><input class="form-control" id="dismissalDocNumer"
               formControlName="dismissalDocNumer"></div>
           <div id="item-48">Reason</div>
-          <div id="item-49" *ngIf="!editable">{{employee.dismissalReason}}</div>
-          <div id="item-49" *ngIf="editable"><input class="form-control" id="dismissalReason"
+          <div id="item-49" *ngIf="!dismissal">{{employee.dismissalReason}}</div>
+          <div id="item-49" *ngIf="dismissal"><input class="form-control" id="dismissalReason"
               formControlName="dismissalReason"></div>
         </div>
       </form>
     </div>
   </div>
 </ng-container>
+<router-outlet></router-outlet>

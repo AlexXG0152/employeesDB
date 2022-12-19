@@ -1,4 +1,19 @@
 <div class="container">
   <app-result-page></app-result-page>
-  <app-dashboard *ngIf="showThisContent$"></app-dashboard>
+  <div class="row align-items-start">
+    <div class="col-10">
+      <app-dashboard *ngIf="showThisContent$"></app-dashboard>
+    </div>
+
+    <div class="col-2" *ngIf="showThisContent$">
+      <div class="card mt-2 wb">
+        <button type="button" class="btn btn-outline-dark mb-2"
+          [routerLink]="['/employee/a7dclde$eqa!qs6$9k1qflme8wObv0kbmfu7$xgtu']" (click)="createNew()">Create employee</button>
+        <button type="button" class="btn btn-outline-dark mb-2" disabled>Mock button</button>
+        <button type="button" class="btn btn-outline-dark mb-2" disabled>Mock button</button>
+        <button type="button" class="btn btn-outline-dark mb-2" disabled>Mock button</button>
+        <button type="button" class="btn btn-outline-dark mb-2" disabled>Mock button</button>
+      </div>
+    </div>
+  </div>
 </div>
