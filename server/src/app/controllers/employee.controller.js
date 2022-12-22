@@ -7,7 +7,8 @@ export const getAllByFirstName = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Please add firstName");
     }
-    const employees = await Employee.find({ firstName: req.params.firstName });
+    const search = new RegExp(req.params.firstName, 'i')
+    const employees = await Employee.find({$or: [{firstName: search}, {lastName: search}] });
     res.json(employees);
   } catch (error) {
     return res.status(200).send({ error });
