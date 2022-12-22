@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./src/app/environments/.env" });
+dotenv.config({ path: "./src/environments/.env" });
 
 import upload from "../middlewares/upload";
 import { MongoClient } from "mongodb";

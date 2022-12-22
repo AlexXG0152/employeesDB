@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeEducationService } from 'src/app/services/employee-education.service';
+import { EmployeeEducationService } from '../../services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
-import { IEmployee } from 'src/app/interfaces/employee';
-import { IEmployeeEducation } from 'src/app/interfaces/employeeEducation';
+import { IEmployeeEducation } from '../../interfaces/employeeEducation';
 
 @Component({
   selector: 'app-employee-education',

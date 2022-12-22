@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IEmployee } from 'src/app/interfaces/employee';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({

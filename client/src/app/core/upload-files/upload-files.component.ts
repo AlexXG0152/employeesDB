@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UploadFilesService } from 'src/app/services/upload-files.service';
+import { UploadFilesService } from '../../services/upload-files.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';

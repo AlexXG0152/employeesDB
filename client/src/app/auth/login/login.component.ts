@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { StorageService } from 'src/app/services/storage.service';
+import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';
 
 export interface ILoginForm {
   username: null;

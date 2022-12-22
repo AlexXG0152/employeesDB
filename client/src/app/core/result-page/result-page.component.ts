@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { IEmployee } from '../../interfaces/employee';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
