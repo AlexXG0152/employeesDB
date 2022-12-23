@@ -9,7 +9,7 @@ const USER_KEY = environment.USER_KEY;
 export class StorageService {
   constructor() {}
 
-  clean(): void {
+  async clean(): Promise<void> {
     window.sessionStorage.clear();
   }
 

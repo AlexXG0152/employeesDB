@@ -43,7 +43,7 @@ export class UploadFilesComponent implements OnInit {
     employeeID: new FormControl(''),
   });
 
-  checkDate() {
+  checkDate(): boolean {
     const pattern =
       /^(19|20)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/;
     const date = this.uploadCommentForm.value.documentDate;
@@ -60,7 +60,7 @@ export class UploadFilesComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  submit() {}
+  submit(): void {}
 
   upload(): void {
     this.progress = 0;
@@ -124,6 +124,6 @@ export class UploadFilesComponent implements OnInit {
       this.employeeID = params['id'];
     });
     this.fileInfo = this.uploadService.getEmployeeFiles(this.employeeID!);
-    this.fileInfo.subscribe(() => {});
+    // this.fileInfo.subscribe(() => {});
   }
 }

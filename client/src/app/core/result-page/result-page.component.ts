@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { IEmployee } from '../../interfaces/employee';
@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './result-page.component.html',
   styleUrls: ['./result-page.component.scss'],
 })
-export class ResultPageComponent implements OnInit {
+export class ResultPageComponent implements OnInit, AfterViewInit {
   constructor(
     private EmployeePersonalDataService: EmployeePersonalDataService
   ) {}
@@ -25,17 +25,15 @@ export class ResultPageComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator?: MatPaginator;
   searchText: string = '';
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
 
-  onSearchTextEntered(searchValue: string) {
+  onSearchTextEntered(searchValue: string): void {
     this.searchText = searchValue;
     this.EmployeePersonalDataService.passShowContentOnHomePage(this.show);
     this.getUserByFirstName();
   }
 
-  employeesData$?: Subscription;
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
-
-  getUserByFirstName() {
+  getUserByFirstName(): void {
     if (this.searchText.length === 0 || this.searchText.match(/^\d/)) {
       this.show = false;
     } else {
@@ -43,31 +41,33 @@ export class ResultPageComponent implements OnInit {
         this.searchText
       ).subscribe((employee: IEmployee[]) => {
         this.dataSource = new MatTableDataSource<IEmployee>(employee);
-
-        // this.employeesData = this.employeesData.filter(
-        //   (user: { firstName: string }) =>
-        //     user.firstName.toLowerCase() === this.searchText.toLowerCase()
-        // );
         this.EmployeePersonalDataService.passResults(employee);
         this.EmployeePersonalDataService.passShowContentOnHomePage(!this.show);
         this.show = true;
         this.dataSource.paginator = this.paginator!;
+        // this.EmployeePersonalDataService.passPaginatorResults(this.paginator);
       });
     }
   }
 
-  ngOnInit() {
-    this.employeesData$ =
-      this.EmployeePersonalDataService.getPassedResults().subscribe(
-        (employee) => {
-          this.dataSource = new MatTableDataSource<IEmployee>(employee);
-        }
-      );
+  ngOnInit(): void {
+    this.EmployeePersonalDataService.getPassedResults().subscribe(
+      (employee) => {
+        this.dataSource = new MatTableDataSource<IEmployee>(employee);
+      }
+    );
     this.show = true;
-    this.dataSource.paginator = this.paginator!;
   }
 
-  clear() {
+  ngAfterViewInit(): void {
+    // this.EmployeePersonalDataService.getPassedPaginatorResults().subscribe(
+    //   () => {
+        this.dataSource.paginator = this.paginator!;
+    //   }
+    // );
+  }
+
+  clear(): void {
     window.location.reload();
   }
 }

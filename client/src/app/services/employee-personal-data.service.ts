@@ -78,4 +78,13 @@ export class EmployeePersonalDataService {
   getData(): Observable<boolean> {
     return this.messageSubject$.asObservable();
   }
+
+  // paginator$ = new BehaviorSubject<any>('');
+  // passPaginatorResults(paginator: any): void {
+  //   this.paginator$.next(paginator);
+  // }
+
+  // getPassedPaginatorResults(): Observable<any> {
+  //   return this.paginator$.asObservable();
+  // }
 }

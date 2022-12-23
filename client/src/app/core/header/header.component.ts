@@ -45,10 +45,11 @@ export class HeaderComponent implements OnInit {
   logout(): void {
     this.AuthService.logout().subscribe({
       next: (res) => {
-        this.StorageService.clean();
-
-        window.location.reload();
-        window.location.assign('/home');
+        this.StorageService.clean().then(() => {
+          window.location.reload();
+          window.location.assign('/home');
+          this.isLoggedIn = this.StorageService.isLoggedIn();
+        });
       },
       error: (err) => {
         console.error(err);

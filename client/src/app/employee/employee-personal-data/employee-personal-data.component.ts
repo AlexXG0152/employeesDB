@@ -56,7 +56,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     }
   }
 
-  createEmployee() {
+  createEmployee(): void {
     const update = {
       ...this.editEployeeForm.value,
     };
@@ -88,7 +88,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     });
   }
 
-  createEmployeeForm() {
+  createEmployeeForm(): void {
     this.EmployeePersonalDataService.setData(false);
     this.employeeData = [emptyEmployee];
     this.fillFormData([emptyEmployee]);
@@ -101,7 +101,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.createNew = true;
   }
 
-  save() {
+  save(): void {
     const update = {
       employeeID: this.employeeID,
       ...this.editEployeeForm.value,
@@ -133,7 +133,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.fillFormData([employee]);
   }
 
-  openDialog() {
+  openDialog(): void {
     const confirmationText = this.editable
       ? 'changes in employee personal data?'
       : 'dismiss this employee';
