@@ -3,7 +3,7 @@ import cors from "cors";
 import cookieSession from "cookie-session";
 import rateLimit from "express-rate-limit";
 import slowDown from "express-slow-down";
-import { disablePoweredBy } from "./disablePoweredBy";
+import { disablePoweredBy } from "./disablePoweredBy.js";
 
 export function secure(app) {
   const limiter = rateLimit({

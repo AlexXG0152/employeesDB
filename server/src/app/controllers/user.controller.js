@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
-import User from "../models/user.model";
-import Role from "../models/role.model";
+import User from "../models/user.model.js";
+import Role from "../models/role.model.js";
 
 export function allAccess(req, res) {
   res.status(200).send("Public Content.");

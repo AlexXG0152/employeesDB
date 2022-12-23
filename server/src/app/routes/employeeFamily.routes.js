@@ -3,9 +3,9 @@ import {
   createOne,
   updateOne,
   deleteOnefromDB,
-} from "../controllers/employeeFamily.controller";
-import authJwt from "../middlewares/authJwt";
-import morganMiddleware from "../middlewares/morgan"
+} from "../controllers/employeeFamily.controller.js";
+import authJwt from "../middlewares/authJwt.js";
+import morganMiddleware from "../middlewares/morgan.js"
 
 import { Router } from "express";
 

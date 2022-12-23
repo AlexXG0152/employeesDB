@@ -1,7 +1,7 @@
-import { signup, signin, signout } from "../controllers/auth.controller";
-import authJwt from "../middlewares/authJwt";
+import { signup, signin, signout } from "../controllers/auth.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 import { Router } from "express";
-import verifySignUp from "../middlewares/verifySignUp"
+import verifySignUp from "../middlewares/verifySignUp.js"
 
 const authRouter = Router();
 

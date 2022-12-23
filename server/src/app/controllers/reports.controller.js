@@ -20,7 +20,7 @@
 // await client.close();
 
 import asyncHandler from "express-async-handler";
-import Employee from "../models/employee.model";
+import Employee from "../models/employee.model.js";
 
 export const todayBirthdays = asyncHandler(async (req, res) => {
   const agg = [

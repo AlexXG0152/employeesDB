@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "./src/environments/.env" });
-
-import upload from "../middlewares/upload";
+import upload from "../middlewares/upload.js";
 import { MongoClient } from "mongodb";
 import { GridFSBucket } from "mongodb";
 

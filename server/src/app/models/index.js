@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import User from "./user.model";
-import Role from "./role.model";
-import Employee from "./employee.model";
-import EmployeesEducation from "./employeeEducation.model";
-import FamilyMembers from "./employeeFamily.model";
-import GrowthPlan from "./employeeGrowthPlan.model";
+import User from "./user.model.js";
+import Role from "./role.model.js";
+import Employee from "./employee.model.js";
+import EmployeesEducation from "./employeeEducation.model.js";
+import FamilyMembers from "./employeeFamily.model.js";
+import GrowthPlan from "./employeeGrowthPlan.model.js";
 
 Promise = global.Promise;
 

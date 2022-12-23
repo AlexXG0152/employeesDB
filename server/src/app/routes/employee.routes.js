@@ -5,8 +5,8 @@ import {
   updateOne,
   deleteOnefromDB,
   getMaxID,
-} from "../controllers/employee.controller";
-import authJwt from "../middlewares/authJwt";
+} from "../controllers/employee.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 
 import { Router } from "express";
 

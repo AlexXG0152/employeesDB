@@ -3,8 +3,8 @@ import {
   createOne,
   updateOne,
   deleteOnefromDB,
-} from "../controllers/employeeEducation.controller";
-import authJwt from "../middlewares/authJwt";
+} from "../controllers/employeeEducation.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 import { Router } from "express";
 
 const employeeEducationRouter = Router();

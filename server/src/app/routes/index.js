@@ -1,13 +1,13 @@
 import { Router } from "express";
-import userRouter from "./user.routes";
-import authRouter from "./auth.routes";
-import uploadRouter from "./upload.routes";
-import reportsRouter from "./reports.routes";
-import printFormsRouter from "./employeePrintForms.routes";
-import employeeGrowthPlanRouter from "./employeeGrowthPlan.routes";
-import employeeFamilyRouter from "./employeeFamily.routes";
-import employeeEducationRouter from "./employeeEducation.routes";
-import employeeRouter from "./employee.routes";
+import userRouter from "./user.routes.js";
+import authRouter from "./auth.routes.js";
+import uploadRouter from "./upload.routes.js";
+import reportsRouter from "./reports.routes.js";
+import printFormsRouter from "./employeePrintForms.routes.js";
+import employeeGrowthPlanRouter from "./employeeGrowthPlan.routes.js";
+import employeeFamilyRouter from "./employeeFamily.routes.js";
+import employeeEducationRouter from "./employeeEducation.routes.js";
+import employeeRouter from "./employee.routes.js";
 
 const router = Router();
 router.use(userRouter);

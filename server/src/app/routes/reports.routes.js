@@ -2,8 +2,8 @@ import {
   todayBirthdays,
   getFiredInThisYear,
   getHiredInThisYear,
-} from "../controllers/reports.controller";
-import authJwt from "../middlewares/authJwt";
+} from "../controllers/reports.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 import { Router } from "express";
 
 const reportsRouter = Router();

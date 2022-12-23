@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import { mongo } from "mongoose";
 
-import FamilyMembers from "../models/employeeFamily.model";
+import FamilyMembers from "../models/employeeFamily.model.js";
 
 export const getOneByID = asyncHandler(async (req, res) => {
   try {

@@ -1,4 +1,3 @@
-import authJwt from "../middlewares/authJwt";
 import {
   allAccess,
   userBoard,
@@ -6,7 +5,8 @@ import {
   adminBoard,
   getAllUsers,
   updateOne
-} from "../controllers/user.controller";
+} from "../controllers/user.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 import { Router } from "express";
 
 const userRouter = Router();

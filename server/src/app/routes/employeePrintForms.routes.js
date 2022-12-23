@@ -1,5 +1,5 @@
-import { create, send } from "../controllers/employeePrintForms.controller";
-import authJwt from "../middlewares/authJwt";
+import { create, send } from "../controllers/employeePrintForms.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 import { Router } from "express";
 
 const printFormsRouter = Router();

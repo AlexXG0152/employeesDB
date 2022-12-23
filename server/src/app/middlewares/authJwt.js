@@ -1,7 +1,7 @@
 import jsonwebtoken from "jsonwebtoken";
 import { secret } from "../config/auth.config.js";
-import User from "../models/user.model";
-import Role from "../models/role.model";
+import User from "../models/user.model.js";
+import Role from "../models/role.model.js";
 // const User = _user;
 // const Role = _role;
 

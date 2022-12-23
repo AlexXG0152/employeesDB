@@ -1,5 +1,5 @@
-import uploadController from "../controllers/upload.controller";
-import authJwt from "../middlewares/authJwt";
+import uploadController from "../controllers/upload.controller.js";
+import authJwt from "../middlewares/authJwt.js";
 import { Router } from "express";
 
 const uploadRouter = Router();

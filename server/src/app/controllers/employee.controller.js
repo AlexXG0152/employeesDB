@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import Employee from "../models/employee.model";
+import Employee from "../models/employee.model.js";
 
 export const getAllByFirstName = asyncHandler(async (req, res) => {
   try {

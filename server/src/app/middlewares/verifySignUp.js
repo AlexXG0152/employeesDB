@@ -1,6 +1,6 @@
-import db from "../models/index";
-import User from "../models/user.model";
-import Role from "../models/role.model";
+import db from "../models/index.js";
+import User from "../models/user.model.js";
+import Role from "../models/role.model.js";
 // const Role = _role;
 // const User = _user;
 const ROLES = db.ROLES;
