@@ -1,11 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { IEmployee } from 'src/app/interfaces/employee';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
-import { emptyEmployee } from 'src/assets/emptyEmployee';
+import { Subscription } from 'rxjs';
+import { IEmployee } from '../../interfaces/employee';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { emptyEmployee } from '../../../assets/emptyEmployee';
 import { StorageService } from '../../services/storage.service';
 import { ModalComponent } from '../modal/modal.component'; //111
 
@@ -89,7 +89,7 @@ export class EmployeePersonalDataComponent implements OnInit {
   }
 
   createEmployeeForm() {
-    this.EmployeePersonalDataService.setData(false)
+    this.EmployeePersonalDataService.setData(false);
     this.employeeData = [emptyEmployee];
     this.fillFormData([emptyEmployee]);
     this.editEployeeForm.get('dismissalDate')?.disable();

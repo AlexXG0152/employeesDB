@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IFiredInYear, IHiredInYear, ITodayBirthdays } from 'src/app/interfaces/dashboard';
+import { IFiredInYear, IHiredInYear, ITodayBirthdays } from '../../interfaces/dashboard';
 import { ReportService } from '../../services/report.service';
 
 type Year = {

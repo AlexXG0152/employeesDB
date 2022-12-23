@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./src/app/environments/.env" });
+dotenv.config({ path: "./src/environments/.env" });
 import { promisify } from "util";
 import multer from "multer";
 import { GridFsStorage } from "multer-gridfs-storage";

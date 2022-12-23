@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IGrowthTask } from 'src/app/interfaces/growthTask';
+import { IGrowthTask } from '../../interfaces/growthTask';
 import { EmployeeGrowthPlanService } from '../../services/employee-growth-plan.service';
 import { StorageService } from '../../services/storage.service';
 

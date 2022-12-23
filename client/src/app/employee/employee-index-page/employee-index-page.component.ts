@@ -9,7 +9,7 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
   selector: 'app-employee-index-page',

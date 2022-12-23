@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeePrintFormsService } from 'src/app/services/employee-print-forms.service';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
-import { IEmployee } from 'src/app/interfaces/employee';
+import { EmployeePrintFormsService } from '../../services/employee-print-forms.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { IEmployee } from '../../interfaces/employee';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IEmployeeCertificate } from 'src/app/interfaces/employeeCertificate';
+import { IEmployeeCertificate } from '../../interfaces/employeeCertificate';
 
 @Component({
   selector: 'app-employee-print-forms',

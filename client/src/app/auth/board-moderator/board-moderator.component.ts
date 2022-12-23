@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+import { UserService } from '../../services/user.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
   selector: 'app-board-moderator',

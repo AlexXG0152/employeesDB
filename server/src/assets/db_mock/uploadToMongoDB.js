@@ -1,6 +1,5 @@
 import { MongoClient } from "mongodb";
 import fs from 'fs'
-// require("dotenv").config({ path: "./src/app/environments/.env" });
 
 // Replace the uri string with your MongoDB deployment's connection string.
 const uri = process.env.MONGODB;
@@ -13,11 +12,6 @@ async function run() {
     const foods = database.collection("employeeseducations"); // COLLECTION!
 
     // create an array of documents to insert
-    // const docs = [
-    //   { name: "cake", healthy: false },
-    //   { name: "lettuce", healthy: true },
-    //   { name: "donut", healthy: false },
-    // ];
     let docs = fs.readFileSync(
         "../../../../client/src/assets/emplsEducation.json", // FILENAME!
         "utf8");

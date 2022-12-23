@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { IEmployee } from '../../interfaces/employee';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-result-page',
@@ -21,6 +23,7 @@ export class ResultPageComponent implements OnInit {
     'company.title',
   ];
 
+  @ViewChild(MatPaginator, { static: false }) paginator?: MatPaginator;
   searchText: string = '';
 
   onSearchTextEntered(searchValue: string) {
@@ -29,8 +32,8 @@ export class ResultPageComponent implements OnInit {
     this.getUserByFirstName();
   }
 
-  employeesData: IEmployee[] = [];
   employeesData$?: Subscription;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
 
   getUserByFirstName() {
     if (this.searchText.length === 0 || this.searchText.match(/^\d/)) {
@@ -39,14 +42,16 @@ export class ResultPageComponent implements OnInit {
       this.EmployeePersonalDataService.getEmployeeByFirstName(
         this.searchText
       ).subscribe((employee: IEmployee[]) => {
-        this.employeesData = employee;
-        this.employeesData = this.employeesData.filter(
-          (user: { firstName: string }) =>
-            user.firstName.toLowerCase() === this.searchText.toLowerCase()
-        );
-        this.show = true;
-        this.EmployeePersonalDataService.passResults(this.employeesData);
+        this.dataSource = new MatTableDataSource<IEmployee>(employee);
+
+        // this.employeesData = this.employeesData.filter(
+        //   (user: { firstName: string }) =>
+        //     user.firstName.toLowerCase() === this.searchText.toLowerCase()
+        // );
+        this.EmployeePersonalDataService.passResults(employee);
         this.EmployeePersonalDataService.passShowContentOnHomePage(!this.show);
+        this.show = true;
+        this.dataSource.paginator = this.paginator!;
       });
     }
   }
@@ -55,10 +60,11 @@ export class ResultPageComponent implements OnInit {
     this.employeesData$ =
       this.EmployeePersonalDataService.getPassedResults().subscribe(
         (employee) => {
-          this.employeesData = employee;
+          this.dataSource = new MatTableDataSource<IEmployee>(employee);
         }
       );
     this.show = true;
+    this.dataSource.paginator = this.paginator!;
   }
 
   clear() {

@@ -4,11 +4,11 @@ import router from "../server/src/app/routes/index";
 import db from "./src/app/models/index";
 import morganMiddleware from "./src/app/middlewares/morgan";
 import expressAsyncErrors from "express-async-errors";
-import logger from "../server/src/utils/logger";
+import logger from "./src/app/utils/logger";
 import cors from "cors";
 import cookieSession from "cookie-session";
 
-dotenv.config({ path: "./src/app/environments/.env" });
+dotenv.config({ path: "./src/environments/.env" });
 
 const app = express();
 const PORT = process.env.PORT || 8080;

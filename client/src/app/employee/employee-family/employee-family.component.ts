@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog'; //111
 import { ActivatedRoute } from '@angular/router';
-import { IEmployeeFamilyMember } from 'src/app/interfaces/employeeFamilyMember';
+import { IEmployeeFamilyMember } from '../../interfaces/employeeFamilyMember';
 import { EmployeeFamilyService } from '../../services/employee-family.service';
 import { StorageService } from '../../services/storage.service';
 import { ModalComponent } from '../modal/modal.component'; //111

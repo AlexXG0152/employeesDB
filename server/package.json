@@ -38,5 +38,8 @@
     "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^2.0.20",
     "winston": "^3.8.2"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

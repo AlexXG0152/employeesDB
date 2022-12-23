@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
-import { EmployeePersonalDataService } from 'src/app/services/employee-personal-data.service';
+import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 
 @Component({
   selector: 'app-header',
