@@ -6,6 +6,12 @@
 /out-tsc
 /bazel-out
 /src/assets/temp/
+server/logs/all.log
+logs/*.log
+/src/environments
+
+# Dependencies
+**/logs
 
 # Node
 /node_modules

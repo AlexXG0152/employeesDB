@@ -11,8 +11,6 @@ const mongoClient = new MongoClient(process.env.MONGODBUPLOAD);
 const uploadFiles = async (req, res) => {
   try {
     await upload(req, res);
-    // console.log(req.files);
-
     if (req.files.length <= 0) {
       return res
         .status(400)

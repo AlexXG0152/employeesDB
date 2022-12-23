@@ -18,6 +18,7 @@ export class EmployeePersonalDataComponent implements OnInit {
   CREATE_NEW_EMPLOYEE = 'a7dclde$eqa!qs6$9k1qflme8wObv0kbmfu7$xgtu';
   employeeData: IEmployee[] = [];
   employeeID: string = '';
+  private _id?: string;
   editable = false;
   dismissal = false;
   createNew = false;
@@ -75,6 +76,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
       (data) => {
         this.employeeData = [data];
+        this._id = data._id;
       }
     );
   }
@@ -103,6 +105,7 @@ export class EmployeePersonalDataComponent implements OnInit {
 
   save(): void {
     const update = {
+      _id: this._id,
       employeeID: this.employeeID,
       ...this.editEployeeForm.value,
     };

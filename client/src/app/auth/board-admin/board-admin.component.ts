@@ -90,8 +90,6 @@ export class BoardAdminComponent implements OnInit {
   user: boolean = false;
 
   openPopup(data: IModalData): void {
-    console.log(data);
-
     if (!data._id) {
       this.addRecordButton = 'add';
     }
