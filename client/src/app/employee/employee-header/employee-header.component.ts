@@ -22,7 +22,6 @@ export class EmployeeHeaderComponent implements OnInit {
     });
     this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
       (data) => {
-        console.log('heasfe', data);
         this.employeePersonalData = data;
         this.EmployeePersonalDataService.passOneResult(data);
       }

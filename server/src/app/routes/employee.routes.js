@@ -1,6 +1,6 @@
 import {
   getOneByID,
-  getAllByFirstName,
+  getAllByFirstOrLastName,
   createOne,
   updateOne,
   deleteOnefromDB,
@@ -17,7 +17,7 @@ employeeRouter.get("/api/employee/:id", [authJwt.verifyToken], getOneByID);
 employeeRouter.get(
   "/api/employee/firstName/:firstName",
   [authJwt.verifyToken],
-  getAllByFirstName
+  getAllByFirstOrLastName
 );
 
 employeeRouter.post(

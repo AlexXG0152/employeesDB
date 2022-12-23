@@ -65,7 +65,6 @@ export const send = asyncHandler(async (req, res) => {
 
 async function check() {
   fs.readdir(`${__dirname}/src/assets/temp/`, (err, files) => {
-    console.log(files.length);
     if (files.length > 30) {
       fs.rm(
         `${__dirname}/src/assets/temp/`,
