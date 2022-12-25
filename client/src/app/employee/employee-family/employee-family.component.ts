@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog'; //111
 import { ActivatedRoute } from '@angular/router';
 import { IEmployeeFamilyMember } from '../../interfaces/employeeFamilyMember';
-import { EmployeeFamilyService } from '../../services/employee-family.service';
 import { StorageService } from '../../services/storage.service';
 import { ModalComponent } from '../modal/modal.component'; //111
+import { EmployeeDataService } from 'src/app/services/employee-data.service';
 
 @Component({
   selector: 'app-employee-family',
@@ -14,8 +14,8 @@ import { ModalComponent } from '../modal/modal.component'; //111
 })
 export class EmployeeFamilyComponent {
   constructor(
-    private EmployeeFamilyService: EmployeeFamilyService,
-    private StorageService: StorageService,
+    private employeeDataService: EmployeeDataService,
+    private storageService: StorageService,
     private route: ActivatedRoute,
     public dialog: MatDialog //111
   ) {}
@@ -34,9 +34,9 @@ export class EmployeeFamilyComponent {
       this.employeeID = params['id'];
     });
 
-    this.isLoggedIn = this.StorageService.isLoggedIn();
+    this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
+      const user = this.storageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
@@ -51,19 +51,19 @@ export class EmployeeFamilyComponent {
       employeeID: this.employeeID!,
       ...this.editEployeeFamilyMemberForm.value,
     };
-    this.EmployeeFamilyService.createEmployeeFamilyMember(
+    this.employeeDataService.createEmployeeData(
       this.employeeID!,
-      details
+      details, 'family'
     ).subscribe(() => {
       this.getEployeeFamilyMember();
     });
   }
 
   async getEployeeFamilyMember(): Promise<void> {
-    this.EmployeeFamilyService.getEmployeeFamilyMember(
-      this.employeeID!
+    this.employeeDataService.getEmployeeData(
+      this.employeeID!, 'family'
     ).subscribe((familyMember) => {
-      this.employeeFamilyMembersList = familyMember;
+      this.employeeFamilyMembersList = familyMember as IEmployeeFamilyMember[];
     });
   }
 
@@ -74,9 +74,9 @@ export class EmployeeFamilyComponent {
       ...this.editEployeeFamilyMemberForm.value,
     };
 
-    this.EmployeeFamilyService.patchEmployeeFamilyMember(
+    this.employeeDataService.patchEmployeeData(
       this.employeeID!,
-      update
+      update, 'family'
     ).subscribe(() => {
       this.getEployeeFamilyMember();
     });
@@ -84,9 +84,9 @@ export class EmployeeFamilyComponent {
   }
 
   async deleteEployeeFamilyMember(_id: string): Promise<void> {
-    this.EmployeeFamilyService.deleteEmployeeFamilyMember(
+    this.employeeDataService.deleteEmployeeData(
       this.employeeID!,
-      _id
+      _id, 'family'
     ).subscribe(() => {
       this.getEployeeFamilyMember();
     });

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 
@@ -14,9 +13,8 @@ export interface ILoginForm {
 })
 export class LoginComponent implements OnInit {
   constructor(
-    private AuthService: AuthService,
-    private StorageService: StorageService,
-    private router: Router
+    private authService: AuthService,
+    private storageService: StorageService,
   ) {}
 
   form: {
@@ -30,21 +28,21 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
   ngOnInit(): void {
-    if (this.StorageService.isLoggedIn()) {
+    if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.roles = this.StorageService.getUser().roles;
+      this.roles = this.storageService.getUser().roles;
     }
   }
 
   onSubmit(): void {
     const { username, password } = this.form;
-    this.AuthService.login(username, password).subscribe({
+    this.authService.login(username, password).subscribe({
       next: (data) => {
-        this.StorageService.saveUser(data);
+        this.storageService.saveUser(data);
 
         this.isLoggedIn = true;
         this.isLoginFailed = false;
-        this.roles = this.StorageService.getUser().roles;
+        this.roles = this.storageService.getUser().roles;
         // this.router.navigate([''])
         this.reloadPage();
       },

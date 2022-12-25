@@ -27,11 +27,11 @@ export class EmployeeIndexPageComponent
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private EmployeePersonalDataService: EmployeePersonalDataService
+    private employeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   ngOnInit(): void {
-    this.EmployeePersonalDataService.getData().subscribe((result) => {
+    this.employeePersonalDataService.getData().subscribe((result) => {
       this.show = result
     });
   }
@@ -57,6 +57,6 @@ export class EmployeeIndexPageComponent
   }
   ngOnDestroy() {
     // this.sub.unsubscribe();
-    this.EmployeePersonalDataService.setData(true)
+    this.employeePersonalDataService.setData(true)
   }
 }
