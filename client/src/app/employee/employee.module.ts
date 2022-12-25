@@ -12,6 +12,7 @@ import { EmployeeHeaderComponent } from './employee-header/employee-header.compo
 import { EmployeePrintFormsComponent } from './employee-print-forms/employee-print-forms.component';
 import { NgMaterialModule } from '../ng-material.module';
 import { ModalComponent } from './modal/modal.component';
+import { EmployeeWorkScheduleComponent } from './employee-work-schedule/employee-work-schedule.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ModalComponent } from './modal/modal.component';
     EmployeeHeaderComponent,
     EmployeePrintFormsComponent,
     ModalComponent,
+    EmployeeWorkScheduleComponent,
   ],
   imports: [
     CommonModule,
