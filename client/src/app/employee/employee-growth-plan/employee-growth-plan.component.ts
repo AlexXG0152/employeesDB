@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IGrowthTask } from '../../interfaces/growthTask';
-import { EmployeeGrowthPlanService } from '../../services/employee-growth-plan.service';
+import { IEmployeeGrowthTask } from '../../interfaces/growthTask';
+import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { StorageService } from '../../services/storage.service';
 
 @Component({
@@ -12,9 +12,9 @@ import { StorageService } from '../../services/storage.service';
 })
 export class EmployeeGrowthPlanComponent implements OnInit {
   constructor(
-    private EmployeeGrowthPlanService: EmployeeGrowthPlanService,
+    private employeeDataService: EmployeeDataService,
     private route: ActivatedRoute,
-    private StorageService: StorageService
+    private storageService: StorageService
   ) {}
 
   private roles: string[] = [];
@@ -24,7 +24,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   username?: string;
 
   employeeID?: string;
-  taskList: IGrowthTask[] = [];
+  taskList: IEmployeeGrowthTask[] = [];
 
   employeeGrowthPlanForm = new FormGroup({
     growthPlanTaskTitle: new FormControl('', Validators.required),
@@ -38,34 +38,32 @@ export class EmployeeGrowthPlanComponent implements OnInit {
       ...this.employeeGrowthPlanForm.value,
       employeeID: this.employeeID,
     };
-    this.EmployeeGrowthPlanService.createEmployeeGrowthPlan(
-      this.employeeID!,
-      details
-    ).subscribe(() => {
-      this.getTasks();
-      this.employeeGrowthPlanForm.get('growthPlanTaskTitle')?.reset();
-      this.employeeGrowthPlanForm.get('growthPlanTaskDescription')?.reset();
-    });
+    this.employeeDataService
+      .createEmployeeData(this.employeeID!, details, 'growth-plan')
+      .subscribe(() => {
+        this.getTasks();
+        this.employeeGrowthPlanForm.get('growthPlanTaskTitle')?.reset();
+        this.employeeGrowthPlanForm.get('growthPlanTaskDescription')?.reset();
+      });
   }
 
   async getTasks(): Promise<void> {
-    this.EmployeeGrowthPlanService.getEmployeeGrowthPlan(
-      this.employeeID!
-    ).subscribe((task) => {
-      this.taskList = task;
-    });
+    this.employeeDataService
+      .getEmployeeData(this.employeeID!, 'growth-plan')
+      .subscribe((task) => {
+        this.taskList = task as IEmployeeGrowthTask[];
+      });
   }
 
   async saveTask(): Promise<void> {
     let update = { _id: this.taskId, employeeID: this.employeeID };
     update = { ...update, ...this.editEmployeeGrowthPlanForm.value };
 
-    this.EmployeeGrowthPlanService.patchEmployeeGrowthPlan(
-      this.employeeID!,
-      update
-    ).subscribe(() => {
-      this.getTasks();
-    });
+    this.employeeDataService
+      .patchEmployeeData(this.employeeID!, update, 'growth-plan')
+      .subscribe(() => {
+        this.getTasks();
+      });
     this.closePopup();
   }
 
@@ -75,23 +73,21 @@ export class EmployeeGrowthPlanComponent implements OnInit {
       employeeID: this.employeeID,
       growthPlanTaskFactEndDate: new Date().toISOString().slice(0, 10),
     };
-    this.EmployeeGrowthPlanService.patchEmployeeGrowthPlan(
-      this.employeeID!,
-      update
-    ).subscribe(() => {
-      this.getTasks();
-      this.closePopupU('displayFinish');
-    });
+    this.employeeDataService
+      .patchEmployeeData(this.employeeID!, update, 'growth-plan')
+      .subscribe(() => {
+        this.getTasks();
+        this.closePopupU('displayFinish');
+      });
   }
 
   async deleteTask(): Promise<void> {
-    this.EmployeeGrowthPlanService.deleteEmployeeGrowthPlan(
-      this.employeeID!,
-      this.taskId!
-    ).subscribe(() => {
-      this.getTasks();
-      this.closePopupU('displayDelete');
-    });
+    this.employeeDataService
+      .deleteEmployeeData(this.employeeID!, this.taskId!, 'growth-plan')
+      .subscribe(() => {
+        this.getTasks();
+        this.closePopupU('displayDelete');
+      });
   }
 
   // POP-UP
@@ -104,7 +100,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
     growthPlanTaskPlannedEndDate: new FormControl('', Validators.required),
   });
 
-  openPopup(taskData: IGrowthTask): void {
+  openPopup(taskData: IEmployeeGrowthTask): void {
     this.taskId = taskData._id;
     this.displayStyle = 'block';
     this.editEmployeeGrowthPlanForm
@@ -132,9 +128,9 @@ export class EmployeeGrowthPlanComponent implements OnInit {
     });
     await this.getTasks();
 
-    this.isLoggedIn = this.StorageService.isLoggedIn();
+    this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
+      const user = this.storageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
@@ -145,7 +141,7 @@ export class EmployeeGrowthPlanComponent implements OnInit {
   displayFinish = 'none';
   displayDelete = 'none';
 
-  openPopupU(task: IGrowthTask, modal: string): void {
+  openPopupU(task: IEmployeeGrowthTask, modal: string): void {
     this.taskId = task._id;
     modal === 'displayFinish'
       ? (this.displayFinish = 'block')

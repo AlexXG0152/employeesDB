@@ -12,8 +12,8 @@ import { IEmployeeCertificate } from '../../interfaces/employeeCertificate';
 })
 export class EmployeePrintFormsComponent implements OnInit {
   constructor(
-    private CertificateService: EmployeePrintFormsService,
-    private EmployeePersonalDataService: EmployeePersonalDataService,
+    private certificateService: EmployeePrintFormsService,
+    private employeePersonalDataService: EmployeePersonalDataService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -29,7 +29,7 @@ export class EmployeePrintFormsComponent implements OnInit {
   }
 
   getUserData() {
-    this.EmployeePersonalDataService.getOnePassedResult().subscribe((data) => {
+    this.employeePersonalDataService.getOnePassedResult().subscribe((data) => {
       this.user = data;
     });
   }
@@ -46,7 +46,7 @@ export class EmployeePrintFormsComponent implements OnInit {
       date: new Date().toLocaleDateString(),
     };
 
-    this.CertificateService.createCertificateFromWorkPlace(this.user!.employeeID, employeeData).subscribe(
+    this.certificateService.createCertificateFromWorkPlace(this.user!.employeeID, employeeData).subscribe(
       (filename) => {
         this.link = filename;
         this.downloadFile();
@@ -55,7 +55,7 @@ export class EmployeePrintFormsComponent implements OnInit {
   }
 
   downloadFile() {
-    this.CertificateService.download(
+    this.certificateService.download(
       this.user!.employeeID,
       this.link!.split('/').at(-1)!
     ).subscribe((file) => {

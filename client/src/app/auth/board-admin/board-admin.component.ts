@@ -23,13 +23,13 @@ export class BoardAdminComponent implements OnInit {
   content?: string;
 
   constructor(
-    private UserService: UserService,
+    private userService: UserService,
     private _liveAnnouncer: LiveAnnouncer
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
-    this.UserService.getAdminBoard().subscribe({
+    this.userService.getAdminBoard().subscribe({
       next: (data) => {
         this.content = data;
       },
@@ -49,7 +49,7 @@ export class BoardAdminComponent implements OnInit {
   }
 
   getAllUsers(): void {
-    this.UserService.getAllUsers().subscribe((users) => {
+    this.userService.getAllUsers().subscribe((users) => {
       this.dataSource = new MatTableDataSource(users);
       this.dataSource.sort = this.sort;
       this.loading = this.dataSource ? false : true;
@@ -74,7 +74,7 @@ export class BoardAdminComponent implements OnInit {
       roles: roles,
     };
 
-    this.UserService.patchUserRight(id, update).subscribe(() => {
+    this.userService.patchUserRight(id, update).subscribe(() => {
       this.getAllUsers();
     });
     this.closePopup();

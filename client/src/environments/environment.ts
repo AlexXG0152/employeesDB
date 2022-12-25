@@ -7,6 +7,7 @@ export const environment = {
   BASE_URL: 'http://localhost:8080',
   AUTH_API: 'http://localhost:8080/api/auth/',
   API_URL: 'http://localhost:8080/api/test/',
+  EMPLOYEE_URL: 'http://localhost:8080/api/employee',
   USER_KEY: 'auth-user',
 };
 

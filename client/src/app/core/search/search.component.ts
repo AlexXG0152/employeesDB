@@ -33,7 +33,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   ],
 })
 export class SearchComponent implements AfterViewInit {
-  constructor() {}
   @ViewChild('searchInput') inputElement?: ElementRef;
 
   enteredSearchValue: string = '';

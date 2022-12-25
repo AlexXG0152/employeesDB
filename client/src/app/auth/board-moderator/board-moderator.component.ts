@@ -9,21 +9,21 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 })
 export class BoardModeratorComponent implements OnInit {
   constructor(
-    private UserService: UserService,
-    private EmployeePersonalDataService: EmployeePersonalDataService
+    private userService: UserService,
+    private employeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   content?: string;
   showThisContent$?: boolean;
 
   async ngOnInit(): Promise<void> {
-    this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
+    this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
       (data: boolean) => {
         this.showThisContent$ = data;
       }
     );
 
-    this.UserService.getModeratorBoard().subscribe({
+    this.userService.getModeratorBoard().subscribe({
       next: async (data) => {
         this.content = data;
       },
@@ -43,6 +43,6 @@ export class BoardModeratorComponent implements OnInit {
   }
 
   createNew() {
-    this.EmployeePersonalDataService.setData(false)
+    this.employeePersonalDataService.setData(false)
   }
 }

@@ -1,4 +1,4 @@
-export interface IGrowthTask {
+export interface IEmployeeGrowthTask {
   employeeID: number;
   growthPlanTaskTitle: string;
   growthPlanTaskDescription: string;

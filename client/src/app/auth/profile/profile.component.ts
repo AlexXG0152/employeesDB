@@ -7,11 +7,11 @@ import { StorageService } from '../../services/storage.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private StorageService: StorageService) {}
+  constructor(private storageService: StorageService) {}
 
   currentUser: any;
 
   ngOnInit(): void {
-    this.currentUser = this.StorageService.getUser();
+    this.currentUser = this.storageService.getUser();
   }
 }
