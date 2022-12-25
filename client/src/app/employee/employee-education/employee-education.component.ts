@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { EmployeeEducationService } from '../../services/employee-education.service';
 import { StorageService } from '../../services/storage.service';
 import { IEmployeeEducation } from '../../interfaces/employeeEducation';
+import { EmployeeDataService } from 'src/app/services/employee-data.service';
 
 @Component({
   selector: 'app-employee-education',
@@ -14,12 +14,12 @@ import { IEmployeeEducation } from '../../interfaces/employeeEducation';
 export class EmployeeEducationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private EmployeeEducationService: EmployeeEducationService,
-    private StorageService: StorageService,
+    private storageService: StorageService,
+    private employeeDataService: EmployeeDataService,
   ) {}
 
   private roles: string[] = [];
-  employeeEducationData?: IEmployeeEducation[];
+  employeeEducationData: IEmployeeEducation[] = [];
   employeeID: string = '';
 
   isLoggedIn = false;
@@ -33,10 +33,10 @@ export class EmployeeEducationComponent implements OnInit {
     });
     this.getData();
 
-    this.isLoggedIn = this.StorageService.isLoggedIn();
+    this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
+      const user = this.storageService.getUser();
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
@@ -47,17 +47,17 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   getData(): void {
-    this.EmployeeEducationService.getEmployeeEducation(
-      this.employeeID
+    this.employeeDataService.getEmployeeData(
+      this.employeeID, 'education'
     ).subscribe((data) => {
-      this.employeeEducationData = data;
+      this.employeeEducationData = data as IEmployeeEducation[];
     });
   }
 
   deleteData(_id: string): void {
-    this.EmployeeEducationService.deleteEmployeeEducation(
+    this.employeeDataService.deleteEmployeeData(
       this.employeeID,
-      _id
+      _id, 'education'
     ).subscribe(() => {
       this.getData();
     });
@@ -78,9 +78,9 @@ export class EmployeeEducationComponent implements OnInit {
   }
 
   saveData(updatedData: IEmployeeEducation) {
-    this.EmployeeEducationService.patchEmployeeEducation(
+    this.employeeDataService.patchEmployeeData(
       this.employeeID,
-      updatedData
+      updatedData, 'education'
     ).subscribe(() => {
       this.getData();
     });
@@ -105,7 +105,7 @@ export class EmployeeEducationComponent implements OnInit {
   }
   employeeEducationForm = new FormGroup({
     educationType: new FormControl('', Validators.required),
-    educationLevel: new FormControl('', Validators.required),
+    educationLevel: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
     educationCenterName: new FormControl('', Validators.required),
     educationProfile: new FormControl('', Validators.required),
     educationDegree: new FormControl('', Validators.required),
@@ -119,9 +119,10 @@ export class EmployeeEducationComponent implements OnInit {
       employeeID: this.employeeID,
       ...this.employeeEducationForm.value,
     };
-    this.EmployeeEducationService.createEmployeeEducation(
+    this.employeeDataService.createEmployeeData(
       this.employeeID,
-      details
+      details,
+      'education'
     ).subscribe(() => {
       this.getData();
     });

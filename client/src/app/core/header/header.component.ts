@@ -10,9 +10,9 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private StorageService: StorageService,
-    private AuthService: AuthService,
-    private EmployeePersonalDataService: EmployeePersonalDataService
+    private storageService: StorageService,
+    private authService: AuthService,
+    private employeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   private roles: string[] = [];
@@ -24,10 +24,10 @@ export class HeaderComponent implements OnInit {
   showButton$?: boolean;
 
   ngOnInit(): void {
-    this.isLoggedIn = this.StorageService.isLoggedIn();
+    this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
+      const user = this.storageService.getUser();
       this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
 
       this.username = user.username;
     }
-    this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
+    this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
       (data: boolean) => {
         this.showButton$ = data;
       }
@@ -43,12 +43,12 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    this.AuthService.logout().subscribe({
+    this.authService.logout().subscribe({
       next: (res) => {
-        this.StorageService.clean().then(() => {
+        this.storageService.clean().then(() => {
           window.location.reload();
           window.location.assign('/home');
-          this.isLoggedIn = this.StorageService.isLoggedIn();
+          this.isLoggedIn = this.storageService.isLoggedIn();
         });
       },
       error: (err) => {

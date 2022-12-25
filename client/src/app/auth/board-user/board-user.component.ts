@@ -7,12 +7,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./board-user.component.scss'],
 })
 export class BoardUserComponent implements OnInit {
-  constructor(private UserService: UserService) {}
+  constructor(private userService: UserService) {}
 
   content?: string;
 
   ngOnInit(): void {
-    this.UserService.getUserBoard().subscribe({
+    this.userService.getUserBoard().subscribe({
       next: (data) => {
         this.content = data;
       },

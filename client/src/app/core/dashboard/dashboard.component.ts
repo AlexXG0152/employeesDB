@@ -11,7 +11,7 @@ type Year = {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private ReportService: ReportService) {}
+  constructor(private reportService: ReportService) {}
 
   ngOnInit(): void {
     if (
@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
 
   getTodaysBirthDays(): void {
     const dateToday = new Date().toLocaleDateString().slice(0, 6);
-    this.ReportService.getTodayBirthdays(dateToday).subscribe((data: ITodayBirthdays[]) => {
+    this.reportService.getTodayBirthdays(dateToday).subscribe((data: ITodayBirthdays[]) => {
       this.todaysBirthDays = data;
       window.localStorage.setItem('b', JSON.stringify(this.todaysBirthDays));
       this.todaysBirthDays.forEach((element) => {
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getHiredInThisYear(): void {
-    this.ReportService.getHiredInThisYear(this.yearToday).subscribe((data) => {
+    this.reportService.getHiredInThisYear(this.yearToday).subscribe((data) => {
       this.hiredInThisYear = data;
       window.localStorage.setItem('h', JSON.stringify(this.hiredInThisYear));
       this.divideByMonth(
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   getFiredInThisYear(): void {
-    this.ReportService.getFiredInThisYear(this.yearToday).subscribe((data) => {
+    this.reportService.getFiredInThisYear(this.yearToday).subscribe((data) => {
       this.firedInThisYear = data;
       window.localStorage.setItem('f', JSON.stringify(this.firedInThisYear));
       this.divideByMonth(this.firedInThisYear, 'dismissalDate', this.yearFired);

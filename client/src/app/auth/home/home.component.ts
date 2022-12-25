@@ -9,8 +9,8 @@ import { UserService } from '../../services/user.service';
 })
 export class HomeComponent implements OnInit {
   constructor(
-    private UserService: UserService,
-    private EmployeePersonalDataService: EmployeePersonalDataService
+    private userService: UserService,
+    private employeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   longText = `Here can be some interesting functionality for simple homepage witout
@@ -20,13 +20,13 @@ export class HomeComponent implements OnInit {
   showThisContent$?: boolean;
 
   ngOnInit(): void {
-    this.EmployeePersonalDataService.getShowContentOnHomePage().subscribe(
+    this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
       (data) => {
         this.showThisContent$ = data;
       }
     );
 
-    this.UserService.getPublicContent().subscribe({
+    this.userService.getPublicContent().subscribe({
       next: (data) => {
         this.content = data;
       },

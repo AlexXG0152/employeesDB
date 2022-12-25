@@ -16,7 +16,7 @@ export class UploadFilesComponent implements OnInit {
   constructor(
     private uploadService: UploadFilesService,
     private route: ActivatedRoute,
-    private StorageService: StorageService
+    private storageService: StorageService
   ) {}
 
   private roles: string[] = [];
@@ -111,9 +111,9 @@ export class UploadFilesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.StorageService.isLoggedIn();
+    this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
+      const user = this.storageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
@@ -124,6 +124,5 @@ export class UploadFilesComponent implements OnInit {
       this.employeeID = params['id'];
     });
     this.fileInfo = this.uploadService.getEmployeeFiles(this.employeeID!);
-    // this.fileInfo.subscribe(() => {});
   }
 }

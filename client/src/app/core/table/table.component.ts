@@ -14,7 +14,7 @@ export interface TableColumn {
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private liveAnnouncer: LiveAnnouncer) {}
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   tableDataSource = new MatTableDataSource([]);
@@ -40,9 +40,9 @@ export class TableComponent implements OnInit {
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
-      this._liveAnnouncer.announce('Sorting cleared');
+      this.liveAnnouncer.announce('Sorting cleared');
     }
   }
 }

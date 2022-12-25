@@ -10,7 +10,7 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 export class EmployeeHeaderComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private EmployeePersonalDataService: EmployeePersonalDataService
+    private employeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   employeePersonalData: any;
@@ -20,11 +20,18 @@ export class EmployeeHeaderComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.employeeID = params['id'];
     });
-    this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
-      (data) => {
+
+    this.employeePersonalDataService.getOnePassedResult().subscribe((data) => {
+      if (data.employeeID === undefined) {
+        this.employeePersonalDataService
+          .getEmployee(this.employeeID)
+          .subscribe((data) => {
+            this.employeePersonalData = data;
+            this.employeePersonalDataService.passOneResult(data);
+          });
+      } else {
         this.employeePersonalData = data;
-        this.EmployeePersonalDataService.passOneResult(data);
       }
-    );
+    });
   }
 }

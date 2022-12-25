@@ -8,6 +8,7 @@ import { EmployeePersonalDataService } from '../../services/employee-personal-da
 import { emptyEmployee } from '../../../assets/emptyEmployee';
 import { StorageService } from '../../services/storage.service';
 import { ModalComponent } from '../modal/modal.component'; //111
+import { EmployeeDataService } from 'src/app/services/employee-data.service';
 
 @Component({
   selector: 'app-employee-personal-data',
@@ -32,8 +33,9 @@ export class EmployeePersonalDataComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private StorageService: StorageService,
-    private EmployeePersonalDataService: EmployeePersonalDataService,
+    private storageService: StorageService,
+    private employeePersonalDataService: EmployeePersonalDataService,
+    private employeeDataService: EmployeeDataService,
     public dialog: MatDialog //111
   ) {}
 
@@ -47,9 +49,9 @@ export class EmployeePersonalDataComponent implements OnInit {
       this.getData();
     }
 
-    this.isLoggedIn = this.StorageService.isLoggedIn();
+    this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
-      const user = this.StorageService.getUser();
+      const user = this.storageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
@@ -61,9 +63,9 @@ export class EmployeePersonalDataComponent implements OnInit {
     const update = {
       ...this.editEployeeForm.value,
     };
-    this.EmployeePersonalDataService.getMaxEmployeeID().subscribe((data) => {
+    this.employeePersonalDataService.getMaxEmployeeID().subscribe((data) => {
       update.employeeID = data[0].employeeID + 1;
-      this.EmployeePersonalDataService.createEmployee(update).subscribe(
+      this.employeePersonalDataService.createEmployee(update).subscribe(
         (data) => {
           this.router.navigate([`/employee/${data.employeeID}`]);
         }
@@ -73,25 +75,26 @@ export class EmployeePersonalDataComponent implements OnInit {
   }
 
   getData(): void {
-    this.EmployeePersonalDataService.getEmployee(this.employeeID).subscribe(
+    this.employeePersonalDataService.getEmployee(this.employeeID).subscribe(
       (data) => {
         this.employeeData = [data];
         this._id = data._id;
+        this.employeePersonalDataService.passOneResult(data)
       }
     );
   }
 
   updateEployeePersonalData(update: IEmployee): Subscription {
-    return this.EmployeePersonalDataService.patchEmployeePersonalData(
+    return this.employeeDataService.patchEmployeeData(
       this.employeeID!,
-      update
+      update, ''
     ).subscribe(() => {
       this.getData();
     });
   }
 
   createEmployeeForm(): void {
-    this.EmployeePersonalDataService.setData(false);
+    this.employeePersonalDataService.setData(false);
     this.employeeData = [emptyEmployee];
     this.fillFormData([emptyEmployee]);
     this.editEployeeForm.get('dismissalDate')?.disable();
