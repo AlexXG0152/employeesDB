@@ -48,3 +48,18 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+#mat-datepicker-0>mat-calendar-header>div>div {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+#mat-datepicker-0>div>mat-month-view>table>tbody>tr:nth-child(1)>td {
+  display: none;
+}
+
+#mat-datepicker-0 {
+  width: 296px;
+  height: 300px;
+}

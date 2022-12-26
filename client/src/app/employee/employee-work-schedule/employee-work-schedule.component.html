@@ -1,81 +1,52 @@
-<!-- <div class="month name">{{month}} {{year}}</div>
+<mat-form-field appearance="fill">
+  <mat-label>Month and Year</mat-label>
+  <input matInput [matDatepicker]="dp" [formControl]="date" (dateChange)="valueChanged()">
+  <!-- <mat-hint>MM.YYYY</mat-hint> -->
+  <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp startView="year" (monthSelected)="setMonthAndYear($event, dp)" panelClass="example-month-picker">
+  </mat-datepicker>
+</mat-form-field>
 
-<table class="month">
-  <td *ngFor="let item of [].constructor(31); let i = index">
-    <div class="day name">{{i+1}}</div>
-    <div class="day">{{randomSymbol()}}</div>
-  </td>
-</table>
-
-<div class="month name">{{month}} {{year}}</div>
-
-
-<table class="wrapper">
-
-  <thead class="month">
-    <tr *ngFor="let item of [].constructor(31); let i = index">
-      <th class="day name">{{i+1}}</th>
-    </tr>
-  </thead>
-
-  <div class="name">1</div>
-  <tbody class="month">
-    <tr *ngFor="let item of [].constructor(31); let i = index">
-      <td class="day">{{randomSymbol()}}</td>
-    </tr>
-  </tbody>
-
-  <div class="name">2</div>
-  <tbody class="month">
-    <tr *ngFor="let item of [].constructor(31); let i = index">
-      <td class="day">{{randomSymbol()}}</td>
-    </tr>
-  </tbody>
-
-  <div class="name">3</div>
-  <tbody class="month">
-    <tr *ngFor="let item of [].constructor(31); let i = index">
-      <td class="day">{{randomSymbol()}}</td>
-    </tr>
-  </tbody>
-
-</table> -->
-
-
-<div>
+<div class="month name">{{monthName | uppercase}} {{year}}</div>
+<div class="wrapper">
   <table class="tg">
 
     <thead>
-      <tr *ngFor="let item of [].constructor(31); let i = index">
+      <tr *ngFor="let item of [].constructor(data.length); let i = index">
         <th>{{i+1}}</th>
       </tr>
     </thead>
 
+    <div class="name">DEPARTMENT // POSITION // WORK SCHEDULE</div>
     <tbody>
-      <tr *ngFor="let item of [].constructor(31); let i = index">
-        <td class="tg-0pky" colspan="31">{{i+1}}</td>
+      <tr *ngFor="let item of data; let i = index">
+        <td class="day" matTooltip="{{item[1]}}" [matTooltipPosition]="position1.value!">{{item[2]}}</td>
+      </tr>
+      <!-- "{{item[1]}}" -->
+    </tbody>
+    <tbody>
+      <tr *ngFor="let item of data; let i = index">
+        <td class="day"
+          matTooltip="{{tooltips[i]}}"
+          [matTooltipPosition]="position2.value!">{{item[4]}}</td>
+          <!-- matTooltip="{{item[4] === 'D' ? [item[1], '      08:00 - 20:00'] : (item[4] === 'N' ? [item[1], '      20:00 - 08:00'] : item[1])}}" -->
       </tr>
     </tbody>
 
-    <tbody>
-      <tr *ngFor="let item of [].constructor(31); let i = index">
-        <td class="day">{{randomSymbol()}}</td>
+    <!-- <div class="name">gen2</div> -->
+    <!-- <tbody>
+      <tr *ngFor="let item of getDaysInMonth(2022, 12); let i = index">
+        <td class="day">{{getDaysInMonth(2022, 12)[i][2]}}</td>
       </tr>
-    </tbody>
-
-    <tbody>
-      <tr *ngFor="let item of [].constructor(31); let i = index">
-        <td class="tg-0lax" colspan="31">{{i+1}}</td>
-      </tr>
-    </tbody>
-
-    <div>121212</div>
-
-    <tbody>
-      <tr *ngFor="let item of [].constructor(31); let i = index">
-        <td class="day">{{randomSymbol()}}</td>
-      </tr>
-    </tbody>
+    </tbody> -->
 
   </table>
+</div>
+
+<div class="name mt-5">Statistics</div>
+<div class="details">
+  <div>Hours: {{statistics.hours}}</div>
+  <div>Work Days: {{statistics.workdays}}</div>
+  <div>Weekend Days: {{statistics.weekdays}}</div>
+  <div>Mock</div>
 </div>
