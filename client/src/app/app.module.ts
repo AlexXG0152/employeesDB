@@ -7,11 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
-import { httpInterceptorProviders } from './helpers/http.interceptor';
 import { CommonModule } from '@angular/common';
 import { EmployeeModule } from './employee/employee.module';
 import { NgMaterialModule } from './ng-material.module';
-// import { SharedModule } from './shared.module';
+import { interceptorProviders } from './helpers/interceptors';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [],
@@ -27,10 +27,10 @@ import { NgMaterialModule } from './ng-material.module';
     AuthModule,
     CoreModule,
     EmployeeModule,
-    // SharedModule
+    ToastrModule.forRoot(),
   ],
   exports:[],
-  providers: [httpInterceptorProviders],
+  providers: [interceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
