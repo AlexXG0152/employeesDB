@@ -9,11 +9,13 @@ import { EmployeeIndexPageComponent } from './employee-index-page/employee-index
 import { EmployeePersonalDataComponent } from './employee-personal-data/employee-personal-data.component';
 import { EmployeePrintFormsComponent } from './employee-print-forms/employee-print-forms.component';
 import { EmployeeWorkScheduleComponent } from './employee-work-schedule/employee-work-schedule.component';
+import { AuthGuard } from '../helpers/auth.guard';
 
 const employeeRoutes: Routes = [
   {
     path: 'employee/:id',
     component: EmployeeIndexPageComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: EmployeePersonalDataComponent },
       { path: 'personal', redirectTo: '' },
