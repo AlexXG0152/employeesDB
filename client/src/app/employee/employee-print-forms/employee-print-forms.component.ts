@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EmployeePrintFormsService } from '../../services/employee-print-forms.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { IEmployee } from '../../interfaces/employee';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEmployeeCertificate } from '../../interfaces/employeeCertificate';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-employee-print-forms',
   templateUrl: './employee-print-forms.component.html',
   styleUrls: ['./employee-print-forms.component.scss'],
 })
-export class EmployeePrintFormsComponent implements OnInit {
+export class EmployeePrintFormsComponent implements OnInit, OnDestroy {
   constructor(
     private certificateService: EmployeePrintFormsService,
     private employeePersonalDataService: EmployeePersonalDataService,
@@ -20,6 +21,7 @@ export class EmployeePrintFormsComponent implements OnInit {
 
   link?: string;
   user?: IEmployee;
+  getUserData$?: Subscription;
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
@@ -29,7 +31,7 @@ export class EmployeePrintFormsComponent implements OnInit {
   }
 
   getUserData() {
-    this.employeePersonalDataService.getOnePassedResult().subscribe((data) => {
+    this.getUserData$ = this.employeePersonalDataService.getOnePassedResult().subscribe((data) => {
       this.user = data;
     });
   }
@@ -85,6 +87,10 @@ export class EmployeePrintFormsComponent implements OnInit {
     setTimeout(() => {
       window.URL.revokeObjectURL(url);
     }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    this.getUserData$?.unsubscribe();
   }
 }
 
