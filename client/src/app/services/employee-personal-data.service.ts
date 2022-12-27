@@ -14,7 +14,7 @@ export class EmployeePersonalDataService {
 
   allSearchResults$ = new BehaviorSubject<any>('');
   oneSearchResult$ = new BehaviorSubject<any>('');
-  showContentOnHomePage$: Subject<boolean> = new BehaviorSubject<boolean>(true);
+  showContentOnHomePage$ = new BehaviorSubject<boolean>(true);
 
   getEmployee(id: string): Observable<IEmployee> {
     return this.http.get<IEmployee>(`http://localhost:8080/api/employee/${id}`);

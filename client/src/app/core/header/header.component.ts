@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-  showButton$?: boolean;
+  showButton$?: Subscription;
+  showButton?: boolean;
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
@@ -35,9 +37,9 @@ export class HeaderComponent implements OnInit {
 
       this.username = user.username;
     }
-    this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
-      (data: boolean) => {
-        this.showButton$ = data;
+    this.showButton$ = this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
+      (data) => {
+        this.showButton = data;
       }
     );
   }
@@ -55,5 +57,9 @@ export class HeaderComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.showButton$?.unsubscribe();
   }
 }

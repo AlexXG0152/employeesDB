@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +18,15 @@ export class HomeComponent implements OnInit {
   login or registration. All interestion on moderator's board.`;
 
   content?: string;
-  showThisContent$?: boolean;
+  showThisContent?: boolean;
+  showThisContent$?: Subscription;
 
   ngOnInit(): void {
-    this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
-      (data) => {
-        this.showThisContent$ = data;
-      }
-    );
+    this.showThisContent$ = this.employeePersonalDataService
+      .getShowContentOnHomePage()
+      .subscribe((data) => {
+        this.showThisContent = data;
+      });
 
     this.userService.getPublicContent().subscribe({
       next: (data) => {
@@ -39,5 +41,9 @@ export class HomeComponent implements OnInit {
         }
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    this.showThisContent$?.unsubscribe();
   }
 }

@@ -1,27 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-board-moderator',
   templateUrl: './board-moderator.component.html',
   styleUrls: ['./board-moderator.component.scss'],
 })
-export class BoardModeratorComponent implements OnInit {
+export class BoardModeratorComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private employeePersonalDataService: EmployeePersonalDataService
   ) {}
 
   content?: string;
-  showThisContent$?: boolean;
+  showThisContent?: boolean;
+  showThisContent$?: Subscription;
 
   async ngOnInit(): Promise<void> {
-    this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
-      (data: boolean) => {
-        this.showThisContent$ = data;
-      }
-    );
+    this.showThisContent$ = this.employeePersonalDataService
+      .getShowContentOnHomePage()
+      .subscribe((data: boolean) => {
+        this.showThisContent = data;
+      });
 
     this.userService.getModeratorBoard().subscribe({
       next: async (data) => {
@@ -43,6 +45,10 @@ export class BoardModeratorComponent implements OnInit {
   }
 
   createNew() {
-    this.employeePersonalDataService.setData(false)
+    this.employeePersonalDataService.setData(false);
+  }
+
+  ngOnDestroy(): void {
+    this.showThisContent$?.unsubscribe();
   }
 }
