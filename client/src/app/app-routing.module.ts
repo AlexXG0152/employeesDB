@@ -7,26 +7,27 @@ import { HomeComponent } from './auth/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { ResultPageComponent } from './core/result-page/result-page.component';
+import { AuthGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'user', component: BoardUserComponent },
-  { path: 'mod', component: BoardModeratorComponent },
-  { path: 'admin', component: BoardAdminComponent },
-  // { path: 'searchResults', component: ResultPageComponent },
+  { path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },
+  { path: 'user', component: BoardUserComponent,canActivate: [AuthGuard] },
+  { path: 'mod', component: BoardModeratorComponent,canActivate: [AuthGuard] },
+  { path: 'admin', component: BoardAdminComponent,canActivate: [AuthGuard] },
   {
     path: 'employee/:id/',
     loadChildren: () =>
       import('./employee/employee.module').then((m) => m.EmployeeModule),
     data: { preload: true },
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: '**', component: PageNotFoundComponent },
 ];
+
 export const routingConfiguration: ExtraOptions = {
   paramsInheritanceStrategy: 'always',
 };
