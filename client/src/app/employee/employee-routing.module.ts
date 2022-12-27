@@ -8,6 +8,7 @@ import { EmployeeGrowthPlanComponent } from './employee-growth-plan/employee-gro
 import { EmployeeIndexPageComponent } from './employee-index-page/employee-index-page.component';
 import { EmployeePersonalDataComponent } from './employee-personal-data/employee-personal-data.component';
 import { EmployeePrintFormsComponent } from './employee-print-forms/employee-print-forms.component';
+import { EmployeeWorkScheduleComponent } from './employee-work-schedule/employee-work-schedule.component';
 
 const employeeRoutes: Routes = [
   {
@@ -21,6 +22,7 @@ const employeeRoutes: Routes = [
       { path: 'upload', component: UploadFilesComponent },
       { path: 'growth-plan', component: EmployeeGrowthPlanComponent },
       { path: 'print-forms', component: EmployeePrintFormsComponent },
+      { path: 'work-schedule', component: EmployeeWorkScheduleComponent },
       { path: 'help', component: PageNotFoundComponent },
       { path: '**', component: PageNotFoundComponent },
     ],

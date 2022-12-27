@@ -1,0 +1,52 @@
+<mat-form-field appearance="fill">
+  <mat-label>Month and Year</mat-label>
+  <input matInput [matDatepicker]="dp" [formControl]="date" (dateChange)="valueChanged()">
+  <!-- <mat-hint>MM.YYYY</mat-hint> -->
+  <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp startView="year" (monthSelected)="setMonthAndYear($event, dp)" panelClass="example-month-picker">
+  </mat-datepicker>
+</mat-form-field>
+
+<div class="month name">{{monthName | uppercase}} {{year}}</div>
+<div class="wrapper">
+  <table class="tg">
+
+    <thead>
+      <tr *ngFor="let item of [].constructor(data.length); let i = index">
+        <th>{{i+1}}</th>
+      </tr>
+    </thead>
+
+    <div class="name">DEPARTMENT // POSITION // WORK SCHEDULE</div>
+    <tbody>
+      <tr *ngFor="let item of data; let i = index">
+        <td class="day" matTooltip="{{item[1]}}" [matTooltipPosition]="position1.value!">{{item[2]}}</td>
+      </tr>
+      <!-- "{{item[1]}}" -->
+    </tbody>
+    <tbody>
+      <tr *ngFor="let item of data; let i = index">
+        <td class="day"
+          matTooltip="{{tooltips[i]}}"
+          [matTooltipPosition]="position2.value!">{{item[4]}}</td>
+          <!-- matTooltip="{{item[4] === 'D' ? [item[1], '      08:00 - 20:00'] : (item[4] === 'N' ? [item[1], '      20:00 - 08:00'] : item[1])}}" -->
+      </tr>
+    </tbody>
+
+    <!-- <div class="name">gen2</div> -->
+    <!-- <tbody>
+      <tr *ngFor="let item of getDaysInMonth(2022, 12); let i = index">
+        <td class="day">{{getDaysInMonth(2022, 12)[i][2]}}</td>
+      </tr>
+    </tbody> -->
+
+  </table>
+</div>
+
+<div class="name mt-5">Statistics</div>
+<div class="details">
+  <div>Hours: {{statistics.hours}}</div>
+  <div>Work Days: {{statistics.workdays}}</div>
+  <div>Weekend Days: {{statistics.weekdays}}</div>
+  <div>Mock</div>
+</div>
