@@ -22,7 +22,7 @@ export function secure(app) {
 
   var corsOptions = {
     origin: ["http://localhost:4200", "http://localhost:8080"],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   };
   app.use(cors(corsOptions));

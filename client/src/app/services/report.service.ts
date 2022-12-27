@@ -38,4 +38,16 @@ export class ReportService {
   // getDashboardData(): Observable<IFiredInYear[] | IHiredInYear[]> {
   //   return this.allDashboardResults$.asObservable();
   // }
+
+  // getTodayBirthdays(date: string): Observable<any> {
+  //   return this.http.get('http://httpstat.us/404');
+  // }
+
+  // getFiredInThisYear(year: string): Observable<any> {
+  //   return this.http.get('http://httpstat.us/404');
+  // }
+
+  // getHiredInThisYear(year: string): Observable<any> {
+  //   return this.http.get('http://httpstat.us/404');
+  // }
 }
