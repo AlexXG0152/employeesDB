@@ -9,12 +9,13 @@ import { environment } from '../../environments/environment';
 type EmployeeData = IEmployeeEducation | IEmployeeFamilyMember | IEmployeeGrowthTask
 type Collection = 'education' | 'family' | 'growth-plan' | '';
 
-const URL = environment.EMPLOYEE_URL;
-
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeDataService {
+
+  private URL = environment.EMPLOYEE_URL;
+
   constructor(private http: HttpClient) {}
 
   createEmployeeData(
@@ -22,11 +23,11 @@ export class EmployeeDataService {
     details: any,
     type: Collection
   ): Observable<EmployeeData> {
-    return this.http.post<EmployeeData>(`${URL}/${id}/${type}`, { details });
+    return this.http.post<EmployeeData>(`${this.URL}/${id}/${type}`, { details });
   }
 
   getEmployeeData(id: string, type: Collection): Observable<EmployeeData[]> {
-    return this.http.get<EmployeeData[]>(`${URL}/${id}/${type}`);
+    return this.http.get<EmployeeData[]>(`${this.URL}/${id}/${type}`);
   }
 
   patchEmployeeData(
@@ -34,7 +35,7 @@ export class EmployeeDataService {
     details: any,
     type: Collection
   ): Observable<EmployeeData> {
-    return this.http.patch<EmployeeData>(`${URL}/${id}/${type}`, { details });
+    return this.http.patch<EmployeeData>(`${this.URL}/${id}/${type}`, { details });
   }
 
   deleteEmployeeData(
@@ -42,6 +43,6 @@ export class EmployeeDataService {
     _id: string,
     type: Collection
   ): Observable<EmployeeData> {
-    return this.http.delete<EmployeeData>(`${URL}/${id}/${type}`, { body: {_id} });
+    return this.http.delete<EmployeeData>(`${this.URL}/${id}/${type}`, { body: {_id} });
   }
 }
