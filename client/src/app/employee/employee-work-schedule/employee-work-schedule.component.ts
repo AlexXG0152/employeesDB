@@ -14,6 +14,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { TooltipPosition } from '@angular/material/tooltip';
 import moment from 'moment';
 import { FormControl } from '@angular/forms';
+import { StorageService } from 'src/app/services/storage.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -57,7 +58,24 @@ export class EmployeeWorkScheduleComponent implements OnInit {
   position1 = new FormControl(this.positionOptions[1]);
   position2 = new FormControl(this.positionOptions[0]);
 
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
+  constructor(private storageService: StorageService){}
+
   ngOnInit(): void {
+    this.isLoggedIn = this.storageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      const user = this.storageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+
     this.createDateArray();
     this.data = this.getDaysInMonth(this.year, this.month);
     this.statistics = this.calcHours();

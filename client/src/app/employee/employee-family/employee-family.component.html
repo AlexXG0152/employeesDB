@@ -4,9 +4,6 @@
   <div class="add-record">
     <button type="button" *ngIf="showModeratorBoard" class="btn btn-success mb-2 float-end" (click)="openPopup($event)">Add record</button>
   </div>
-
-  <!-- <button mat-raised-button color="primary" (click)="openDialog()">Open dialog</button> -->
-
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -18,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let member of employeeFamilyMembersList;" [ngClass]="{ 'selected': member.selected }">
+      <tr *ngFor="let member of employeeFamilyMembersList">
         <td>{{member.familyMemberType}}</td>
         <td>{{member.familyMemberName}}</td>
         <td>{{member.familyMemberBirthDate}}</td>
@@ -39,7 +36,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Employee family member edit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closePopup()"></button>
       </div>
       <div class="modal-body">
@@ -85,4 +82,3 @@
 </div>
 
 <router-outlet></router-outlet>
-<!-- (click)="saveTask()" -->

@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 import { IEmployeeEducation } from '../../interfaces/employeeEducation';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-employee-education',
@@ -16,6 +18,7 @@ export class EmployeeEducationComponent implements OnInit {
     private route: ActivatedRoute,
     private storageService: StorageService,
     private employeeDataService: EmployeeDataService,
+    public dialog: MatDialog
   ) {}
 
   private roles: string[] = [];
@@ -34,14 +37,11 @@ export class EmployeeEducationComponent implements OnInit {
     this.getData();
 
     this.isLoggedIn = this.storageService.isLoggedIn();
-
     if (this.isLoggedIn) {
       const user = this.storageService.getUser();
       this.roles = user.roles;
-
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
       this.username = user.username;
     }
   }
@@ -63,57 +63,6 @@ export class EmployeeEducationComponent implements OnInit {
     });
   }
 
-  makeEditable(data: string) {
-    this.employeeEducationData = this.employeeEducationData!.map(
-      (row: IEmployeeEducation) => {
-        if (row._id === data) {
-          row.selected = row.editable = true;
-          return row;
-        } else {
-          row.selected = row.editable = false;
-          return row;
-        }
-      }
-    );
-  }
-
-  saveData(updatedData: IEmployeeEducation) {
-    this.employeeDataService.patchEmployeeData(
-      this.employeeID,
-      updatedData, 'education'
-    ).subscribe(() => {
-      this.getData();
-    });
-  }
-
-  cancel() {
-    this.employeeEducationData = this.employeeEducationData!.map(
-      (row: IEmployeeEducation) => {
-        row.selected = row.editable = false;
-        return row;
-      }
-    );
-  }
-
-  // POP-UP
-  displayStyle = 'none';
-  openPopup(): void {
-    this.displayStyle = 'block';
-  }
-  closePopup(): void {
-    this.displayStyle = 'none';
-  }
-  employeeEducationForm = new FormGroup({
-    educationType: new FormControl('', Validators.required),
-    educationLevel: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
-    educationCenterName: new FormControl('', Validators.required),
-    educationProfile: new FormControl('', Validators.required),
-    educationDegree: new FormControl('', Validators.required),
-    educationDateEnd: new FormControl('', Validators.required),
-    educationDiplomaNumber: new FormControl('', Validators.required),
-    educationDiplomaDate: new FormControl('', Validators.required),
-  });
-
   createRecord(): void {
     const details = {
       employeeID: this.employeeID,
@@ -127,5 +76,86 @@ export class EmployeeEducationComponent implements OnInit {
       this.getData();
     });
     this.displayStyle = 'none';
+  }
+
+  async updateRecord(): Promise<void> {
+    const update = {
+      _id: this.editEployeeEducationRecordID,
+      employeeID: this.employeeID,
+      ...this.employeeEducationForm.value,
+    };
+    this.employeeDataService.patchEmployeeData(
+      this.employeeID!,
+      update, 'education'
+    ).subscribe(() => {
+      this.getData();
+    });
+    this.closePopup();
+  }
+
+  addRecordButton: string = '';
+  editEployeeEducationRecordID?: string;
+
+  // POP-UP
+  displayStyle = 'none';
+  openPopup(employeeEducationData: any): void {
+    if (!employeeEducationData._id) {
+      this.addRecordButton = 'add';
+    }
+    this.editEployeeEducationRecordID = employeeEducationData._id;
+    this.displayStyle = 'block';
+    this.employeeEducationForm
+      .get('educationType')
+      ?.setValue(employeeEducationData.educationType);
+    this.employeeEducationForm
+      .get('educationLevel')
+      ?.setValue(employeeEducationData.educationLevel);
+    this.employeeEducationForm
+      .get('educationCenterName')
+      ?.setValue(employeeEducationData.educationCenterName);
+    this.employeeEducationForm
+      .get('educationProfile')
+      ?.setValue(employeeEducationData.educationProfile);
+    this.employeeEducationForm
+      .get('educationDegree')
+      ?.setValue(employeeEducationData.educationDegree);
+    this.employeeEducationForm
+      .get('educationDateEnd')
+      ?.setValue(employeeEducationData.educationDateEnd);
+    this.employeeEducationForm
+      .get('educationDiplomaNumber')
+      ?.setValue(employeeEducationData.educationDiplomaNumber);
+    this.employeeEducationForm
+      .get('educationDiplomaDate')
+      ?.setValue(employeeEducationData.educationDiplomaDate);
+  }
+
+  closePopup(): void {
+    this.displayStyle = 'none';
+    this.editEployeeEducationRecordID = '';
+    this.addRecordButton = '';
+  }
+
+  employeeEducationForm = new FormGroup({
+    educationType: new FormControl('', Validators.required),
+    educationLevel: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
+    educationCenterName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+    educationProfile: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+    educationDegree: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+    educationDateEnd: new FormControl('', Validators.required),
+    educationDiplomaNumber: new FormControl('', Validators.required),
+    educationDiplomaDate: new FormControl('', Validators.required),
+  });
+
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '550px',
+      data: { header: 'Angular', textTitle: 'this.color', text: 'this.color' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
