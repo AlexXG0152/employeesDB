@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
     });
   }
   reloadPage(): void {
-    window.location.assign('/home');
+    window.location.reload();
+    // window.location.assign('home');
   }
 }

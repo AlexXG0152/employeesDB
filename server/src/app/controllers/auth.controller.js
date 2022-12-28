@@ -1,10 +1,10 @@
-import { secret } from "../config/auth.config.js";
+// import { secret } from "../config/auth.config.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "../../environments/.env" });
 import User from "../models/user.model.js";
 import Role from "../models/role.model.js";
 
 import jsonwebtoken from "jsonwebtoken";
-// import hashSync from "bcryptjs";
-// import compareSync from "bcryptjs";
 import bcryptjs from "bcryptjs";
 
 export function signup(req, res) {
@@ -78,7 +78,7 @@ export function signin(req, res) {
         return res.status(401).send({ message: "Invalid Password!" });
       }
 
-      var token = jsonwebtoken.sign({ id: user.id }, secret, {
+      var token = jsonwebtoken.sign({ id: user.id }, process.env.SECRET, {
         expiresIn: 86400, // expires in 24 hours
       });
 

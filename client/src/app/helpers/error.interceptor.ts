@@ -36,7 +36,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               case 403: // Forbidden
                 this.toastr.error(`${error.statusText}`, 'Access Error');
                 this.storageService.clean();
-                // this.router.navigate(['/login']);
                 break;
               case 404: // Not found
                 this.toastr.error(`${error.statusText}`, 'Route Error');

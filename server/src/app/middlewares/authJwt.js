@@ -1,5 +1,7 @@
 import jsonwebtoken from "jsonwebtoken";
-import { secret } from "../config/auth.config.js";
+// import { secret } from "../config/auth.config.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "../../environments/.env" });
 import User from "../models/user.model.js";
 import Role from "../models/role.model.js";
 // const User = _user;
@@ -12,7 +14,7 @@ const verifyToken = (req, res, next) => {
     return res.status(403).send({ message: "No token provided!" });
   }
 
-  jsonwebtoken.verify(token, secret, (err, decoded) => {
+  jsonwebtoken.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).send({ message: "Unauthorized!" });
     }
