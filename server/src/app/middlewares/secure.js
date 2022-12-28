@@ -28,6 +28,7 @@ export function secure(app) {
       "https://alexxg0152.github.io",
     ],
     methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+
     credentials: true,
   };
   app.use(cors(corsOptions));
