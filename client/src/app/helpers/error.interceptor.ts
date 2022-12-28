@@ -8,12 +8,21 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private toastr: ToastrService) {}
+  constructor(
+    private toastr: ToastrService,
+    private router: Router,
+    private storageService: StorageService
+  ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
@@ -25,11 +34,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.toastr.error(`${error.statusText}`, 'Authorization Error');
                 break;
               case 403: // Forbidden
-                console.log(error.statusText);
                 this.toastr.error(`${error.statusText}`, 'Access Error');
+                this.storageService.clean();
+                // this.router.navigate(['/login']);
                 break;
               case 404: // Not found
-                console.log(error.statusText);
                 this.toastr.error(`${error.statusText}`, 'Route Error');
                 break;
               case 503: // Server error

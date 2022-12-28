@@ -31,32 +31,6 @@ tbody tr:last-child {
   margin-bottom: 5px;
 }
 
-.selected {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-content: flex-start;
-  align-items: flex-start;
-}
-
-.selected>td>input {
-  width: 300px;
-}
-
-.selected>td:last-child {
-  display: flex;
-  align-content: flex-start;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.selected>td:last-child>button:first-child {
-  margin-right: 190px;
-}
-
 .column {
   width: 100%;
   display: flex;
