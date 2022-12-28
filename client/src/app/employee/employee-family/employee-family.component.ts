@@ -125,7 +125,6 @@ export class EmployeeFamilyComponent {
     this.editEployeeFamilyMemberForm
       .get('familyMemberDateStart')
       ?.setValue(familyMemberData.familyMemberDateStart);
-    // this.addRecordButton = ''
   }
   closePopup(): void {
     this.displayStyle = 'none';

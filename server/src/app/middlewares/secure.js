@@ -24,7 +24,7 @@ export function secure(app) {
     origin: [
       "http://localhost:4200",
       "http://localhost:8080",
-      "https://employeesdb-qx39.onrender.com/api",
+      "https://employeesdb-qx39.onrender.com",
       "https://alexxg0152.github.io",
     ],
     methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
