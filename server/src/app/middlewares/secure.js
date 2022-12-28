@@ -25,9 +25,10 @@ export function secure(app) {
       "http://localhost:4200",
       "http://localhost:8080",
       "https://employeesdb-qx39.onrender.com/api",
-      "https://alexxg0152.github.io/",
+      "https://alexxg0152.github.io",
     ],
-    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"],
+    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+
     credentials: true,
   };
   app.use(cors(corsOptions));
