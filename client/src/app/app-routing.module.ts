@@ -13,16 +13,16 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent,canActivate: [AuthGuard] },
-  { path: 'user', component: BoardUserComponent,canActivate: [AuthGuard] },
-  { path: 'mod', component: BoardModeratorComponent,canActivate: [AuthGuard] },
-  { path: 'admin', component: BoardAdminComponent,canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: BoardUserComponent, canActivate: [AuthGuard] },
+  { path: 'mod', component: BoardModeratorComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: BoardAdminComponent, canActivate: [AuthGuard] },
   {
     path: 'employee/:id/',
     loadChildren: () =>
       import('./employee/employee.module').then((m) => m.EmployeeModule),
     data: { preload: true },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: '**', component: PageNotFoundComponent },

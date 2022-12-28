@@ -11,9 +11,11 @@ import compression from "compression";
 dotenv.config({ path: "./src/environments/.env" });
 
 const app = express();
-const PORT = process.env.PORT || 8080;
-
 secure(app);
+
+const PORT = process.env.PORT || 8080;
+app.set("trust proxy", 1);
+
 
 app.use(json());
 app.use(urlencoded({ extended: true }));

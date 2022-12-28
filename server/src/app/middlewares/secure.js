@@ -9,21 +9,7 @@ import { disablePoweredBy } from "./disablePoweredBy.js";
 dotenv.config({ path: "../../environments/.env" });
 
 export function secure(app) {
-  const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000,
-    max: 120,
-    message: "Too many requests created from this IP, please try again later",
-  });
-  app.use(limiter);
-
-  const speedLimiter = slowDown({
-    windowMs: 1 * 60 * 1000,
-    delayAfter: 100,
-    delayMs: 1000,
-  });
-  app.use(speedLimiter);
-
-  var corsOptions = {
+  const corsOptions = {
     origin: [
       "http://localhost:4200",
       "http://localhost:8080",
@@ -42,6 +28,9 @@ export function secure(app) {
       secret: process.env.COOKIE_SECRET,
       maxAge: 60 * 60 * 1000,
       expires: new Date(Date.now() + 60 * 60 * 1000),
+      secure: true,
+      // httpOnly: true,
+      sameSite: "none",
     })
   );
 
@@ -64,4 +53,18 @@ export function secure(app) {
   );
 
   app.use(disablePoweredBy);
+
+  const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 120,
+    message: "Too many requests created from this IP, please try again later",
+  });
+  app.use(limiter);
+
+  const speedLimiter = slowDown({
+    windowMs: 1 * 60 * 1000,
+    delayAfter: 100,
+    delayMs: 1000,
+  });
+  app.use(speedLimiter);
 }
