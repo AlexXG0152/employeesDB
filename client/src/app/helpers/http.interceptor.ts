@@ -12,6 +12,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         withCredentials: true,
       });
     }
+    if (req.url.startsWith('https://alexxg0152.github.io')) {
+      req = req.clone({
+        withCredentials: true,
+      });
+    }
 
     return next.handle(req);
   }
