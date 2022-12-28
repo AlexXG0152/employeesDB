@@ -21,8 +21,13 @@ export function secure(app) {
   app.use(speedLimiter);
 
   var corsOptions = {
-    origin: ["http://localhost:4200", "http://localhost:8080"],
-    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"],
+    origin: [
+      "http://localhost:4200",
+      "http://localhost:8080",
+      "https://employeesdb-qx39.onrender.com/api",
+      "https://alexxg0152.github.io",
+    ],
+    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   };
   app.use(cors(corsOptions));
