@@ -42,6 +42,9 @@ export function secure(app) {
       secret: process.env.COOKIE_SECRET,
       maxAge: 60 * 60 * 1000,
       expires: new Date(Date.now() + 60 * 60 * 1000),
+      // secure: true,
+      httpOnly: true,
+      sameSite: "lax",
     })
   );
 

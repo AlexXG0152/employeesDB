@@ -72,7 +72,10 @@ export function signin(req, res) {
         return res.status(404).send({ message: "User Not found." });
       }
 
-      var passwordIsValid = bcryptjs.compareSync(req.body.password, user.password);
+      var passwordIsValid = bcryptjs.compareSync(
+        req.body.password,
+        user.password
+      );
 
       if (!passwordIsValid) {
         return res.status(401).send({ message: "Invalid Password!" });
