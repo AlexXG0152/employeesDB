@@ -6,28 +6,33 @@ import {
   IHiredInYear,
   ITodayBirthdays,
 } from '../interfaces/dashboard';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReportService {
+
+  private URL = environment.REPORTS_URL;
+
   constructor(private http: HttpClient) {}
 
   getTodayBirthdays(date: string): Observable<ITodayBirthdays[]> {
     return this.http.get<ITodayBirthdays[]>(
-      `http://localhost:8080/api/reports/todayBirtdays/${date}`
+      `${this.URL}/todayBirtdays/${date}`
     );
   }
 
   getFiredInThisYear(year: string): Observable<IFiredInYear[]> {
     return this.http.get<IFiredInYear[]>(
-      `http://localhost:8080/api/reports/getFiredInThisYear/${year}`
+      `${this.URL}/getFiredInThisYear/${year}`
     );
   }
 
   getHiredInThisYear(year: string): Observable<IHiredInYear[]> {
     return this.http.get<IHiredInYear[]>(
-      `http://localhost:8080/api/reports/getHiredInThisYear/${year}`
+      `${this.URL}/getHiredInThisYear/${year}`
     );
   }
 
