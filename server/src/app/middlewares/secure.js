@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import cors from "cors";
 import cookieSession from "cookie-session";
+import session from "express-session";
 import rateLimit from "express-rate-limit";
 import slowDown from "express-slow-down";
 import { disablePoweredBy } from "./disablePoweredBy.js";
@@ -9,30 +10,50 @@ import { disablePoweredBy } from "./disablePoweredBy.js";
 dotenv.config({ path: "../../environments/.env" });
 
 export function secure(app) {
+  const sess = {
+    name: "empl-session",
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+      expires: new Date(Date.now() + 60 * 60 * 1000),
+    },
+  };
+  app.use(session(sess));
+  console.log('productionproductionproductionproductionproductionproductionproductionproductionproductionproduction', app.get("env"));
+
+  if (app.get("env") === "production") {
+    app.set("trust proxy", 1); // trust first proxy
+    sess.cookie.secure = true; // serve secure cookies
+    sess.cookie.httpOnly = true;
+    sess.cookie.sameSite = "none";
+  }
+
   const corsOptions = {
     origin: [
+      "https://alexxg0152.github.io",
+      "https://employeesdb-qx39.onrender.com",
       "http://localhost:4200",
       "http://localhost:8080",
-      "https://employeesdb-qx39.onrender.com",
-      "https://alexxg0152.github.io",
     ],
     methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   };
   app.use(cors(corsOptions));
 
-  app.use(
-    cookieSession({
-      name: "empl-session",
-      keys: ["key1", "key2"],
-      secret: process.env.COOKIE_SECRET,
-      maxAge: 60 * 60 * 1000,
-      expires: new Date(Date.now() + 60 * 60 * 1000),
-      secure: true,
-      // httpOnly: true,
-      sameSite: "none",
-    })
-  );
+  // app.use(
+  //   cookieSession({
+  //     name: "empl-session",
+  //     keys: ["key1", "key2"],
+  //     secret: process.env.COOKIE_SECRET,
+  //     maxAge: 60 * 60 * 1000,
+  //     expires: new Date(Date.now() + 60 * 60 * 1000),
+  //     secure: true,
+  //     // httpOnly: true,
+  //     sameSite: "none",
+  //   })
+  // );
 
   app.use(
     helmet({

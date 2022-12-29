@@ -1873,3 +1873,17 @@
 29.12.2022 14:36:32:3632 http: 	::1 - - [29/Dec/2022:11:36:32 +0000] "GET /api/test/all" "USERID:-" - {} 304 - "http://localhost:4200/"
 29.12.2022 14:36:34:3634 http: 	::1 - - [29/Dec/2022:11:36:34 +0000] "POST /api/auth/signout" "USERID:-" - {} 200 37 "http://localhost:4200/"
 29.12.2022 14:36:34:3634 http: 	::1 - - [29/Dec/2022:11:36:34 +0000] "GET /api/test/all" "USERID:-" - {} 304 - "http://localhost:4200/"
+29.12.2022 14:58:23:5823 http: 	::1 - - [29/Dec/2022:11:58:23 +0000] "GET /files/1672315099262-employee-logo_large.png" "USERID:-" - {} 200 - "-"
+29.12.2022 14:58:23:5823 http: 	::1 - - [29/Dec/2022:11:58:23 +0000] "GET /favicon.ico" "USERID:-" - {} 404 150 "-"
+29.12.2022 14:58:30:5830 http: 	::1 - - [29/Dec/2022:11:58:30 +0000] "GET /files/1672315099262-employee-logo_large.png" "USERID:-" - {} 200 - "-"
+29.12.2022 16:00:46:046 info: 	Server is running on port 8080.
+29.12.2022 16:00:47:047 info: 	Successfully connect to MongoDB.
+29.12.2022 16:01:57:157 http: 	::1 - - [29/Dec/2022:13:01:57 +0000] "GET /api/test/all" "USERID:-" - {} 304 - "http://localhost:4200/"
+29.12.2022 16:01:58:158 http: 	::1 - - [29/Dec/2022:13:01:58 +0000] "POST /api/auth/signin" "USERID:-" - {"username":"super"} 200 129 "http://localhost:4200/"
+29.12.2022 16:01:58:158 http: 	::1 - - [29/Dec/2022:13:01:58 +0000] "GET /api/test/all" "USERID:-" - {} 304 - "http://localhost:4200/"
+29.12.2022 16:02:07:27 http: 	::1 - - [29/Dec/2022:13:02:07 +0000] "GET /api/test/allUsers" "USERID:-" - {} 403 32 "http://localhost:4200/"
+29.12.2022 16:02:07:27 http: 	::1 - - [29/Dec/2022:13:02:07 +0000] "GET /api/test/admin" "USERID:-" - {} 403 32 "http://localhost:4200/"
+29.12.2022 16:02:15:215 http: 	::1 - - [29/Dec/2022:13:02:15 +0000] "GET /api/test/all" "USERID:-" - {} 304 - "http://localhost:4200/"
+29.12.2022 16:02:15:215 http: 	::1 - - [29/Dec/2022:13:02:15 +0000] "POST /api/auth/signin" "USERID:-" - {"username":"super"} 200 129 "http://localhost:4200/"
+29.12.2022 16:02:16:216 http: 	::1 - - [29/Dec/2022:13:02:16 +0000] "GET /api/test/all" "USERID:-" - {} 304 - "http://localhost:4200/"
+29.12.2022 16:02:17:217 http: 	::1 - - [29/Dec/2022:13:02:17 +0000] "GET /api/test/user" "USERID:-" - {} 403 32 "http://localhost:4200/"
