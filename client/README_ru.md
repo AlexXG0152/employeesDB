@@ -4,9 +4,9 @@
   <h1>Awesome template CRM for HR management </h1>
   
   <p>
-    An awesome README template for your projects! 
+    <a href="https://alexxg0152.github.io/employeesDB/home" target="_blank">An awesome README template for your projects! [working example]</a>
+    <p>testUser / testUser</p>
   </p>
-  
   
 <!-- Badges -->
 <p>
@@ -293,7 +293,6 @@ Distributed under the no License. See LICENSE.txt for more information.
 ## :handshake: Contact
 
 Связь с помощью PR в этот проект или по электронной почте 😉
-
 
 Project Link: [https://github.com/AlexXG0152/employeesDB](https://github.com/AlexXG0152/employeesDB)
 

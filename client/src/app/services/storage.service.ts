@@ -10,8 +10,9 @@ export class StorageService {
 
   constructor() {}
 
-  async clean(): Promise<void> {
+  public clean(): void {
     window.localStorage.clear();
+    window.sessionStorage.clear();
   }
 
   public saveUser(user: any): void {

@@ -1,8 +1,7 @@
 import db from "../models/index.js";
 import User from "../models/user.model.js";
 import Role from "../models/role.model.js";
-// const Role = _role;
-// const User = _user;
+
 const ROLES = db.ROLES;
 
 const checkDuplicateUsernameOrEmail = (req, res, next) => {

@@ -3,8 +3,9 @@
   <img src="https://github.com/AlexXG0152/employeesDB/blob/main/client/src/assets/logo_large.png" alt="logo" width="200" height="auto" />
   <h1>Awesome CRM for HR management </h1>
   
-  <p>
-    An awesome README template for your projects! 
+<p>
+    <a href="https://alexxg0152.github.io/employeesDB/home" target="_blank">An awesome README template for your projects! [working example]</a>
+    <p>testUser / testUser</p>
   </p>
   
   

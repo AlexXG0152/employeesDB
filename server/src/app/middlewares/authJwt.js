@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 dotenv.config({ path: "../../environments/.env" });
 import User from "../models/user.model.js";
 import Role from "../models/role.model.js";
-// const User = _user;
-// const Role = _role;
 
 const verifyToken = (req, res, next) => {
   let token = req.session.token;

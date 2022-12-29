@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { EmployeePersonalDataService } from '../../services/employee-personal-data.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private employeePersonalDataService: EmployeePersonalDataService
+    private employeePersonalDataService: EmployeePersonalDataService,
+    private router: Router
   ) {}
 
   private roles: string[] = [];
@@ -37,21 +39,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
       this.username = user.username;
     }
-    this.showButton$ = this.employeePersonalDataService.getShowContentOnHomePage().subscribe(
-      (data) => {
+    this.showButton$ = this.employeePersonalDataService
+      .getShowContentOnHomePage()
+      .subscribe((data) => {
         this.showButton = data;
-      }
-    );
+      });
   }
 
   logout(): void {
+    this.storageService.clean();
     this.authService.logout().subscribe({
       next: (res) => {
-        this.storageService.clean().then(() => {
-          window.location.reload();
-          window.location.assign('/home');
-          this.isLoggedIn = this.storageService.isLoggedIn();
-        });
+        this.isLoggedIn = this.storageService.isLoggedIn();
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error(err);
