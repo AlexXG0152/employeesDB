@@ -21,7 +21,6 @@ export function secure(app) {
     },
   };
   app.use(session(sess));
-  console.log('productionproductionproductionproductionproductionproductionproductionproductionproductionproduction', app.get("env"));
 
   if (app.get("env") === "production") {
     app.set("trust proxy", 1); // trust first proxy
@@ -34,6 +33,7 @@ export function secure(app) {
     origin: [
       "https://alexxg0152.github.io",
       "https://employeesdb-qx39.onrender.com",
+      "https://onrender.com",
       "http://localhost:4200",
       "http://localhost:8080",
     ],

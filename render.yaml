@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: employeesDBb
+    env: node
+    repo: https://github.com/AlexXG0152/employeesDB.git
+    region: frankfurt # optional (defaults to oregon)
+    plan: free
+    branch: develop 
+    rootDir: server
+    buildCommand: npm install --legacy-peer-deps
+    startCommand: node server.js
+    autoDeploy: true # optional
+
+    # A static site
+  - type: web
+    name: employeesDBf
+    env: static
+    repo: https://github.com/AlexXG0152/employeesDB.git
+    # plan: free # optional (defaults to starter)
+    branch: develop
+    rootDir: client
+    buildCommand: npm run build
+    staticPublishPath: docs
+    # pullRequestPreviewsEnabled: true # optional
+    # buildFilter:
+    #   paths:
+    #   - src/**/*.js
+    #   ignoredPaths:
+    #   - src/**/*.test.js
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+      - path: /*
+        name: Access-Control-Allow-Credentials
+        value: true
+      - path: /*
+        name: Access-Control-Allow-Headers
+        value: Origin, Content-Type, Accept
+      - path: /*
+        name: X-Powered-By
+        value: PHP/5.1.5
+    # routes:
+    #   - type: redirect
+    #     source: /old
+    #     destination: /new
+    #   - type: rewrite
+    #     source: /a/*
+    #     destination: /a
