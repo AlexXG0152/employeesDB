@@ -26,23 +26,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   username?: string;
   showButton$?: Subscription;
   showButton?: boolean;
+  loginStatus$?: Subscription;
 
   ngOnInit(): void {
-    this.isLoggedIn = this.storageService.isLoggedIn();
+    this.loginStatus$ = this.storageService
+      .loginStatus()
+      .subscribe(() => {
+        this.isLoggedIn = this.storageService.isLoggedIn();
 
-    if (this.isLoggedIn) {
-      const user = this.storageService.getUser();
-      this.roles = user.roles;
+        if (this.isLoggedIn) {
+          const user = this.storageService.getUser();
+          this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+          this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+          this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.username = user.username;
-    }
-    this.showButton$ = this.employeePersonalDataService
-      .getShowContentOnHomePage()
-      .subscribe((data) => {
-        this.showButton = data;
+          this.username = user.username;
+        }
+
+        this.showButton$ = this.employeePersonalDataService
+          .getShowContentOnHomePage()
+          .subscribe((data) => {
+            this.showButton = data;
+          });
       });
   }
 
@@ -61,5 +67,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.showButton$?.unsubscribe();
+    this.loginStatus$?.unsubscribe();
   }
 }
