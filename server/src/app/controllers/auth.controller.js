@@ -94,7 +94,7 @@ export async function signin(req, res) {
           id: user._id,
         },
         process.env.ACCESS_SECRET,
-        { expiresIn: "30s" }
+        { expiresIn: "30m" }
       );
 
       const refreshToken = jsonwebtoken.sign(
@@ -127,9 +127,8 @@ export async function refresh(req, res) {
         id: req.userId,
       },
       process.env.ACCESS_SECRET,
-      { expiresIn: "30s" }
+      { expiresIn: "30m" }
     );
-    console.log(JSON.stringify(token));
     return res.status(200).send({token});
   } catch (error) {
     return res.status(401).send({ message: "Unauthorized!" });

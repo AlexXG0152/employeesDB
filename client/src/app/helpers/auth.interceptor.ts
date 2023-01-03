@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const req = request.clone({
-      setHeaders: { Authorization: `Bearer ${AuthInterceptor.accessToken}` },
+      setHeaders: { authorization: `Bearer ${AuthInterceptor.accessToken}` },
     });
 
     return next.handle(req).pipe(
@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
               return next.handle(
                 request.clone({
                   setHeaders: {
-                    Authorization: `Bearer ${AuthInterceptor.accessToken}`,
+                    authorization: `Bearer ${AuthInterceptor.accessToken}`,
                   },
                 })
               );
