@@ -6,7 +6,7 @@ import User from "../models/user.model.js";
 import Role from "../models/role.model.js";
 
 const verifyToken = (req, res, next) => {
-  const token = req.header("Authorization")?.split(" ")[1] || "";
+  const token = req.header("authorization")?.split(" ")[1] || "";
 
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
