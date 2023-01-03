@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout().subscribe({
       next: (res) => {
         this.isLoggedIn = this.storageService.isLoggedIn();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.error(err);

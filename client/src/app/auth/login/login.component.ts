@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         this.roles = data.roles;
         AuthInterceptor.accessToken = data.token;
 
+        // this.router.navigate(['/']);
         this.reloadPage();
       },
       error: (err) => {
@@ -55,11 +56,13 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       },
     });
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/']);
   }
   reloadPage(): void {
-    // window.location.assign('/home');
-    window.location.reload();
-    // this.router.navigate(['/']);
+    // window.location.reload();
+    this.router.navigate(['/']);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   }
 }

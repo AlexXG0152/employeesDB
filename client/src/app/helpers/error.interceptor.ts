@@ -43,7 +43,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                 status: error.status,
                 message: error.message,
               };
-              // this.router.navigate(['/login']);
               // window.location.reload();
               // this.storageService.clean();
                 return throwError(() => error403);

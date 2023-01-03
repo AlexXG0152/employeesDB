@@ -125,7 +125,7 @@ export class EmployeePersonalDataComponent implements OnInit {
     }
     if (this.createNew) {
       this.createNew = !this.createNew;
-      this.router.navigate(['/mod']);
+      this.router.navigate(['/']);
     }
   }
 
