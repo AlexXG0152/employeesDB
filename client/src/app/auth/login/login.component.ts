@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
         this.roles = data.roles;
         AuthInterceptor.accessToken = data.token;
 
-        // this.router.navigate(['/']);
-        this.reloadPage();
+        // this.reloadPage();
+        this.storageService.loginStatusChange(true)
+        this.router.navigate(['/home'])
       },
       error: (err) => {
         this.errorMessage = err.error.message;
@@ -60,10 +61,9 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    // window.location.reload();
     this.router.navigate(['/']);
     setTimeout(() => {
-      window.location.reload();
+      location.reload();
     }, 500);
   }
 }

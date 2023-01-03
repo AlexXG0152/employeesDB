@@ -113,7 +113,7 @@ export async function signin(req, res) {
       res.status(200).send({
         id: user._id,
         username: user.username,
-        // email: user.email,
+        email: user.email,
         roles: authorities,
         token: token,
       });
