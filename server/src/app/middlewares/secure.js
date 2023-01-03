@@ -32,8 +32,9 @@ export function secure(app) {
   const corsOptions = {
     origin: [
       "https://alexxg0152.github.io",
+      "https://employeesdbf.onrender.com",
+      "https://employeesdbb.onrender.com",
       "https://employeesdb-qx39.onrender.com",
-      "https://onrender.com",
       "http://localhost:4200",
       "http://localhost:8080",
     ],

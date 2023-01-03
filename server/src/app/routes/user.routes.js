@@ -11,10 +11,10 @@ import { Router } from "express";
 
 const userRouter = Router();
 
-userRouter.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept");
-  next();
-});
+// userRouter.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Headers", "x-access-token, Origin, Content-Type, Accept");
+//   next();
+// });
 
 userRouter.get("/api/test/all", allAccess);
 

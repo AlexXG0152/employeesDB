@@ -10,6 +10,11 @@ import employeeEducationRouter from "./employeeEducation.routes.js";
 import employeeRouter from "./employee.routes.js";
 
 const router = Router();
+router.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Headers", "Authorization, Origin, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", "true");
+    next();
+  });
 router.use(userRouter);
 router.use(authRouter);
 router.use(uploadRouter);
