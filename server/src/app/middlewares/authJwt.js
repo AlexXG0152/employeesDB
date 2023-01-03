@@ -6,19 +6,39 @@ import User from "../models/user.model.js";
 import Role from "../models/role.model.js";
 
 const verifyToken = (req, res, next) => {
-  let token = req.session.token;
+  const token = req.header("Authorization")?.split(" ")[1] || "";
 
   if (!token) {
     return res.status(403).send({ message: "No token provided!" });
   }
 
-  jsonwebtoken.verify(token, process.env.SECRET, (err, decoded) => {
+  jsonwebtoken.verify(token, process.env.ACCESS_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).send({ message: "Unauthorized!" });
     }
     req.userId = decoded.id;
     next();
   });
+};
+
+const refreshToken = (req, res, next) => {
+  const refreshToken = req.cookies["refreshToken"];
+
+  if (!refreshToken) {
+    return res.status(403).send({ message: "No token provided!" });
+  }
+
+  jsonwebtoken.verify(
+    refreshToken,
+    process.env.REFRESH_SECRET,
+    (err, decoded) => {
+      if (err) {
+        return res.status(401).send({ message: "Unauthorized!" });
+      }
+      req.userId = decoded.id;
+      next();
+    }
+  );
 };
 
 const isAdmin = (req, res, next) => {
@@ -78,6 +98,7 @@ const isModerator = (req, res, next) => {
 
 const authJwt = {
   verifyToken,
+  refreshToken,
   isAdmin,
   isModerator,
 };

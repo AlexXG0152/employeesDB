@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { Router } from '@angular/router';
+import { AuthInterceptor } from 'src/app/helpers/auth.interceptor';
 
 export interface ILoginForm {
   username: null;
@@ -44,7 +45,9 @@ export class LoginComponent implements OnInit {
 
         this.isLoggedIn = true;
         this.isLoginFailed = false;
-        this.roles = this.storageService.getUser().roles;
+        this.roles = data.roles;
+        AuthInterceptor.accessToken = data.token;
+
         this.reloadPage();
       },
       error: (err) => {
@@ -52,10 +55,11 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       },
     });
-    this.router.navigate(['/home']);
+    this.router.navigate(['/mod']);
   }
   reloadPage(): void {
-    // window.location.assign('home');
+    // window.location.assign('/home');
     window.location.reload();
+    // this.router.navigate(['/']);
   }
 }
