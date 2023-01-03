@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       },
     });
+    //this.router.navigate(['/']);
   }
   reloadPage(): void {
-    // window.location.assign('/home');
     // window.location.reload();
     this.router.navigate(['/']);
     setTimeout(() => {
