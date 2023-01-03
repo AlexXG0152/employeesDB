@@ -7,6 +7,7 @@ import { initial } from "./src/app/utils/initial_user_roles_db.js";
 import { secure } from "./src/app/middlewares/secure.js";
 import logger from "./src/app/utils/logger.js";
 import compression from "compression";
+import cookieParser from "cookie-parser";
 
 dotenv.config({ path: "./src/environments/.env" });
 
@@ -20,6 +21,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(express.static("assets"));
 app.use(compression());
+app.use(cookieParser())
 
 app.use(morganMiddleware);
 app.use(router);

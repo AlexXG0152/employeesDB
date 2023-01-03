@@ -7,7 +7,7 @@ import Role from "../models/role.model.js";
 import jsonwebtoken from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 
-export function signup(req, res) {
+export async function signup(req, res) {
   const user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -58,7 +58,7 @@ export function signup(req, res) {
   });
 }
 
-export function signin(req, res) {
+export async function signin(req, res) {
   User.findOne({
     username: req.body.username,
   })
@@ -78,12 +78,10 @@ export function signin(req, res) {
       );
 
       if (!passwordIsValid) {
-        return res.status(401).send({ message: "Invalid Password!" });
+        return res
+          .status(401)
+          .send({ accessToken: null, message: "Invalid Password!" });
       }
-
-      var token = jsonwebtoken.sign({ id: user.id }, process.env.SECRET, {
-        expiresIn: 86400, // expires in 24 hours
-      });
 
       var authorities = [];
 
@@ -91,21 +89,56 @@ export function signin(req, res) {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
 
-      req.session.token = token;
+      const token = jsonwebtoken.sign(
+        {
+          id: user._id,
+        },
+        process.env.ACCESS_SECRET,
+        { expiresIn: "30s" }
+      );
+
+      const refreshToken = jsonwebtoken.sign(
+        {
+          id: user._id,
+        },
+        process.env.REFRESH_SECRET,
+        { expiresIn: "1w" }
+      );
+
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
 
       res.status(200).send({
         id: user._id,
         username: user.username,
-        email: user.email,
+        // email: user.email,
         roles: authorities,
-        // token: token
+        token: token,
       });
     });
 }
 
+export async function refresh(req, res) {
+  try {
+    const token = jsonwebtoken.sign(
+      {
+        id: req.userId,
+      },
+      process.env.ACCESS_SECRET,
+      { expiresIn: "30s" }
+    );
+    console.log(JSON.stringify(token));
+    return res.status(200).send({token});
+  } catch (error) {
+    return res.status(401).send({ message: "Unauthorized!" });
+  }
+}
+
 export async function signout(req, res) {
   try {
-    req.session = null;
+    res.cookie("refreshToken", "", { maxAge: 0 });
     return res.status(200).send({ message: "You've been signed out!" });
   } catch (err) {
     this.next(err);
