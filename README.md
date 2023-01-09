@@ -4,7 +4,7 @@
   <h1>Awesome CRM for HR management </h1>
   
   <p>
-    <a href="https://employeesdbf.onrender.com/home" target="_blank">An awesome README template for your projects! [working example]</a>
+    <a href="https://employeesdbf.onrender.com/" target="_blank">An awesome README template for your projects! [working example]</a>
     <p>testUser / testUser</p>
   </p>
   
@@ -49,7 +49,7 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-  <!-- - [Screenshots](#camera-screenshots) -->
+  - [Screenshots](#camera-screenshots)
   - [Tech Stack](#space_invader-tech-stack)
   - [Features](#dart-features)
   - [Environment Variables](#key-environment-variables)
@@ -88,7 +88,7 @@ Of course, this will remain my home project for which I will have more time to p
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="https://github.com/AlexXG0152/employeesDB/blob/develop/client/src/assets/Employees%20-%209%20January%202023.gif" width="800" alt="screenshot" />
 </div>
 
 <!-- TechStack -->

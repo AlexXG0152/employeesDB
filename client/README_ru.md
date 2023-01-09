@@ -4,7 +4,7 @@
   <h1>Awesome template CRM for HR management </h1>
   
   <p>
-    <a href="https://employeesdbf.onrender.com/home" target="_blank">An awesome README template for your projects! [working example]</a>
+    <a href="https://employeesdbf.onrender.com/" target="_blank">An awesome README template for your projects! [working example]</a>
     <p>testUser / testUser</p>
   </p>
   
@@ -84,7 +84,8 @@
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+    <img src="https://github.com/AlexXG0152/employeesDB/blob/develop/client/src/assets/Employees%20-%209%20January%202023.gif" width="800" alt="screenshot" />
+
 </div>
 
 <!-- TechStack -->

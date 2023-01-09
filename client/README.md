@@ -4,7 +4,7 @@
   <h1>Awesome CRM for HR management </h1>
   
 <p>
-    <a href="https://employeesdbf.onrender.com/home" target="_blank">An awesome README template for your projects! [working example]</a>
+    <a href="https://employeesdbf.onrender.com/" target="_blank">An awesome README template for your projects! [working example]</a>
     <p>testUser / testUser</p>
   </p>
   
@@ -49,7 +49,7 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-  <!-- - [Screenshots](#camera-screenshots) -->
+  - [Screenshots](#camera-screenshots)
   - [Tech Stack](#space_invader-tech-stack)
   - [Features](#dart-features)
   - [Environment Variables](#key-environment-variables)
@@ -74,16 +74,12 @@
 
 This is a pet project that I came up with for myself after finishing courses in JavaScript and Angular to consolidate the knowledge gained in the courses and from a mentor.
 
-
 And here is a brief background, why HR CRM...
 I had a whole zoo of systems at work (4 different systems written on something in MS DOS, FoxPro and Delphi, C#) where we had to work with personnel data. As the requirements grew, the number of systems increased and there were no willing to integrate them into one until it was too late, the developers were waiting for a CRM from 1C (as practice has shown - in vain).
 
-
 As certain events happened in Belarus in 2020, I took a course at RSSschool on JavaScript and Angular. And in 2022, after the end of the course and some other events, I have more time and after a short rest, I decided to strengthen my knowledge in JavaScript, TypeScript, NodeJS and Angular and make a CRM for HR management on the specified stack of technologies, the one that would be convenient for me at my previous place of work, combining all 4 systems features and functionality in one.
 
-
 Both server and client were written by myself, based on lessons and articles from the Internet.
-
 
 The project is far from perfect, as I did not restore all types of stored information in the templates, based on the logic that if I could make a CRUD for the data about the employee, his family and education, then I can make any other similar functionality for another set of data.  
 Of course, this will remain my home project for which I will have more time to practice and consolidate my knowledge until I find a job as a developer, and less time after I find one, as I am going to put all my energy into my training for this new and exciting job.
@@ -92,8 +88,8 @@ Of course, this will remain my home project for which I will have more time to p
 
 ### :camera: Screenshots
 
-<!-- <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+<div align="center"> 
+    <img src="https://github.com/AlexXG0152/employeesDB/blob/develop/client/src/assets/Employees%20-%209%20January%202023.gif" width="800" alt="screenshot" />
 </div> -->
 
 <!-- TechStack -->
@@ -130,7 +126,7 @@ Of course, this will remain my home project for which I will have more time to p
 <summary>Database</summary>
   <ul>
     <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-    <li><a href="https://github.com/expressjs/multer#readme">Multer</a></li>    
+    <li><a href="https://github.com/expressjs/multer#readme">Multer</a></li>
   </ul>
 </details>
 
