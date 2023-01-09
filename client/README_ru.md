@@ -84,7 +84,8 @@
 ### :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+    <img src="https://github.com/AlexXG0152/employeesDB/blob/develop/client/src/assets/Employees%20-%209%20January%202023.gif" width="800" alt="screenshot" />
+
 </div>
 
 <!-- TechStack -->
