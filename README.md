@@ -156,6 +156,7 @@ To run this project, you will need to add the following environment variables to
 `ANOTHER_API_KEY`
 
 <!-- Getting Started -->
+- [Mautic](https://www.mautic.org) - Open-source marketing automation platform that helps with lead capture, segmentation, campaigns, and customer journeys.
 
 ## :toolbox: Getting Started
 
